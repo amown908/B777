@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Boeing 777 Flight Deck</title>
+    <style>
+        * { box-sizing: border-box; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
+            background: #1c2024; 
+            color: #e2e8f0; 
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 { color: #ffffff; margin-bottom: 5px; }
+        .subtitle { color: #94a3b8; margin-bottom: 25px; }
+
+        .cockpit-container { 
+            position: relative; 
+            display: inline-block; 
+            max-width: 100%;
+            border: 4px solid #475569;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.6);
+        }
+        img { max-width: 100%; height: auto; display: block; }
+
+        .panel-box {
+            position: absolute;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.15s ease-in-out;
+            text-decoration: none;
+        }
+        .panel-box:hover {
+            background: rgba(245, 158, 11, 0.22); /* Classic Boeing brown/amber focus glow */
+            border-color: #f59e0b;
+        }
+
+        /* Interactive Tooltip label on hover */
+        .panel-box::after {
+            content: attr(title);
+            position: absolute;
+            bottom: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(15, 23, 42, 0.9);
+            color: #f59e0b;
+            font-size: 0.75em;
+            font-weight: 600;
+            padding: 4px 8px;
+            border-radius: 4px;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.15s;
+            pointer-events: none;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.5);
+        }
+        .panel-box:hover::after { opacity: 1; }
+
+        /* ── COORDINATES MAPPED SPECIFICALLY TO YOUR B777 OVERVIEW IMAGE ── */
+        #overhead-panel    { top: 0%;    left: 23%;  width: 54%;  height: 35%; }
+        #glareshield-mcp   { top: 48%;   left: 36%;  width: 29%;  height: 6%;  }
+        #captain-mfd       { top: 57%;   left: 32%;  width: 12%;  height: 9%;  }
+        #fo-mfd            { top: 57%;   left: 56%;  width: 12%;  height: 9%;  }
+        #center-eicas      { top: 57%;   left: 47%;  width: 7%;   height: 10%; }
+        #control-yoke-left { top: 62%;   left: 24%;  width: 12%;  height: 27%; }
+        #control-yoke-right{ top: 62%;   left: 64%;  width: 12%;  height: 25%; }
+        #throttle-pedestal { top: 68%;   left: 41%;  width: 17%;  height: 25%; }
+        #aisle-stand       { top: 79%;   left: 41%;  width: 23%;  height: 21%; }
+    </style>
+</head>
+<body>
+
+    <h1>Boeing 777 Flight Deck Guide</h1>
+    <p class="subtitle">Hover over a panel area to highlight its boundaries. Click to open its technical detail data cards.</p>
+
+    <div class="cockpit-container">
+        <img src="b777_cockpit.jpg" alt="Boeing 777 Cockpit System Layout">
+
+        <a href="b777_overhead.html"    class="panel-box" id="overhead-panel"    title="Overhead Panel System"></a>
+        <a href="b777_mcp.html"         class="panel-box" id="glareshield-mcp"   title="Mode Control Panel (MCP)"></a>
+        <a href="b777_capt_mfd.html"    class="panel-box" id="captain-mfd"       title="Captain's Flight Displays (PFD/ND)"></a>
+        <a href="b777_fo_mfd.html"      class="panel-box" id="fo-mfd"            title="First Officer's Flight Displays"></a>
+        <a href="b777_
