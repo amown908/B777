@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control Stand & Pedestal — Boeing 777 Flight Deck</title>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: #1a1412; color: #e2e8f0;
+            margin: 0; padding: 20px;
+            display: flex; flex-direction: column; align-items: center;
+        }
+        .back-link {
+            align-self: flex-start; color: #f59e0b;
+            text-decoration: none; font-weight: bold; margin-bottom: 20px;
+        }
+        .back-link:hover { text-decoration: underline; }
+        h1 { color: #ffffff; margin-bottom: 5px; }
+        .subtitle { color: #bcaaa4; margin-bottom: 25px; text-align: center; }
+
+        .image-container {
+            position: relative;
+            display: inline-block;
+            max-width: 100%;
+            border: 4px solid #3e2723;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px -5px rgba(0,0,0,0.9);
+            overflow: hidden;
+            margin-bottom: 35px;
+        }
+        img { max-width: 100%; height: auto; display: block; max-height: 85vh; }
+
+        /* Boeing layout interactive zone boxes */
+        .panel-zone {
+            position: absolute;
+            background: rgba(141, 110, 99, 0.15);
+            border: 1.5px solid rgba(215, 204, 200, 0.4);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2px;
+            overflow: hidden;
+        }
+        .panel-zone:hover {
+            background: rgba(245, 158, 11, 0.2);
+            border-color: #f59e0b;
+        }
+        .panel-zone .zone-label {
+            color: rgba(255,255,255,0.9);
+            font-size: 0.55em;
+            font-weight: 600;
+            line-height: 1.2;
+            pointer-events: none;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.9);
+            letter-spacing: 0.01em;
+        }
+
+        /* ── INTERACTIVE COORDINATES (B777 PEDESTAL MAP) ── */
+        /* Upper Section (CDUs & EICAS) */
+        #zone-left-cdu       { top: 4%; left: 4%; width: 27%; height: 19%; }
+        #zone-ctr-display    { top: 1%; left: 32%; width: 36%; height: 18%; }
+        #zone-right-cdu      { top: 4%; left: 69%; width: 27%; height: 19%; }
+
+        /* Center Control Quadrant (Throttles/Levers) */
+        #zone-speedbrake     { top: 24%; left: 4%; width: 23%; height: 19%; }
+        #zone-throttles      { top: 27%; left: 28%; width: 44%; height: 15%; }
+        #zone-flaps          { top: 31%; left: 73%; width: 23%; height: 14%; }
+        #zone-fuel-control   { top: 43%; left: 28%; width: 44%; height: 5%; }
+
+        /* Lower Pedestal - Left Column */
+        #zone-com1           { top: 49%; left: 11%; width: 25%; height: 19%; }
+        #zone-com2           { top: 69%; left: 11%; width: 25%; height: 16%; }
+        #zone-door-ctrl      { top: 86%; left: 11%; width: 25%; height: 6%; }
+
+        /* Lower Pedestal - Center Column */
+        #zone-fire-cargo     { top: 49%; left: 37%; width: 26%; height: 7%; }
+        #zone-lower-cdu      { top: 56%; left: 37%; width: 26%; height: 19%; }
+        #zone-trim-control   { top: 76%; left: 37%; width: 26%; height: 9%; }
+        #zone-printer        { top: 86%; left: 37%; width: 26%; height: 2.5%; }
+
+        /* Lower Pedestal - Right Column */
+        #zone-audio-r1       { top: 49%; left: 64%; width: 25%; height: 14%; }
+        #zone-transponder    { top: 63%; left: 64%; width: 25%; height: 5%; }
+        #zone-evac-panel     { top: 75%; left: 64%; width: 25%; height: 10%; }
+        #zone-aisle-stand    { top: 86%; left: 64%; width: 25%; height: 6%; }
+
+        /* Popup overlay box rules */
+        .overlay-screen {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 99;
+        }
+        .popup-box {
+            display: none;
+            position: fixed;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            background: #2b1f1c;
+            border: 2px solid #f59e0b;
+            padding: 22px 25px;
+            border-radius: 8px;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.9);
+            z-index: 100;
+            width: 92%; max-width: 440px;
+        }
+        .popup-box h3 { margin: 0 0 12px 0; color: #ffffff; font-size: 1.1em; padding-right: 30px; }
+        .popup-row { display: flex; gap: 8px; margin-bottom: 6px; font-size: 0.85em; }
+        .popup-row .label { color: #bcaaa4; min-width: 40px; }
+        .popup-row .value { font-family: monospace; color: #f59e0b; }
+        .popup-divider { border: none; border-top: 1px solid #4e342e; margin: 12px 0; }
+        .popup-contents { font-size: 0.85em; color: #d7ccc8; line-height: 1.6; }
+        .popup-contents strong { color: #ffffff; }
+        
+        .close-btn {
+            position: absolute; top: 12px; right: 12px;
+            background: #4e342e; color: white; border: none;
+            padding: 4px 9px; cursor: pointer; border-radius: 4px; font-size: 0.85em;
+        }
+        .close-btn:hover { background: #d97706; color: #1a1412; }
+
+        .parts-section { width: 100%; max-width: 900px; margin-top: 20px; }
+        .parts-section h2 { color: #ffffff; border-bottom: 2px solid #4e342e; padding-bottom: 10px; }
+        .search-box {
+            width: 100%; padding: 10px; margin-bottom: 15px;
+            background: #2b1f1c; border: 1px solid #4e342e;
+            border-radius: 6px; color: #f3f4f6; font-size: 0.9em;
+        }
+        .search-box:focus { outline: none; border-color: #f59e0b; }
+        table { width: 100%; border-collapse: collapse; font-size: 0.9em; }
+        thead tr { background: #1a1412; color: #f59e0b; text-align: left; }
+        th { padding: 12px 15px; border-bottom: 2px solid #f59e0b; }
+        td { padding: 10px 15px; border-bottom: 1px solid #4e342e; }
+        tbody tr:nth-child(even) { background: #221816; }
+        tbody tr:hover { background: #3e2723; }
+        .pn { font-family: monospace; color: #f59e0b; }
+        .sn { font-family: monospace; color: #a3e635; }
+    </style>
+</head>
+<body>
+
+    <a href="index.html" class="back-link">← Back to Full Flight Deck</a>
+    <h1>Control Stand &amp; Pedestal</h1>
+    <p class="subtitle">Click any control section to inspect details, functional overviews, and P/Ns.</p>
+
+    <div class="image-container">
+        <img src="pedestal.jpg" alt="Boeing 777 Control Stand & Pedestal Breakdown">
+
+        <!-- Upper Display and Control Intersections -->
+        <div class="panel-zone" id="zone-left-cdu" onclick="showPopup('left-cdu')">
+            <div class="zone-label">LEFT CDU<br>(FMC Interface)</div>
+        </div>
+        <div class="panel-zone" id="zone-ctr-display" onclick="showPopup('ctr-display')">
+            <div class="zone-label">LOWER CTR DISPLAY<br>(EICAS/CHKL)</div>
+        </div>
+        <div class="panel-zone" id="zone-right-cdu" onclick="showPopup('right-cdu')">
+            <div class="zone-label">RIGHT CDU</div>
+        </div>
+
+        <!-- Center Throttle Quadrant Elements -->
+        <div class="panel-zone" id="zone-speedbrake" onclick="showPopup('speedbrake')">
+            <div class="zone-label">SPEED BRAKE / PITCH TRIM</div>
+        </div>
+        <div class="panel-zone" id="zone-throttles" onclick="showPopup('throttles')">
+            <div class="zone-label">THRUST LEVERS</div>
+        </div>
+        <div class="panel-zone" id="zone-flaps" onclick="showPopup('flaps')">
+            <div class="zone-label">FLAP LEVER / ALTN FLAPS</div>
+        </div>
+        <div class="panel-zone" id="zone-fuel-control" onclick="showPopup('fuel-control')">
+            <div class="zone-label">FUEL CONTROL SWITCHES</div>
+        </div>
+
+        <!-- Lower Pedestal Modules -->
+        <div class="panel-zone" id="zone-com1" onclick="showPopup('com1')">
+            <div class="zone-label">VHF / HF COMM 1 &amp; AUDIO</div>
+        </div>
+        <div class="panel-zone" id="zone-com2" onclick="showPopup('com2')">
+            <div class="zone-label">COMM 2 &amp; ADF/NAV AUDIO</div>
+        </div>
+        <div class="panel-zone" id="zone-door-ctrl" onclick="showPopup('door-ctrl')">
+            <div class="zone-label">FLT DECK DOOR</div>
+        </div>
+
+        <div class="panel-zone" id="zone-fire-cargo" onclick="showPopup('fire-cargo')">
+            <div class="zone-label">ENGINE / APU BTL DISCH</div>
+        </div>
+        <div class="panel-zone" id="zone-lower-cdu" onclick="showPopup('lower-cdu')">
+            <div class="zone-label">CENTER CDU</div>
+        </div>
+        <div class="panel-zone" id="zone-trim-control" onclick="showPopup('trim-control')">
+            <div class="zone-label">AILERON / RUDDER TRIM</div>
+        </div>
+        <div class="panel-zone" id="zone-printer" onclick="showPopup('printer')">
+            <div class="zone-label">FLIGHT PRINTER</div>
+        </div>
+
+        <div class="panel-zone" id="zone-audio-r1" onclick="showPopup('audio-r1')">
+            <div class="zone-label">FO VHF / HF COMM &amp; AUDIO</div>
+        </div>
+        <div class="panel-zone" id="zone-transponder" onclick="showPopup('transponder')">
+            <div class="zone-label">ATC / TRANSPONDER</div>
+        </div>
+        <div class="panel-zone" id="zone-evac-panel" onclick="showPopup('evac-panel')">
+            <div class="zone-label">EVAC / CABIN COCKPIT LIGHTS</div>
+        </div>
+        <div class="panel-zone" id="zone-aisle-stand" onclick="showPopup('aisle-stand')">
+            <div class="zone-label">AISLE STAND FLOOD</div>
+        </div>
+    </div>
+
+    <div id="dark-screen" class="overlay-screen" onclick="closeAllPopups()"></div>
+
+    <!-- ── POPUP STRUCTURAL CONTENT WINDOWS ── -->
+    <div id="popup-left-cdu" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>Left Control Display Unit (CDU)</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">[Enter P/N Later]</span></div>
+        <hr class="popup-divider">
+        <div class="popup-contents">
+            Captain's primary text interface to the <strong>Flight Management Computer (FMC)</strong>. Used for flight planning, performance initialization, and route tracking modifications.
+        </div>
+    </div>
+
+    <div id="popup-ctr-display" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>Lower Center Multifunction Display</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">[Enter P/N Later]</span></div>
+        <hr class="popup-divider">
+        <div class="popup-contents">
+            Displays secondary engine parameters, status messages, electronic checklists, or fluid synoptics configuration graphics.
+        </div>
+    </div>
+
+    <div id="popup-right-cdu" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>Right Control Display Unit (CDU)</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">[Enter P/N Later]</span></div>
+        <hr class="popup-divider">
+        <div class="popup-contents">
+            First Officer's text interface console syncing information directly into the FMC logic cross-talk loop.
+        </div>
+    </div>
+
+    <div id="popup-speedbrake" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>Speed Brake &amp; Pitch Trim Mechanical Quadrant</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">[Enter P/N Later]</span></div>
+        <hr class="popup-divider">
+        <div class="popup-contents">
+            Houses the mechanical lever for <strong>Speed Brakes / Spoilers</strong> (Down, Armed, Flight Detent, Up parameters) along with the Alternate Pitch Trim switches and parking brake handle.
+        </div>
+    </div>
+
+    <div id="popup-throttles" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>Thrust Levers (Throttle Assembly)</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">[Enter P/N Later]</span></div>
+        <hr class="popup-divider">
+        <div class="popup-contents">
+            Dual electronic thrust levers linked to the A/T (Autothrottle) servo systems. Features integrated <strong>A/T Disconnect</strong> and <strong>TO/GA (Takeoff/Go-Around)</strong> click toggles.
+        </div>
+    </div>
+
+    <div id="popup-flaps" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>Flap Selection Handle</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">[Enter P/N Later]</span></div>
+        <hr class="popup-divider">
+        <div class="popup-contents">
+            Controls wing high-lift configuration trailing flaps and leading edge slats. Detents range through gates 1, 5, 15, 20, 25, to 30. Includes an Alternate Flap control panel armor setup.
+        </div>
+    </div>
+
+    <div id="popup-fuel-control" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>Fuel Control Switches</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">[Enter P/N Later]</span></div>
+        <hr class="popup-divider">
+        <div class="popup-contents">
+            Two-position toggles (<strong>RUN / CUTOFF</strong>) controlling high-pressure fuel valves to command starting sequence or emergency fire isolation fuel starvation metrics.
+        </div>
+    </div>
+
+    <div id="popup-com1" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>Radio Tuning &amp; Audio Select Panel (Left)</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">[Enter P/N Later]</span></div>
+        <hr class="popup-divider">
+        <div class="popup-contents">
+            Primary VHF/HF tuning array paired with transmission selection key indicators for microphones, interphones, and speaker gain pots.
+        </div>
+    </div>
+
+    <div id="popup-com2" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>Secondary Communication &amp; Navigation Monitoring Module</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">[Enter P/N Later]</span></div>
+        <hr class="popup-divider">
+        <div class="popup-contents">
+            Lower left console panel providing radio link fallbacks and receiver markers for monitoring Morse code idents over VOR, ADF, or ILS stations.
+        </div>
+    </div>
+
+    <div id="popup-door-ctrl" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>Flight Deck Access Door Security Panel</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">[Enter P/N Later]</span></div>
+        <hr class="popup-divider">
+        <div class="popup-contents">
+            Toggle interface managing cabin request entries, featuring <strong>UNLKD, AUTO, and DENY</strong> override selection lock configurations.
+        </div>
+    </div>
+
+    <div id="popup-fire-cargo" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>Engine &amp; APU Fire Bottle Manual Squib Discharge</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">[Enter P/N Later]</span></div>
+        <hr class="popup-divider">
+        <div class="popup-contents">
+            Guarded backup activation push buttons targeting armed fire extinguisher squib canisters inside active structural bays.
+        </div>
+    </div>
+
+    <div id="popup-lower-cdu" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>Center Maintenance Control Display Unit</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">[Enter P/N Later]</span></div>
+        <hr class="popup-divider">
+        <div class="popup-contents">
+            Third shared multi-purpose interface console. Commonly dedicated to SATCOM management, ACARS telemetry pipelines, or onboard troubleshooting diagnostic indices.
+        </div>
+    </div>
+
+    <div id="popup-trim-control" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>Aileron &amp; Rudder Trim Module</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">[Enter P/N Later]</span></div>
+        <hr class="popup-divider">
+        <div class="popup-contents">
+            Contains mechanical trim input pots including the proportional rotational knob modifying zero-force aerodynamic alignment parameters on the rudder surface loop.
+        </div>
+    </div>
+
+    <div id="popup-printer" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>Integrated Cockpit Data Link Printer</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">[Enter P/N Later]</span></div>
+        <hr class="popup-divider">
+        <div class="popup-contents">
+            Thermal printing apparatus printing weather briefs, oceanic text clearances, or structural operational parameters routed via ACARS datalink modules.
+        </div>
+    </div>
+
+    <div id="popup-audio-r1" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>Radio Tuning &amp; Audio Select Panel (Right)</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">[Enter P/N Later]</span></div>
+        <hr class="popup-divider">
+        <div class="popup-contents">
+            First Officer's dedicated primary radio and cabin communications terminal selector board interface.
+        </div>
+    </div>
+
+    <div id="popup-transponder" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>ATC Transponder &amp; TCAS Selection Panel</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">[Enter P/N Later]</span></div>
+        <hr class="popup-divider">
+        <div class="popup-contents">
+            Inputs squawk identity protocols into radar transponders and specifies mode parameters scanning internal airspace traffic collision alert nets.
+        </div>
+    </div>
+
+    <div id="popup-evac-panel" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>Evacuation Alert &amp; Console Lighting Trim</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">[Enter P/N Later]</span></div>
+        <hr class="popup-divider">
+        <div class="popup-contents">
+            Houses emergency cabin evacuation alarms and controls rheostat backlight dimming levels for lower pedestal integrated overlay circuit boards.
+        </div>
+    </div>
+
+    <div id="popup-aisle-stand" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>Observer Audio &amp; Aisle Flood controls</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">[Enter P/N Later]</span></div>
+        <hr class="popup-divider">
+        <div class="popup-contents">
+            Adjusts auxiliary local map lighting levels and contains terminal interface selectors for jumpseat occupant communications.
+        </div>
+    </div>
+
+    <!-- ── COMPONENT PARTS LIST REFERENCE INDEX ── -->
+    <div class="parts-section">
+        <h2>Pedestal Layout Parts Index</h2>
+        <input class="search-box" type="text" id="searchPedestal" onkeyup="filterTable('searchPedestal','pedestalTable')" placeholder="Search console description or part identifiers...">
+        <table id="pedestalTable">
+            <thead>
+                <tr><th>Subsystem Component</th><th>Part Number</th><th>Tracking Phase</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Left Flight Management Computer CDU Terminal</td><td class="pn">[TBD]</td><td class="sn">Awaiting Input</td></tr>
+                <tr><td>Right Flight Management Computer CDU Terminal</td><td class="pn">[TBD]</td><td class="sn">Awaiting Input</td></tr>
+                <tr><td>Thrust Lever Quadrant Assembly Base</td><td class="pn">[TBD]</td><td class="sn">Awaiting Input</td></tr>
+                <tr><td>Flap Selection Potentiometer Controller</td><td class="pn">[TBD]</td><td class="sn">Awaiting Input</td></tr>
+                <tr><td>Engine Fuel Engine Cutoff Switch Block</td><td class="pn">[TBD]</td><td class="sn">Awaiting Input</td></tr>
+                <tr><td>Captain VHF Tuning Panel Unit</td><td class="pn">[TBD]</td><td class="sn">Awaiting Input</td></tr>
+                <tr><td>First Officer VHF Tuning Panel Unit</td><td class="pn">[TBD]</td><td class="sn">Awaiting Input</td></tr>
+                <tr><td>Center Multi-Purpose Maintenance CDU Terminal</td><td class="pn">[TBD]</td><td class="sn">Awaiting Input</td></tr>
+                <tr><td>Flight Deck Armored Door Locking Matrix</td><td class="pn">[TBD]</td><td class="sn">Awaiting Input</td></tr>
+                <tr><td>Rudder Trim / Lateral Aileron Trim Assembly</td><td class="pn">[TBD]</td><td class="sn">Awaiting Input</td></tr>
+                <tr><td>Mode S ATC Transponder Selection Device</td><td class="pn">[TBD]</td><td class="sn">Awaiting Input</td></tr>
+                <tr><td>Cockpit Flight Strip Data Printer Housing</td><td class="pn">[TBD]</td><td class="sn">Awaiting Input</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function showPopup(id) {
+            closeAllPopups();
+            document.getElementById('dark-screen').style.display = 'block';
+            document.getElementById('popup-' + id).style.display = 'block';
+        }
+        function closeAllPopups() {
+            document.getElementById('dark-screen').style.display = 'none';
+            document.querySelectorAll('.popup-box').forEach(p => p.style.display = 'none');
+        }
+        function filterTable(inputId, tableId) {
+            const input = document.getElementById(inputId).value.toLowerCase();
+            document.querySelectorAll('#' + tableId + ' tbody tr').forEach(row => {
+                row.style.display = row.textContent.toLowerCase().includes(input) ? '' : 'none';
+            });
+        }
+    </script>
+
+</body>
+</html>
