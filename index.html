@@ -8,7 +8,6 @@
         * { box-sizing: border-box; }
         body { 
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
-            /* Deep, dark Boeing cockpit brown for the whole page background */
             background: #1a1412; 
             color: #e2e8f0; 
             margin: 0; padding: 20px;
@@ -23,7 +22,6 @@
             max-width: 600px; 
             width: 100%;
             margin: 0 auto;
-            /* Border adjusted to complement the dark brown theme */
             border: 4px solid #3e2723; border-radius: 8px;
             overflow: hidden;
             box-shadow: 0 10px 30px -5px rgba(0,0,0,0.9);
@@ -38,17 +36,16 @@
             text-decoration: none;
         }
         .panel-box:hover {
-            /* Warm amber tint for the Boeing cockpit aesthetic */
             background: rgba(245, 158, 11, 0.2); 
             border-color: #f59e0b;
         }
 
+        /* Hover Tooltip */
         .panel-box::after {
             content: attr(title);
             position: absolute;
             bottom: 8px; left: 50%;
             transform: translateX(-50%);
-            /* Tooltip matches the new dark brown background */
             background: rgba(26, 20, 18, 0.95);
             color: #f59e0b;
             font-size: 0.75em; font-weight: 600;
@@ -60,7 +57,47 @@
         }
         .panel-box:hover::after { opacity: 1; }
 
-        /* Percentages tuned to your uploaded image */
+        /* ── POP-UP MODAL OVERLAY ── */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.75);
+            display: flex; justify-content: center; align-items: center;
+            opacity: 0; pointer-events: none;
+            transition: opacity 0.2s ease-in-out;
+            z-index: 1000;
+        }
+        .modal-overlay.active { opacity: 1; pointer-events: auto; }
+
+        .modal-box {
+            background: #2b1f1c;
+            border: 2px solid #5d4037;
+            border-radius: 8px;
+            padding: 24px;
+            max-width: 400px; width: 90%;
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.7);
+            text-align: center;
+            transform: scale(0.9);
+            transition: transform 0.2s ease-in-out;
+        }
+        .modal-overlay.active .modal-box { transform: scale(1); }
+
+        .modal-box h3 { margin-top: 0; color: #ffffff; font-size: 1.3rem; }
+        .modal-box p { color: #d7ccc8; font-size: 0.95rem; line-height: 1.5; margin-bottom: 20px; }
+
+        /* Action Buttons */
+        .modal-buttons { display: flex; gap: 10px; justify-content: center; }
+        .btn {
+            padding: 10px 16px; border-radius: 4px; border: none;
+            font-weight: 600; cursor: pointer; text-decoration: none; font-size: 0.9rem;
+            transition: background 0.15s;
+        }
+        .btn-primary { background: #f59e0b; color: #1a1412; }
+        .btn-primary:hover { background: #d97706; }
+        .btn-secondary { background: #4e342e; color: #e2e8f0; }
+        .btn-secondary:hover { background: #5d4037; }
+
+        /* Mapped Coordinates */
         #overhead         { top: 0%;    left: 0%;    width: 100%; height: 32%; }
         #compass          { top: 32%;   left: 46%;   width: 8%;   height: 4%;  }
         #glareshield      { top: 42%;   left: 27%;   width: 46%;  height: 5%;  }
@@ -77,23 +114,72 @@
 <body>
 
     <h1>Boeing 777 Flight Deck Guide</h1>
-    <p class="subtitle">Hover over a layout section to highlight its components. Click to inspect technical parameters.</p>
+    <p class="subtitle">Hover over a layout section to preview. Click to inspect options.</p>
 
     <div class="cockpit-container">
         <img src="b777_cockpit.jpg" alt="Boeing 777 Flight Deck System Breakdown">
 
-        <a href="b777_overhead.html"     class="panel-box" id="overhead"      title="Overhead Panel System"></a>
-        <a href="b777_compass.html"      class="panel-box" id="compass"       title="Standby Compass & Eye Ref"></a>
-        <a href="b777_glareshield.html"  class="panel-box" id="glareshield"   title="Glareshield & MCP"></a>
-        <a href="b777_mainpanel.html"    class="panel-box" id="main-panel"    title="Main Panel Display System (MFDs/EICAS)"></a>
-        <a href="b777_pedestal.html"     class="panel-box" id="pedestal"      title="Control Stand & Pedestal (Throttles/CDUs)"></a>
-        <a href="b777_yokes.html"        class="panel-box" id="yoke-left"     title="Captain Control Column (Yoke)"></a>
-        <a href="b777_yokes.html"        class="panel-box" id="yoke-right"    title="First Officer Control Column (Yoke)"></a>
-        <a href="b777_lateral_capt.html" class="panel-box" id="lateral-capt"  title="Captain Lateral Side Console"></a>
-        <a href="b777_lateral_fo.html"   class="panel-box" id="lateral-fo"    title="First Officer Lateral Side Console"></a>
-        <a href="b777_seats.html"        class="panel-box" id="seat-capt"     title="Captain Pilot Seat"></a>
-        <a href="b777_seats.html"        class="panel-box" id="seat-fo"       title="First Officer Pilot Seat"></a>
+        <a href="b777_overhead.html"     class="panel-box" id="overhead"      title="Overhead Panel System" data-summary="Manages primary electrical, hydraulic, fuel, and air conditioning aircraft sub-systems."></a>
+        <a href="b777_compass.html"      class="panel-box" id="compass"       title="Standby Compass & Eye Ref" data-summary="Provides mechanical, magnetic direction backup independent of main systems."></a>
+        <a href="b777_glareshield.html"  class="panel-box" id="glareshield"   title="Glareshield & MCP" data-summary="Houses Autoflight system control panel (Mode Control Panel) and EFIS display settings."></a>
+        <a href="b777_mainpanel.html"    class="panel-box" id="main-panel"    title="Main Panel Display System (MFDs/EICAS)" data-summary="Primary Flight Displays and Engine Indication/Crew Alerting System screens."></a>
+        <a href="b777_pedestal.html"     class="panel-box" id="pedestal"      title="Control Stand & Pedestal (Throttles/CDUs)" data-summary="Contains thrust levers, flap selectors, radio panels, and Control Display Units."></a>
+        <a href="b777_yokes.html"        class="panel-box" id="yoke-left"     title="Captain Control Column (Yoke)" data-summary="Captain's primary pitch and roll mechanical control interface."></a>
+        <a href="b777_yokes.html"        class="panel-box" id="yoke-right"    title="First Officer Control Column (Yoke)" data-summary="First Officer's primary pitch and roll mechanical control interface."></a>
+        <a href="b777_lateral_capt.html" class="panel-box" id="lateral-capt"  title="Captain Lateral Side Console" data-summary="Houses side window controls, oxygen mask stowage, and audio select panels."></a>
+        <a href="b777_lateral_fo.html"   class="panel-box" id="lateral-fo"    title="First Officer Lateral Side Console" data-summary="First Officer side instrumentation, window operation, and oxygen interface."></a>
+        <a href="b777_seats.html"        class="panel-box" id="seat-capt"     title="Captain Pilot Seat" data-summary="Fully adjustable primary crew seat with restraint tracking assemblies."></a>
+        <a href="b777_seats.html"        class="panel-box" id="seat-fo"       title="First Officer Pilot Seat" data-summary="Fully adjustable primary co-pilot crew accommodation seat."></a>
     </div>
 
+    <div class="modal-overlay" id="infoModal">
+        <div class="modal-box">
+            <h3 id="modalTitle">Panel Name</h3>
+            <p id="modalDescription">Quick description overview goes here.</p>
+            <div class="modal-buttons">
+                <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+                <a href="#" id="modalLink" class="btn btn-primary">Go to Detail Page</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const modal = document.getElementById('infoModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalDescription = document.getElementById('modalDescription');
+        const modalLink = document.getElementById('modalLink');
+        const panels = document.querySelectorAll('.panel-box');
+
+        panels.forEach(panel => {
+            panel.addEventListener('click', function(e) {
+                // Stop the browser from immediately opening the page
+                e.preventDefault(); 
+                
+                // Extract properties from the clicked element
+                const title = this.getAttribute('title');
+                const summary = this.getAttribute('data-summary') || "No layout description provided.";
+                const destinationUrl = this.getAttribute('href');
+
+                // Feed values into the pop-up modal box
+                modalTitle.textContent = title;
+                modalDescription.textContent = summary;
+                modalLink.setAttribute('href', destinationUrl);
+
+                // Reveal the modal overlay
+                modal.classList.add('active');
+            });
+        });
+
+        function closeModal() {
+            modal.classList.remove('active');
+        }
+
+        // Close the modal if clicking outside the box background container
+        modal.addEventListener('click', function(e) {
+            if(e.target === modal) {
+                closeModal();
+            }
+        });
+    </script>
 </body>
 </html>
