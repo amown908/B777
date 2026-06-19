@@ -68,7 +68,9 @@
         #zone-right-cdu      { top: 1.5%; left: 76%; width: 20%; height: 16%; }
         #zone-speedbrake     { top: 1.5%; left: 25%; width: 14%; height: 23%; }
         #zone-throttles      { top: 3.0%; left: 40%; width: 20%; height: 21%; }
+        #zone-parking-brake  { top: 20.0%; left: 10%; width: 6%; height: 11%; }
         #zone-flaps          { top: 10.5%; left: 63%; width: 11%; height: 19%; }
+        #zone-alt-flaps      { top: 19.5%; left: 77%; width: 13%; height: 11%; }
         #zone-fuel-control   { top: 25.5%; left: 40%; width: 20%; height: 6.5%; }
 
         /* Middle Columns Panels */
@@ -164,8 +166,14 @@
         <div class="panel-zone" id="zone-throttles" onclick="showPopup('throttles')">
             <div class="zone-label">THROTTLES ASSEMBLY</div>
         </div>
+        <div class="panel-zone" id="zone-parking-brake" onclick="showPopup('parking-brake')">
+            <div class="zone-label">PARKING BRAKE</div>
+        </div>
         <div class="panel-zone" id="zone-flaps" onclick="showPopup('flaps')">
             <div class="zone-label">FLAPS</div>
+        </div>
+        <div class="panel-zone" id="zone-alt-flaps" onclick="showPopup('alt-flaps')">
+            <div class="zone-label">ALTN FLAPS CONTROL</div>
         </div>
         <div class="panel-zone" id="zone-fuel-control" onclick="showPopup('fuel-control')">
             <div class="zone-label">ENGINE FIRE CONTROL</div>
@@ -249,7 +257,17 @@
         <div class="popup-row"><span class="label">P/N</span><span class="value">BA654M0007-535</span></div>
         <hr class="popup-divider">
         <div class="popup-contents">
-            Central structural housing for structural thrust mechanical lever logic paths and parking brake connections.
+            Central housing for mechanical thrust lever linkage configurations and tracking logic loops.
+        </div>
+    </div>
+
+    <div id="popup-parking-brake" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>Parking Brake</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">BA654M0007-535</span></div>
+        <hr class="popup-divider">
+        <div class="popup-contents">
+            Mechanical safety retention control handling main landing gear brake valve settings.
         </div>
     </div>
 
@@ -260,6 +278,16 @@
         <hr class="popup-divider">
         <div class="popup-contents">
             Governs multi-detent aerodynamic deployment gates routing back to hydraulic flight trim manifolds.
+        </div>
+    </div>
+
+    <div id="popup-alt-flaps" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>Alternate Flaps Control Panel</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">BA654M0007-535</span></div>
+        <hr class="popup-divider">
+        <div class="popup-contents">
+            Secondary non-normal backup selector used to manually extend or retract trailing edge wing surfaces.
         </div>
     </div>
 
@@ -406,19 +434,21 @@
             </thead>
             <tbody>
                 <tr><td>Control Stand Assembly (Throttles)</td><td class="pn">BA654M0007-535</td><td class="sn">-</td></tr>
-                <tr><td>Capt's Cursor Control Panel </td><td class="pn">2001-025</td><td class="sn">-</td></tr>
-                <tr><td>FO's Cursor Control Panel </td><td class="pn">2001-025</td><td class="sn">-</td></tr>
+                <tr><td>Capt's Cursor Control Panel</td><td class="pn">2001-025</td><td class="sn">-</td></tr>
+                <tr><td>FO's Cursor Control Panel</td><td class="pn">2001-025</td><td class="sn">-</td></tr>
                 <tr><td>Autospeedbrake Actuator</td><td class="pn">BA654M0007-535</td><td class="sn">-</td></tr>
+                <tr><td>Parking Brake Assembly</td><td class="pn">BA654M0007-535</td><td class="sn">-</td></tr>
                 <tr><td>Stabilizer Trim Indicator R</td><td class="pn">MP372-879-003</td><td class="sn">-</td></tr>
-                <tr><td>Capt's Radio Communications Panel </td><td class="pn">BA205M8114-3</td><td class="sn">-</td></tr>
+                <tr><td>Alternate Flaps Control Panel</td><td class="pn">BA654M0007-535</td><td class="sn">-</td></tr>
+                <tr><td>Capt's Radio Communications Panel</td><td class="pn">BA205M8114-3</td><td class="sn">-</td></tr>
                 <tr><td>Engine Fire Control</td><td class="pn">MA264941.18.2.825</td><td class="sn">-</td></tr>
-                <tr><td>FO's Radio Communications Panel </td><td class="pn">BA205M8114-3</td><td class="sn">-</td></tr>
+                <tr><td>FO's Radio Communications Panel</td><td class="pn">BA205M8114-3</td><td class="sn">-</td></tr>
                 <tr><td>Audio Control Panel - Captain</td><td class="pn">2142-025</td><td class="sn">-</td></tr>
-                <tr><td>Center Control Display Unit </td><td class="pn">PS317481.36.5.825</td><td class="sn">-</td></tr>
+                <tr><td>Center Control Display Unit</td><td class="pn">PS317481.36.5.825</td><td class="sn">-</td></tr>
                 <tr><td>Audio Control Panel - F/O</td><td class="pn">2142-025</td><td class="sn">-</td></tr>
                 <tr><td>Weather Radar Control Panel</td><td class="pn">PS312578.28.5.825</td><td class="sn">-</td></tr>
                 <tr><td>ATC/TCAS Control Panel</td><td class="pn">2054-025</td><td class="sn">-</td></tr>
-                <tr><td>Center Radio Communications Panel </td><td class="pn">BA205M8114-3</td><td class="sn">-</td></tr>
+                <tr><td>Center Radio Communications Panel</td><td class="pn">BA205M8114-3</td><td class="sn">-</td></tr>
                 <tr><td>Emergency Evac Control Panel</td><td class="pn">2160-025</td><td class="sn">-</td></tr>
                 <tr><td>Audio Control Panel First Obs.</td><td class="pn">2142-025</td><td class="sn">-</td></tr>
                 <tr><td>Rudder Trim Indicator</td><td class="pn">PS322650.01.2.607</td><td class="sn">-</td></tr>
