@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Overhead Panel — Boeing 777 Flight Deck</title>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: #1a1412; color: #e2e8f0;
+            margin: 0; padding: 20px;
+            display: flex; flex-direction: column; align-items: center;
+        }
+        .back-link {
+            align-self: flex-start; color: #f59e0b;
+            text-decoration: none; font-weight: bold; margin-bottom: 20px;
+        }
+        .back-link:hover { text-decoration: underline; }
+        h1 { color: #ffffff; margin-bottom: 5px; }
+        .subtitle { color: #bcaaa4; margin-bottom: 25px; }
+
+        .image-container {
+            position: relative;
+            display: inline-block;
+            max-width: 100%;
+            border: 4px solid #3e2723;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px -5px rgba(0,0,0,0.9);
+            overflow: hidden;
+            margin-bottom: 35px;
+        }
+        img { max-width: 100%; height: auto; display: block; }
+
+        /* Boeing styling for clickable panel zones */
+        .panel-zone {
+            position: absolute;
+            background: rgba(141, 110, 99, 0.15);
+            border: 1.5px solid rgba(215, 204, 200, 0.4);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 4px;
+            overflow: hidden;
+        }
+        .panel-zone:hover {
+            background: rgba(245, 158, 11, 0.2);
+            border-color: #f59e0b;
+        }
+        .panel-zone .zone-label {
+            color: rgba(255,255,255,0.9);
+            font-size: 0.55em;
+            font-weight: 600;
+            line-height: 1.3;
+            pointer-events: none;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.9);
+            letter-spacing: 0.02em;
+        }
+        .panel-zone .zone-fin {
+            color: #f59e0b;
+            font-size: 0.5em;
+            font-family: monospace;
+            pointer-events: none;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.9);
+            margin-top: 2px;
+        }
+
+        /* ── INTERACTIVE COORDINATES (B777 OVERHEAD SECTIONS) ── */
+        /* Top Section Sub-Panels */
+        #zone-top-left       { top: 2%; left: 2%; width: 22%; height: 26%; }
+        #zone-top-center     { top: 2%; left: 25%; width: 49%; height: 26%; }
+        #zone-top-right      { top: 2%; left: 75%; width: 23%; height: 26%; }
+
+        /* Main Shield Section Panels */
+        #zone-adiru          { top: 31%; left: 2%; width: 24%; height: 16%; }
+        #zone-flight-comp    { top: 48%; left: 2%; width: 24%; height: 11%; }
+        #zone-electrical     { top: 60%; left: 2%; width: 24%; height: 23%; }
+        
+        #zone-emer-lights    { top: 31%; left: 27%; width: 23%; height: 16%; }
+        #zone-window-heat    { top: 48%; left: 27%; width: 23%; height: 11%; }
+        #zone-hyd-ram-air    { top: 60%; left: 27%; width: 23%; height: 23%; }
+
+        #zone-engine-mcp     { top: 31%; left: 51%; width: 23%; height: 28%; }
+        #zone-fuel-jettison  { top: 60%; left: 51%; width: 23%; height: 23%; }
+
+        #zone-air-cond       { top: 31%; left: 75%; width: 23%; height: 28%; }
+        #zone-bleed-press    { top: 60%; left: 75%; width: 23%; height: 23%; }
+
+        /* Tapered Bottom Rows */
+        #zone-wipers-lights  { top: 84%; left: 2%; width: 24%; height: 14%; }
+        #zone-pass-signs     { top: 84%; left: 27%; width: 23%; height: 14%; }
+        #zone-anti-ice       { top: 84%; left: 51%; width: 23%; height: 14%; }
+        #zone-lighting-r     { top: 84%; left: 75%; width: 23%; height: 14%; }
+
+        .overlay-screen {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 99;
+        }
+        .popup-box {
+            display: none;
+            position: fixed;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            background: #2b1f1c;
+            border: 2px solid #f59e0b;
+            padding: 22px 25px;
+            border-radius: 8px;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.9);
+            z-index: 100;
+            width: 92%; max-width: 440px;
+        }
+        .popup-box h3 { margin: 0 0 12px 0; color: #ffffff; font-size: 1.1em; padding-right: 30px; }
+        .popup-row { display: flex; gap: 8px; margin-bottom: 6px; font-size: 0.85em; }
+        .popup-row .label { color: #bcaaa4; min-width: 40px; }
+        .popup-row .value { font-family: monospace; color: #f59e0b; }
+        .popup-row .value.sn { color: #a3e635; }
+        .popup-divider { border: none; border-top: 1px solid #4e342e; margin: 12px 0; }
+        .popup-contents { font-size: 0.85em; color: #d7ccc8; line-height: 1.6; }
+        .popup-contents strong { color: #ffffff; }
+        
+        .close-btn {
+            position: absolute; top: 12px; right: 12px;
+            background: #4e342e; color: white; border: none;
+            padding: 4px 9px; cursor: pointer; border-radius: 4px; font-size: 0.85em;
+        }
+        .close-btn:hover { background: #d97706; color: #1a1412; }
+
+        .parts-section { width: 100%; max-width: 900px; margin-top: 20px; }
+        .parts-section h2 { color: #ffffff; border-bottom: 2px solid #4e342e; padding-bottom: 10px; }
+        .search-box {
+            width: 100%; padding: 10px; margin-bottom: 15px;
+            background: #2b1f1c; border: 1px solid #4e342e;
+            border-radius: 6px; color: #f3f4f6; font-size: 0.9em;
+        }
+        .search-box:focus { outline: none; border-color: #f59e0b; }
+        table { width: 100%; border-collapse: collapse; font-size: 0.9em; }
+        thead tr { background: #1a1412; color: #f59e0b; text-align: left; }
+        th { padding: 12px 15px; border-bottom: 2px solid #f59e0b; }
+        td { padding: 10px 15px; border-bottom: 1px solid #4e342e; }
+        tbody tr:nth-child(even) { background: #221816; }
+        tbody tr:hover { background: #3e2723; }
+        .pn { font-family: monospace; color: #f59e0b; }
+        .sn { font-family: monospace; color: #a3e635; }
+        .na { color: #8d6e63; font-style: italic; }
+    </style>
+</head>
+<body>
+
+    <a href="b777_cockpit.html" class="back-link">← Back to Full Flight Deck</a>
+    <h1>Boeing 777 Overhead Panel</h1>
+    <p class="subtitle">Click any panel zone to view structural details, P/N, and functions. Scroll down for the components index.</p>
+
+    <div class="image-container">
+        <img src="overhead.jpg" alt="Boeing 777 Overhead Panel">
+
+        <div class="panel-zone" id="zone-top-left" onclick="showPopup('top-left')">
+            <div class="zone-label">FLT CONTROL / FLUID SHUTOFF</div>
+            <div class="zone-fin">P/N Pending</div>
+        </div>
+        <div class="panel-zone" id="zone-top-center" onclick="showPopup('top-center')">
+            <div class="zone-label">BLANK MID SECTION</div>
+            <div class="zone-fin">—</div>
+        </div>
+        <div class="panel-zone" id="zone-top-right" onclick="showPopup('top-right')">
+            <div class="zone-label">APU MAINT / CARGO TEMP / CVR</div>
+            <div class="zone-fin">P/N Pending</div>
+        </div>
+
+        <div class="panel-zone" id="zone-adiru" onclick="showPopup('adiru')">
+            <div class="zone-label">ADIRU / BACKUP SYS</div>
+            <div class="zone-fin">P/N Pending</div>
+        </div>
+        <div class="panel-zone" id="zone-flight-comp" onclick="showPopup('flight-comp')">
+            <div class="zone-label">PRIMARY FLIGHT COMPUTERS</div>
+            <div class="zone-fin">P/N Pending</div>
+        </div>
+        <div class="panel-zone" id="zone-electrical" onclick="showPopup('electrical')">
+            <div class="zone-label">ELECTRICAL SYSTEM</div>
+            <div class="zone-fin">P/N Pending</div>
+        </div>
+
+        <div class="panel-zone" id="zone-emer-lights" onclick="showPopup('emer-lights')">
+            <div class="zone-label">EMER LIGHTS / PASS OXY</div>
+            <div class="zone-fin">P/N Pending</div>
+        </div>
+        <div class="panel-zone" id="zone-window-heat" onclick="showPopup('window-heat')">
+            <div class="zone-label">WINDOW HEAT</div>
+            <div class="zone-fin">P/N Pending</div>
+        </div>
+        <div class="panel-zone" id="zone-hyd-ram-air" onclick="showPopup('hyd-ram-air')">
+            <div class="zone-label">HYDRAULIC &amp; RAM AIR</div>
+            <div class="zone-fin">P/N Pending</div>
+        </div>
+
+        <div class="panel-zone" id="zone-engine-mcp" onclick="showPopup('engine-mcp')">
+            <div class="zone-label">ENGINE START &amp; CARGO FIRE</div>
+            <div class="zone-fin">P/N Pending</div>
+        </div>
+        <div class="panel-zone" id="zone-fuel-jettison" onclick="showPopup('fuel-jettison')">
+            <div class="zone-label">FUEL PUMPS &amp; JETTISON</div>
+            <div class="zone-fin">P/N Pending</div>
+        </div>
+
+        <div class="panel-zone" id="zone-air-cond" onclick="showPopup('air-cond')">
+            <div class="zone-label">AIR CONDITIONING / RECIRC</div>
+            <div class="zone-fin">P/N Pending</div>
+        </div>
+        <div class="panel-zone" id="zone-bleed-press" onclick="showPopup('bleed-press')">
+            <div class="zone-label">BLEED AIR &amp; PRESSURIZATION</div>
+            <div class="zone-fin">P/N Pending</div>
+        </div>
+
+        <div class="panel-zone" id="zone-wipers-lights" onclick="showPopup('wipers-lights')">
+            <div class="zone-label">L WIPER / CAMERA LTS</div>
+            <div class="zone-fin">—</div>
+        </div>
+        <div class="panel-zone" id="zone-pass-signs" onclick="showPopup('pass-signs')">
+            <div class="zone-label">PASS SIGNS / COCKPIT LIGHTING</div>
+            <div class="zone-fin">—</div>
+        </div>
+        <div class="panel-zone" id="zone-anti-ice" onclick="showPopup('anti-ice')">
+            <div class="zone-label">ANTI-ICE &amp; EXT LIGHTS</div>
+            <div class="zone-fin">—</div>
+        </div>
+        <div class="panel-zone" id="zone-lighting-r" onclick="showPopup('lighting-r')">
+            <div class="zone-label">R WIPER CONTROL</div>
+            <div class="zone-fin">—</div>
+        </div>
+    </div>
+
+    <div id="dark-screen" class="overlay-screen" onclick="closeAllPopups()"></div>
+
+    <div id="popup-top-left" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>Flight Control Hydraulic Valve Power</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">[Enter P/N Later]</span></div>
+        <hr class="popup-divider">
+        <div class="popup-contents">
+            Contains guarded switches for <strong>FLT CONTROL HYD VALVE POWER</strong> (Tail, Wing assemblies) and Window Heat backups.
+        </div>
+    </div>
+
+    <div id="popup-top-center" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>Blank Structural Mid Panel</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">N/A</span></div>
+        <hr class="popup-divider">
+        <div class="popup-contents"> Structural spacer segment. </div>
+    </div>
+
+    <div id="popup-top-right" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>APU Maint / Cargo Temp / Voice Recorder</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">[Enter P/N Later]</span></div>
+        <hr class="popup-divider">
+        <div class="popup-contents">
+            Contains <strong>APU MAINT</strong>, EEC Maintenance switches, Cargo Temperature dials, and Cockpit Voice Recorder status indicators.
+        </div>
+    </div>
+
+    <div id="popup-adiru" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>ADIRU System Control</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">[Enter P/N Later]</span></div>
+        <hr class="popup-divider">
+        <div class="popup-contents">
+            Manages the <strong>Air Data Inertial Reference Unit</strong> switch matrix and associated battery operations.
+        </div>
+    </div>
+
+    <div id="popup-flight-comp" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>Primary Flight Computers (PFC)</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">[Enter P/N Later]</span></div>
+        <hr class="popup-divider">
+        <div class="popup-contents">
+            Houses the guarded disconnect toggle for the Fly-By-Wire system <strong>Primary Flight Computers</strong>.
+        </div>
+    </div>
+
+    <div id="popup-electrical" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>Electrical Power Control Panel</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">[Enter P/N Later]</span></div>
+        <hr class="popup-divider">
+        <div class="popup-contents">
+            Primary electrical node. Controls <strong>Battery, APU Gen, Engine Generators, Bus Ties</strong>, and External Power connections.
+        </div>
+    </div>
+
+    <div id="popup-emer-lights" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>Emergency Lights &amp; Passenger Oxygen</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">[Enter P/N Later]</span></div>
+        <hr class="popup-divider">
+        <div class="popup-contents">
+            Controls emergency path lighting deployment toggle and guarded passenger cabin <strong>Oxygen Mask Deployment</strong>.
+        </div>
+    </div>
+
+    <div id="popup-window-heat" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>Window Heat Controls</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">[Enter P/N Later]</span></div>
+        <hr class="popup-divider">
+        <div class="popup-contents">
+            Anti-fogging and anti-icing element controllers for the main flight deck wind-shields and lateral windows.
+        </div>
+    </div>
+
+    <div id="popup-hyd-ram-air" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>Hydraulic &amp; Ram Air Control Panel</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">[Enter P/N Later]</span></div>
+        <hr class="popup-divider">
+        <div class="popup-contents">
+            Controls Left/Right Engine driven pumps, Central electric system switches, and deployment mechanisms for the <strong>Ram Air Turbine (RAT)</strong>.
+        </div>
+    </div>
+
+    <div id="popup-engine-mcp" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>Engine Start &amp; Cargo Fire Panel</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">[Enter P/N Later]</span></div>
+        <hr class="popup-divider">
+        <div class="popup-contents">
+            Houses left/right pneumatic starter knobs, autostart systems, and <strong>APU / Cargo Fire Discharge</strong> systems.
+        </div>
+    </div>
+
+    <div id="popup-fuel-jettison" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>Fuel Pumps &amp; Fuel Jettison Panel</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">[Enter P/N Later]</span></div>
+        <hr class="popup-divider">
+        <div class="popup-contents">
+            Manages wing tank/center tank crossfeed selectors alongside the active fuel dump/jettison computer selectors.
+        </div>
+    </div>
+
+    <div id="popup-air-cond" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>Environmental &amp; Air Conditioning Pack Panel</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">[Enter P/N Later]</span></div>
+        <hr class="popup-divider">
+        <div class="popup-contents">
+            Manages cabin zone target temperatures, recirculation fan assemblies, and system cooling pack automation switches.
+        </div>
+    </div>
+
+    <div id="popup-bleed-press" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>Bleed Air &amp; Pressurization Control</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">[Enter P/N Later]</span></div>
+        <hr class="popup-divider">
+        <div class="popup-contents">
+            Controls Engine isolation bleed valves, APU air source supply, and dual channel manual/auto landing altitude air pressurization profiles.
+        </div>
+    </div>
+
+    <div id="popup-wipers-lights" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>Captain Controls Node</h3>
+        <hr class="popup-divider">
+        <div class="popup-contents">Houses Left Wiper configurations and instrument console/camera brightness dimmers.</div>
+    </div>
+
+    <div id="popup-pass-signs" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>Passenger Signs &amp; Internal Lighting</h3>
+        <hr class="popup-divider">
+        <div class="popup-contents">Manages Seatbelts/No Smoking illumination commands and cockpit interior dome/storm lights.</div>
+    </div>
+
+    <div id="popup-anti-ice" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>Anti-Ice &amp; Exterior Lighting Selector</h3>
+        <hr class="popup-divider">
+        <div class="popup-contents">Controls Wing/Engine induction anti-ice and external lighting toggles (Beacon, Nav, Logo, Strobe, Landing/Taxi arrays).</div>
+    </div>
+
+    <div id="popup-lighting-r" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>First Officer Control Node</h3>
+        <hr class="popup-divider">
+        <div class="popup-contents">Houses Right Windshield Wiper control assembly parameters.</div>
+    </div>
+
+
+    <div class="parts-section">
+        <h2>B777 Overhead Parts Index</h2>
+        <input class="search-box" type="text" id="searchOverhead" onkeyup="filterTable('searchOverhead','overheadTable')" placeholder="Search description or part numbers...">
+        <table id="overheadTable">
+            <thead>
+                <tr><th>System Description</th><th>Part Number</th><th>Status Tracking</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Flight Control Hydraulic Valve Power Panel</td><td class="pn">[TBD]</td><td class="sn">Awaiting Input</td></tr>
+                <tr><td>APU Maintenance / Cargo Temp Matrix</td><td class="pn">[TBD]</td><td class="sn">Awaiting Input</td></tr>
+                <tr><td>ADIRU System Module</td><td class="pn">[TBD]</td><td class="sn">Awaiting Input</td></tr>
+                <tr><td>Primary Flight Computers Sub-assembly</td><td class="pn">[TBD]</td><td class="sn">Awaiting Input</td></tr>
+                <tr><td>Electrical Power Control Panel</td><td class="pn">[TBD]</td><td class="sn">Awaiting Input</td></tr>
+                <tr><td>Emergency Lighting &amp; Oxygen Delivery Panel</td><td class="pn">[TBD]</td><td class="sn">Awaiting Input</td></tr>
+                <tr><td>Window Thermal De-Ice Regulator</td><td class="pn">[TBD]</td><td class="sn">Awaiting Input</td></tr>
+                <tr><td>Hydraulic Engine Pumps &amp; RAT Unit</td><td class="pn">[TBD]</td><td class="sn">Awaiting Input</td></tr>
+                <tr><td>Engine Start / Ignition &amp; Cargo Fire Panel</td><td class="pn">[TBD]</td><td class="sn">Awaiting Input</td></tr>
+                <tr><td>Fuel Transfer &amp; Jettison Distribution Panel</td><td class="pn">[TBD]</td><td class="sn">Awaiting Input</td></tr>
+                <tr><td>Environmental Flight Deck Air Conditioning Assembly</td><td class="pn">[TBD]</td><td class="sn">Awaiting Input</td></tr>
+                <tr><td>Pneumatic Bleed Air &amp; Outflow Pressurization Control</td><td class="pn">[TBD]</td><td class="sn">Awaiting Input</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function showPopup(id) {
+            closeAllPopups();
+            document.getElementById('dark-screen').style.display = 'block';
+            document.getElementById('popup-' + id).style.display = 'block';
+        }
+        function closeAllPopups() {
+            document.getElementById('dark-screen').style.display = 'none';
+            document.querySelectorAll('.popup-box').forEach(p => p.style.display = 'none');
+        }
+        function filterTable(inputId, tableId) {
+            const input = document.getElementById(inputId).value.toLowerCase();
+            document.querySelectorAll('#' + tableId + ' tbody tr').forEach(row => {
+                row.style.display = row.textContent.toLowerCase().includes(input) ? '' : 'none';
+            });
+        }
+    </script>
+
+</body>
+</html>
