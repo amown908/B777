@@ -71,7 +71,7 @@
         #zone-parking-brake  { top: 20.0%; left: 10%; width: 6%; height: 11%; }
         #zone-flaps          { top: 10.5%; left: 63%; width: 11%; height: 19%; }
         #zone-alt-flaps      { top: 19.5%; left: 77%; width: 13%; height: 11%; }
-        #zone-fuel-control   { top: 25.5%; left: 40%; width: 20%; height: 6.5%; }
+        #zone-fuel-control   { top: 25.5%; left: 25%; width: 35%; height: 6.5%; }
 
         /* Middle Columns Panels */
         #zone-com1           { top: 33.5%; left: 10%; width: 26%; height: 18.5%; }
@@ -148,8 +148,8 @@
 <body>
 
     <a href="index.html" class="back-link">← Back to Full Flight Deck</a>
-    <h1>Control Stand &amp; Pedestal</h1>
-    <p class="subtitle">Click any control section to inspect details, schematic references, and official structural P/Ns.</p>
+    <h1>Pedestal</h1>
+    <p class="subtitle">Click any control section to inspect details, P/N and S/N.</p>
 
     <div class="image-container">
         <img src="pedestal_updated.jpg" alt="Boeing Control Stand & Pedestal Breakdown">
@@ -161,7 +161,7 @@
             <div class="zone-label">FO CURSOR CONTROL</div>
         </div>
         <div class="panel-zone" id="zone-speedbrake" onclick="showPopup('speedbrake')">
-            <div class="zone-label">AUTOSPEEDBRAKE ACTUATOR / STAB TRIM</div>
+            <div class="zone-label">AUTOSPEEDBRAKE / STAB TRIM</div>
         </div>
         <div class="panel-zone" id="zone-throttles" onclick="showPopup('throttles')">
             <div class="zone-label">THROTTLES ASSEMBLY</div>
@@ -173,10 +173,10 @@
             <div class="zone-label">FLAPS</div>
         </div>
         <div class="panel-zone" id="zone-alt-flaps" onclick="showPopup('alt-flaps')">
-            <div class="zone-label">ALTN FLAPS CONTROL</div>
+            <div class="zone-label">ALTN FLAPS </div>
         </div>
         <div class="panel-zone" id="zone-fuel-control" onclick="showPopup('fuel-control')">
-            <div class="zone-label">ENGINE FIRE CONTROL</div>
+            <div class="zone-label">ENGINE CONTROLS</div>
         </div>
 
         <div class="panel-zone" id="zone-com1" onclick="showPopup('com1')">
@@ -215,7 +215,7 @@
             <div class="zone-label">EMERGENCY EVAC CONTROL</div>
         </div>
         <div class="panel-zone" id="zone-aisle-stand" onclick="showPopup('aisle-stand')">
-            <div class="zone-label">AI SLE STAND BRIGHTNESS</div>
+            <div class="zone-label">AISLE STAND BRIGHTNESS</div>
         </div>
     </div>
 
@@ -293,7 +293,7 @@
 
     <div id="popup-fuel-control" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>Engine Fire Control</h3>
+        <h3>Engine Controls</h3>
         <div class="popup-row"><span class="label">P/N</span><span class="value">MA264941.18.2.825</span></div>
         <hr class="popup-divider">
         <div class="popup-contents">
