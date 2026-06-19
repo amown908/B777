@@ -8,22 +8,25 @@
         * { box-sizing: border-box; }
         body { 
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
-            /* Switched from Airbus Blue-Grey to classic Boeing Dark Brown */
-            background: #1e1a17; 
+            /* Deep, dark Boeing cockpit brown for the whole page background */
+            background: #1a1412; 
             color: #e2e8f0; 
             margin: 0; padding: 20px;
             display: flex; flex-direction: column; align-items: center;
         }
         h1 { color: #ffffff; margin-bottom: 5px; }
-        .subtitle { color: #a1a1aa; margin-bottom: 25px; text-align: center; }
+        .subtitle { color: #bcaaa4; margin-bottom: 25px; text-align: center; }
 
         .cockpit-container { 
             position: relative; 
             display: inline-block; 
-            max-width: 100%;
-            border: 4px solid #3f3732; border-radius: 8px;
+            max-width: 600px; 
+            width: 100%;
+            margin: 0 auto;
+            /* Border adjusted to complement the dark brown theme */
+            border: 4px solid #3e2723; border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.8);
+            box-shadow: 0 10px 30px -5px rgba(0,0,0,0.9);
         }
         img { max-width: 100%; height: auto; display: block; }
 
@@ -45,18 +48,19 @@
             position: absolute;
             bottom: 8px; left: 50%;
             transform: translateX(-50%);
-            background: rgba(30, 26, 23, 0.95);
+            /* Tooltip matches the new dark brown background */
+            background: rgba(26, 20, 18, 0.95);
             color: #f59e0b;
             font-size: 0.75em; font-weight: 600;
             padding: 6px 10px; border-radius: 4px;
             white-space: nowrap; opacity: 0;
             transition: opacity 0.15s; pointer-events: none;
             box-shadow: 0 4px 6px -1px rgba(0,0,0,0.5);
-            border: 1px solid #574c45;
+            border: 1px solid #4e342e;
         }
         .panel-box:hover::after { opacity: 1; }
 
-        /* ── RE-MAPPED COORDINATES TUNED TO YOUR UPLOADED IMAGE ── */
+        /* Percentages tuned to your uploaded image */
         #overhead         { top: 0%;    left: 0%;    width: 100%; height: 32%; }
         #compass          { top: 32%;   left: 46%;   width: 8%;   height: 4%;  }
         #glareshield      { top: 42%;   left: 27%;   width: 46%;  height: 5%;  }
@@ -76,7 +80,7 @@
     <p class="subtitle">Hover over a layout section to highlight its components. Click to inspect technical parameters.</p>
 
     <div class="cockpit-container">
-        <img src="b777_cockpit.jpeg" alt="Boeing 777 Flight Deck System Breakdown">
+        <img src="b777_cockpit.jpg" alt="Boeing 777 Flight Deck System Breakdown">
 
         <a href="b777_overhead.html"     class="panel-box" id="overhead"      title="Overhead Panel System"></a>
         <a href="b777_compass.html"      class="panel-box" id="compass"       title="Standby Compass & Eye Ref"></a>
