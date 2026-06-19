@@ -77,7 +77,7 @@
         #zone-top-right      { top: 2%; left: 75%; width: 23%; height: 26%; }
 
         /* Main Shield Section Panels */
-        #zone-adiru          { top: 31%; left: 2%; width: 24%; height: 16%; }
+        #zone-adiru          { top: 31%; left: 2%; width: 24%; height: 20%; }
         #zone-flight-comp    { top: 48%; left: 2%; width: 24%; height: 11%; }
         #zone-electrical     { top: 60%; left: 2%; width: 24%; height: 23%; }
         
@@ -175,11 +175,7 @@
         </div>
 
         <div class="panel-zone" id="zone-adiru" onclick="showPopup('adiru')">
-            <div class="zone-label">ADIRU / BACKUP SYS</div>
-            <div class="zone-fin">P/N Pending</div>
-        </div>
-        <div class="panel-zone" id="zone-flight-comp" onclick="showPopup('flight-comp')">
-            <div class="zone-label">PRIMARY FLIGHT COMPUTERS</div>
+            <div class="zone-label">ADIRU / BACKUP SYS / PRIMARY FLIGHT COMPUTERS</div>
             <div class="zone-fin">P/N Pending</div>
         </div>
         <div class="panel-zone" id="zone-electrical" onclick="showPopup('electrical')">
@@ -272,17 +268,7 @@
         <div class="popup-row"><span class="label">P/N</span><span class="value">[Enter P/N Later]</span></div>
         <hr class="popup-divider">
         <div class="popup-contents">
-            Manages the <strong>Air Data Inertial Reference Unit</strong> switch matrix and associated battery operations.
-        </div>
-    </div>
-
-    <div id="popup-flight-comp" class="popup-box">
-        <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>Primary Flight Computers (PFC)</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">[Enter P/N Later]</span></div>
-        <hr class="popup-divider">
-        <div class="popup-contents">
-            Houses the guarded disconnect toggle for the Fly-By-Wire system <strong>Primary Flight Computers</strong>.
+            Manages the <strong>Air Data Inertial Reference Unit</strong> switch matrix and associated battery operations and houses the guarded disconnect toggle for the Fly-By-Wire system <strong>Primary Flight Computers</strong>.
         </div>
     </div>
 
