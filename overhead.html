@@ -81,8 +81,7 @@
         #zone-flight-comp    { top: 48%; left: 2%; width: 24%; height: 11%; }
         #zone-electrical     { top: 54.75%; left: 3%; width: 23.25%; height: 22.25%; }
         
-        #zone-emer-lights    { top: 31%; left: 27%; width: 23%; height: 16%; }
-        #zone-window-heat    { top: 48%; left: 27%; width: 23%; height: 11%; }
+        #zone-emer-lights    { top: 31%; left: 26.75%; width: 23.25%; height: 23.25%; }
         #zone-hyd-ram-air    { top: 60%; left: 27%; width: 23%; height: 23%; }
 
         #zone-engine-mcp     { top: 31%; left: 51%; width: 23%; height: 28%; }
@@ -92,7 +91,7 @@
         #zone-bleed-press    { top: 60%; left: 75%; width: 23%; height: 23%; }
 
         /* Tapered Bottom Rows */
-        #zone-wipers-lights  { top: 77.5%; left: 3%; width: 24%; height: 7%; }
+        #zone-wipers-lights  { top: 77.5%; left: 3%; width: 23.25%; height: 7%; }
         #zone-pass-signs     { top: 84%; left: 27%; width: 23%; height: 14%; }
         #zone-anti-ice       { top: 84%; left: 51%; width: 23%; height: 14%; }
         #zone-lighting-r     { top: 84%; left: 75%; width: 23%; height: 14%; }
@@ -184,11 +183,7 @@
         </div>
 
         <div class="panel-zone" id="zone-emer-lights" onclick="showPopup('emer-lights')">
-            <div class="zone-label">EMER LIGHTS / PASS OXY</div>
-            <div class="zone-fin">P/N Pending</div>
-        </div>
-        <div class="panel-zone" id="zone-window-heat" onclick="showPopup('window-heat')">
-            <div class="zone-label">WINDOW HEAT</div>
+            <div class="zone-label">EMER LIGHTS / PASS OXY / WINDOW HEAT</div>
             <div class="zone-fin">P/N Pending</div>
         </div>
         <div class="panel-zone" id="zone-hyd-ram-air" onclick="showPopup('hyd-ram-air')">
@@ -288,17 +283,7 @@
         <div class="popup-row"><span class="label">P/N</span><span class="value">[Enter P/N Later]</span></div>
         <hr class="popup-divider">
         <div class="popup-contents">
-            Controls emergency path lighting deployment toggle and guarded passenger cabin <strong>Oxygen Mask Deployment</strong>.
-        </div>
-    </div>
-
-    <div id="popup-window-heat" class="popup-box">
-        <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>Window Heat Controls</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">[Enter P/N Later]</span></div>
-        <hr class="popup-divider">
-        <div class="popup-contents">
-            Anti-fogging and anti-icing element controllers for the main flight deck wind-shields and lateral windows.
+            Controls emergency path lighting deployment toggle and guarded passenger cabin <strong>Oxygen Mask Deployment</strong> and contains anti-fogging and anti-icing element controllers for the main flight deck wind-shields and lateral windows.
         </div>
     </div>
 
