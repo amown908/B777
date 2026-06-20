@@ -30,14 +30,14 @@
             overflow: hidden;
             margin-bottom: 35px;
         }
-        img { max-width: 100%; height: auto; display: block; max-height: 90vh; }
+        img { max-width: 100%; height: auto; display: block; max-height: 95vh; }
 
         /* Interactive zone boxes calibrated for pedestal_updated.jpg */
         .panel-zone {
             position: absolute;
-            background: rgba(141, 110, 99, 0.15);
-            border: 1.5px solid rgba(215, 204, 200, 0.4);
-            border-radius: 4px;
+            background: rgba(141, 110, 99, 0.12);
+            border: 1.5px solid rgba(215, 204, 200, 0.35);
+            border-radius: 3px;
             cursor: pointer;
             transition: all 0.2s ease;
             display: flex;
@@ -54,7 +54,7 @@
         }
         .panel-zone .zone-label {
             color: rgba(255,255,255,0.95);
-            font-size: 0.52em;
+            font-size: 0.50em;
             font-weight: 600;
             line-height: 1.2;
             pointer-events: none;
@@ -62,35 +62,43 @@
             letter-spacing: 0.01em;
         }
 
-        /* ── INTERACTIVE COORDINATES (UPDATED IMAGE MAP) ── */
-        /* Top Section Panels */
-        #zone-left-cdu       { top: 1.5%; left: 4%; width: 20%; height: 16%; }
-        #zone-right-cdu      { top: 1.5%; left: 76%; width: 20%; height: 16%; }
-        #zone-speedbrake     { top: 1.5%; left: 25%; width: 14%; height: 23%; }
-        #zone-throttles      { top: 3.0%; left: 40%; width: 20%; height: 21%; }
-        #zone-parking-brake  { top: 20.0%; left: 10%; width: 6%; height: 11%; }
-        #zone-flaps          { top: 10.5%; left: 63%; width: 11%; height: 19%; }
-        #zone-alt-flaps      { top: 19.5%; left: 77%; width: 13%; height: 11%; }
-        #zone-fuel-control   { top: 25.5%; left: 45%; width: 15%; height: 6.5%; }
-        #zone-stabcutout   { top: 26%; left: 25%; width: 15%; height: 6.5%; }
+        /* ── INTERACTIVE COORDINATES (P10 CONTROL STAND UPPER & LOWER PEDESTAL) ── */
+        /* Upper Control Stand */
+        #zone-capt-cdu-upper     { top: 7.0%; left: 1.5%; width: 14%; height: 6.5%; }
+        #zone-fo-cdu-upper       { top: 7.0%; left: 83.5%; width: 14%; height: 6.5%; }
+        #zone-capt-stab-ind      { top: 25.0%; left: 16.5%; width: 4.5%; height: 9.5%; }
+        #zone-fo-stab-ind        { top: 25.0%; left: 76.5%; width: 4.5%; height: 9.5%; }
+        #zone-speedbrake-lever   { top: 7.0%; left: 21.0%; width: 13%; height: 16.0%; }
+        #zone-throttles-lever    { top: 1.0%; left: 36.5%; width: 26.5%; height: 23.0%; }
+        #zone-flap-lever         { top: 7.0%; left: 65.5%; width: 9%; height: 16.5%; }
+        #zone-parking-brake      { top: 24.5%; left: 9.5%; width: 5.5%; height: 11.5%; }
+        #zone-stab-cutout        { top: 28.0%; left: 27.0%; width: 10.5%; height: 5.5%; }
+        #zone-fuel-control       { top: 27.5%; left: 41.5%; width: 18.0%; height: 6.0%; }
+        #zone-alt-flaps-group    { top: 23.0%; left: 83.0%; width: 10.5%; height: 12.0%; }
 
-        /* Middle Columns Panels */
-        #zone-com1           { top: 33.5%; left: 10%; width: 26%; height: 18.5%; }
-        #zone-weather-radar  { top: 52.5%; left: 10%; width: 26%; height: 7.0%; }
-        #zone-com2           { top: 59.5%; left: 10%; width: 26%; height: 21.0%; }
-        #zone-door-ctrl      { top: 81.0%; left: 10%; width: 26%; height: 7.0%; }
+        /* Aft Pedestal - Left Column (Captain Stack) */
+        #zone-capt-rtp           { top: 39.5%; left: 9.5%; width: 26.5%; height: 6.5%; }
+        #zone-capt-acp           { top: 46.5%; left: 9.5%; width: 26.5%; height: 11.5%; }
+        #zone-weather-radar      { top: 58.5%; left: 9.5%; width: 26.5%; height: 7.0%; }
+        #zone-mid-left-rtp       { top: 66.0%; left: 9.5%; width: 26.5%; height: 6.5%; }
+        #zone-mid-left-acp       { top: 73.0%; left: 9.5%; width: 26.5%; height: 11.5%; }
+        #zone-flight-deck-door   { top: 87.5%; left: 9.5%; width: 26.5%; height: 6.5%; }
 
-        /* Center Column Panels */
-        #zone-fire-cargo     { top: 33.5%; left: 37%; width: 26%; height: 9.5%; }
-        #zone-lower-cdu      { top: 43.5%; left: 37%; width: 26%; height: 24.5%; }
-        #zone-trim-control   { top: 68.5%; left: 37%; width: 26%; height: 12.5%; }
-        #zone-printer        { top: 81.5%; left: 37%; width: 26%; height: 2.0%; }
+        /* Aft Pedestal - Center Column */
+        #zone-engine-fire        { top: 39.5%; left: 36.5%; width: 26.5%; height: 8.5%; }
+        #zone-center-cdu         { top: 48.5%; left: 36.5%; width: 26.5%; height: 25.0%; }
+        #zone-rudder-trim-ind    { top: 74.0%; left: 36.5%; width: 26.5%; height: 3.5%; }
+        #zone-aileron-rudder-trm { top: 78.0%; left: 36.5%; width: 26.5%; height: 9.0%; }
+        #zone-printer-panel      { top: 87.5%; left: 36.5%; width: 26.5%; height: 3.5%; }
 
-        /* Right Column Panels */
-        #zone-audio-r1       { top: 33.5%; left: 64%; width: 26%; height: 18.5%; }
-        #zone-transponder    { top: 52.5%; left: 64%; width: 26%; height: 6.5%; }
-        #zone-evac-panel     { top: 69.0%; left: 64%; width: 26%; height: 11.5%; }
-        #zone-aisle-stand    { top: 81.0%; left: 64%; width: 26%; height: 7.0%; }
+        /* Aft Pedestal - Right Column (First Officer Stack) */
+        #zone-fo-rtp             { top: 39.5%; left: 63.5%; width: 26.5%; height: 6.5%; }
+        #zone-fo-acp             { top: 46.5%; left: 63.5%; width: 26.5%; height: 11.5%; }
+        #zone-transponder        { top: 58.5%; left: 63.5%; width: 26.5%; height: 6.5%; }
+        #zone-evac-panel         { top: 75.5%; left: 63.5%; width: 26.5%; height: 6.5%; }
+        #zone-floor-lights       { top: 82.5%; left: 63.5%; width: 13.0%; height: 4.5%; }
+        #zone-observer-audio     { top: 82.5%; left: 77.0%; width: 13.0%; height: 4.5%; }
+        #zone-aisle-stand        { top: 87.5%; left: 63.5%; width: 26.5%; height: 6.5%; }
 
         /* Popup overlay box rules */
         .overlay-screen {
@@ -149,294 +157,341 @@
 <body>
 
     <a href="index.html" class="back-link">← Back to Full Flight Deck</a>
-    <h1>Pedestal</h1>
-    <p class="subtitle">Click any control section to inspect details, P/N and S/N.</p>
+    <h1>Pedestal & Control Stand Breakdown</h1>
+    <p class="subtitle">Click any interactive control section to inspect module metrics.</p>
 
     <div class="image-container">
         <img src="pedestal_updated.jpg" alt="Boeing Control Stand & Pedestal Breakdown">
 
-        <div class="panel-zone" id="zone-left-cdu" onclick="showPopup('left-cdu')">
-            <div class="zone-label">CAPT CURSOR CONTROL</div>
+        <div class="panel-zone" id="zone-capt-cdu-upper" onclick="showPopup('capt-cdu-upper')">
+            <div class="zone-label">CAPT CD (1)</div>
         </div>
-        <div class="panel-zone" id="zone-right-cdu" onclick="showPopup('right-cdu')">
-            <div class="zone-label">FO CURSOR CONTROL</div>
+        <div class="panel-zone" id="zone-fo-cdu-upper" onclick="showPopup('fo-cdu-upper')">
+            <div class="zone-label">F/O CD (2)</div>
         </div>
-        <div class="panel-zone" id="zone-speedbrake" onclick="showPopup('speedbrake')">
-            <div class="zone-label">AUTOSPEEDBRAKE / STAB TRIM</div>
+        <div class="panel-zone" id="zone-capt-stab-ind" onclick="showPopup('capt-stab-ind')">
+            <div class="zone-label">CAPT STAB IND</div>
         </div>
-        <div class="panel-zone" id="zone-throttles" onclick="showPopup('throttles')">
-            <div class="zone-label">THROTTLES ASSEMBLY</div>
+        <div class="panel-zone" id="zone-fo-stab-ind" onclick="showPopup('fo-stab-ind')">
+            <div class="zone-label">F/O STAB IND</div>
+        </div>
+        <div class="panel-zone" id="zone-speedbrake-lever" onclick="showPopup('speedbrake-lever')">
+            <div class="zone-label">SPEEDBRAKE LEVER</div>
+        </div>
+        <div class="panel-zone" id="zone-throttles-lever" onclick="showPopup('throttles-lever')">
+            <div class="zone-label">THRUST LEVERS</div>
+        </div>
+        <div class="panel-zone" id="zone-flap-lever" onclick="showPopup('flap-lever')">
+            <div class="zone-label">FLAP LEVER</div>
         </div>
         <div class="panel-zone" id="zone-parking-brake" onclick="showPopup('parking-brake')">
             <div class="zone-label">PARKING BRAKE</div>
         </div>
-        <div class="panel-zone" id="zone-flaps" onclick="showPopup('flaps')">
-            <div class="zone-label">FLAPS</div>
-        </div>
-        <div class="panel-zone" id="zone-alt-flaps" onclick="showPopup('alt-flaps')">
-            <div class="zone-label">ALTN FLAPS </div>
+        <div class="panel-zone" id="zone-stab-cutout" onclick="showPopup('stab-cutout')">
+            <div class="zone-label">STABILIZER CUTOUT</div>
         </div>
         <div class="panel-zone" id="zone-fuel-control" onclick="showPopup('fuel-control')">
-            <div class="zone-label">FUEL CONTROLS</div>
+            <div class="zone-label">FUEL CONTROL</div>
         </div>
- <div class="panel-zone" id="zone-stbcutout" onclick="showPopup('stbcutout')">
-            <div class="zone-label">STABILIZER CUTOUT SWITCHES</div>
+        <div class="panel-zone" id="zone-alt-flaps-group" onclick="showPopup('alt-flaps-group')">
+            <div class="zone-label">ALTN FLAPS PANEL</div>
         </div>
-        <div class="panel-zone" id="zone-com1" onclick="showPopup('com1')">
-            <div class="zone-label">RADIO COMMUNICATIONS - FO</div>
+
+        <div class="panel-zone" id="zone-capt-rtp" onclick="showPopup('capt-rtp')">
+            <div class="zone-label">RADIO TUNING PANEL (L)</div>
+        </div>
+        <div class="panel-zone" id="zone-capt-acp" onclick="showPopup('capt-acp')">
+            <div class="zone-label">AUDIO CONTROL PANEL (L)</div>
         </div>
         <div class="panel-zone" id="zone-weather-radar" onclick="showPopup('weather-radar')">
-            <div class="zone-label">WEATHER RADAR CONTROL</div>
+            <div class="zone-label">WEATHER RADAR</div>
         </div>
-        <div class="panel-zone" id="zone-com2" onclick="showPopup('com2')">
-            <div class="zone-label">RADIO COMMUNICATIONS CENTER</div>
+        <div class="panel-zone" id="zone-mid-left-rtp" onclick="showPopup('mid-left-rtp')">
+            <div class="zone-label">RADIO TUNING PANEL (MID-L)</div>
         </div>
-        <div class="panel-zone" id="zone-door-ctrl" onclick="showPopup('door-ctrl')">
-            <div class="zone-label">FLT DK DOOR PANEL</div>
+        <div class="panel-zone" id="zone-mid-left-acp" onclick="showPopup('mid-left-acp')">
+            <div class="zone-label">AUDIO CONTROL PANEL (MID-L)</div>
+        </div>
+        <div class="panel-zone" id="zone-flight-deck-door" onclick="showPopup('flight-deck-door')">
+            <div class="zone-label">FLIGHT DECK DOOR</div>
         </div>
 
-        <div class="panel-zone" id="zone-fire-cargo" onclick="showPopup('fire-cargo')">
-            <div class="zone-label">ENG FIRE SHUTOFF SWITCHES</div>
+        <div class="panel-zone" id="zone-engine-fire" onclick="showPopup('engine-fire')">
+            <div class="zone-label">ENGINE FIRE PANEL</div>
         </div>
-        <div class="panel-zone" id="zone-lower-cdu" onclick="showPopup('lower-cdu')">
+        <div class="panel-zone" id="zone-center-cdu" onclick="showPopup('center-cdu')">
             <div class="zone-label">CENTER CDU</div>
         </div>
-        <div class="panel-zone" id="zone-trim-control" onclick="showPopup('trim-control')">
-            <div class="zone-label">AILERON/RUDDER TRIM &amp; IND</div>
+        <div class="panel-zone" id="zone-rudder-trim-ind" onclick="showPopup('rudder-trim-ind')">
+            <div class="zone-label">RUDDER TRIM IND</div>
         </div>
-        <div class="panel-zone" id="zone-printer" onclick="showPopup('printer')">
-            <div class="zone-label">FLIGHT DECK PRINTER</div>
+        <div class="panel-zone" id="zone-aileron-rudder-trm" onclick="showPopup('aileron-rudder-trm')">
+            <div class="zone-label">AILERON/RUDDER TRIM</div>
+        </div>
+        <div class="panel-zone" id="zone-printer-panel" onclick="showPopup('printer-panel')">
+            <div class="zone-label">PRINTER CONTROLS</div>
         </div>
 
-        <div class="panel-zone" id="zone-audio-r1" onclick="showPopup('audio-r1')">
-            <div class="zone-label">RADIO COMMUNICATIONS - FO</div>
+        <div class="panel-zone" id="zone-fo-rtp" onclick="showPopup('fo-rtp')">
+            <div class="zone-label">RADIO TUNING PANEL (R)</div>
+        </div>
+        <div class="panel-zone" id="zone-fo-acp" onclick="showPopup('fo-acp')">
+            <div class="zone-label">AUDIO CONTROL PANEL (R)</div>
         </div>
         <div class="panel-zone" id="zone-transponder" onclick="showPopup('transponder')">
-            <div class="zone-label">ATC/TCAS CONTROL PANEL</div>
+            <div class="zone-label">TRANSPONDER PANEL</div>
         </div>
         <div class="panel-zone" id="zone-evac-panel" onclick="showPopup('evac-panel')">
-            <div class="zone-label">EMERGENCY EVAC CONTROL</div>
+            <div class="zone-label">EMERGENCY EVACUATION</div>
+        </div>
+        <div class="panel-zone" id="zone-floor-lights" onclick="showPopup('floor-lights')">
+            <div class="zone-label">FLOOR LIGHTS</div>
+        </div>
+        <div class="panel-zone" id="zone-observer-audio" onclick="showPopup('observer-audio')">
+            <div class="zone-label">OBS AUDIO SELECTOR</div>
         </div>
         <div class="panel-zone" id="zone-aisle-stand" onclick="showPopup('aisle-stand')">
-            <div class="zone-label">AISLE STAND BRIGHTNESS</div>
+            <div class="zone-label">AISLE STAND LIGHTS</div>
         </div>
     </div>
 
     <div id="dark-screen" class="overlay-screen" onclick="closeAllPopups()"></div>
 
-    <div id="popup-left-cdu" class="popup-box">
+    <div id="popup-capt-cdu-upper" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>Capt Cursor Control</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">2001-025</span></div>
+        <h3>Captain Cursor Control Device (1)</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">-</span></div>
         <hr class="popup-divider">
-        <div class="popup-contents">
-            Captain's dedicated interface control node driving the primary active display navigation inputs.
-        </div>
+        <div class="popup-contents">Left outboard primary command tracking unit for navigating localized screen arrays.</div>
     </div>
 
-    <div id="popup-right-cdu" class="popup-box">
+    <div id="popup-fo-cdu-upper" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>FO Cursor Control</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">2001-025</span></div>
+        <h3>F/O Cursor Control Device (2)</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">-</span></div>
         <hr class="popup-divider">
-        <div class="popup-contents">
-            First Officer's navigation tracking module sync'd into the central avionics cursor cluster loop.
-        </div>
+        <div class="popup-contents">Right outboard primary command tracking unit for interactive display targeting loops.</div>
     </div>
 
-    <div id="popup-speedbrake" class="popup-box">
+    <div id="popup-capt-stab-ind" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>Speedbrake  </h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value"> 924D100-1 BA654M0007-535 / MP372-879-003</span></div>
+        <h3>Stabilizer Position Indicator — Captain</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">-</span></div>
         <hr class="popup-divider">
-        <div class="popup-contents">
-            Consolidates automatic spoiler deployment mechanism with the Left &amp; Right Stabilizer Trim pointer blocks.
-        </div>
-    </div>
-     <div id="popup-stabcutout" class="popup-box">
-        <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3> Stabilizer Cutout Switches </h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value"> 924D100-1 BA654M0007-535 / MP372-879-003</span></div>
-        <hr class="popup-divider">
-        <div class="popup-contents">
-            Consolidates automatic spoiler deployment mechanism with the Left &amp; Right Stabilizer Trim pointer blocks.
-        </div>
+        <div class="popup-contents">Displays left-side mechanical trim indicator green-band settings.</div>
     </div>
 
-
-    <div id="popup-throttles" class="popup-box">
+    <div id="popup-fo-stab-ind" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>Throttle Assembly</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">BA654M0007-535</span></div>
+        <h3>Stabilizer Position Indicator — First Officer</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">-</span></div>
         <hr class="popup-divider">
-        <div class="popup-contents">
-            Central housing for mechanical thrust lever linkage configurations and tracking logic loops.
-        </div>
+        <div class="popup-contents">Displays right-side localized trim settings matching trailing edge alignments.</div>
+    </div>
+
+    <div id="popup-speedbrake-lever" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>Speedbrake Lever</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">-</span></div>
+        <hr class="popup-divider">
+        <div class="popup-contents">Manages speedbrake deployment settings across armed, down, and extended positions.</div>
+    </div>
+
+    <div id="popup-throttles-lever" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>Thrust Levers Assembly</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">-</span></div>
+        <hr class="popup-divider">
+        <div class="popup-contents">Dual engine throttle controls equipped with reverse thrust engagement mechanisms.</div>
+    </div>
+
+    <div id="popup-flap-lever" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>Flap Selection Lever</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">-</span></div>
+        <hr class="popup-divider">
+        <div class="popup-contents">Controls trailing edge flap extensions through standard detent gates.</div>
     </div>
 
     <div id="popup-parking-brake" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>Parking Brake</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">BA654M0007-535</span></div>
+        <h3>Parking Brake Lever</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">-</span></div>
         <hr class="popup-divider">
-        <div class="popup-contents">
-            Mechanical safety retention control handling main landing gear brake valve settings.
-        </div>
+        <div class="popup-contents">Locks main landing gear wheel braking cylinders mechanically into secure state.</div>
     </div>
 
-    <div id="popup-flaps" class="popup-box">
+    <div id="popup-stab-cutout" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>Flap Selection Lever Mechanism</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">BA654M0007-535</span></div>
+        <h3>Stabilizer Cutout Switches</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">-</span></div>
         <hr class="popup-divider">
-        <div class="popup-contents">
-            Governs multi-detent aerodynamic deployment gates routing back to hydraulic flight trim manifolds.
-        </div>
-    </div>
-
-    <div id="popup-alt-flaps" class="popup-box">
-        <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>Alternate Flaps Control Panel</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">BA654M0007-535</span></div>
-        <hr class="popup-divider">
-        <div class="popup-contents">
-            Secondary non-normal backup selector used to manually extend or retract trailing edge wing surfaces.
-        </div>
+        <div class="popup-contents">Disconnects power directly from electronic signal logic loops to prevent uncommanded runaway inputs.</div>
     </div>
 
     <div id="popup-fuel-control" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>Fuel Controls</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">MA264941.18.2.825</span></div>
+        <h3>Fuel Control Switches</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">-</span></div>
         <hr class="popup-divider">
-        <div class="popup-contents">
-            Houses dual Run/Cutoff switches controlling high-pressure valving configurations alongside structural fire system ties.
-        </div>
+        <div class="popup-contents">Switches fuel feed pathways between Run and Cutoff positions for dual engine blocks.</div>
     </div>
 
-    <div id="popup-com1" class="popup-box">
+    <div id="popup-alt-flaps-group" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>Capt's Radio Communications Panel</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">BA205M8114-3</span></div>
+        <h3>Alternate Flaps Arm Switch &amp; Selector</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">-</span></div>
         <hr class="popup-divider">
-        <div class="popup-contents">
-            Left-hand digital interface terminal controlling active transceiver voice tuning configurations.
-        </div>
+        <div class="popup-contents">Combined backup node allowing manual electronic command override of wing high-lift surfaces.</div>
+    </div>
+
+    <div id="popup-capt-rtp" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>Radio Tuning Panel (3) — Captain Side</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">-</span></div>
+        <hr class="popup-divider">
+        <div class="popup-contents">Upper-left active transceiver transceiver tuning console serving the Captain.</div>
+    </div>
+
+    <div id="popup-capt-acp" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>Audio Control Panel (3) — Captain Side</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">-</span></div>
+        <hr class="popup-divider">
+        <div class="popup-contents">Routes microphone signals, audio volume settings, and intercom loops for Left seat.</div>
     </div>
 
     <div id="popup-weather-radar" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
         <h3>Weather Radar Control Panel</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">PS312578.28.5.825</span></div>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">-</span></div>
         <hr class="popup-divider">
-        <div class="popup-contents">
-            Manages gain adjustments, tilt configuration parameters, and sweeps for the primary nose radar scanner dome.
-        </div>
+        <div class="popup-contents">Controls gain settings, ground clutter filters, and tilt sweeping ranges.</div>
     </div>
 
-    <div id="popup-com2" class="popup-box">
+    <div id="popup-mid-left-rtp" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>Radio Communications Panel Center</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">BA205M8114-3</span></div>
+        <h3>Radio Tuning Panel (Lower Left)</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">-</span></div>
         <hr class="popup-divider">
-        <div class="popup-contents">
-            Shared radio stack framework managing operational fallback data-link pipelines.
-        </div>
+        <div class="popup-contents">Secondary communication transceiver tuning node for voice data pathways.</div>
     </div>
 
-    <div id="popup-door-ctrl" class="popup-box">
+    <div id="popup-mid-left-acp" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>Flt Dk Door Panel</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">MA415938.01.2.825</span></div>
+        <h3>Audio Control Panel (Lower Left)</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">-</span></div>
         <hr class="popup-divider">
-        <div class="popup-contents">
-            Secured cockpit locking framework controlling Deny/Auto override requests.
-        </div>
+        <div class="popup-contents">Secondary routing station managing auxiliary audio cross-points.</div>
     </div>
 
-    <div id="popup-fire-cargo" class="popup-box">
+    <div id="popup-flight-deck-door" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>L / R Eng Fire Shutoff Switches</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">MA264941.18.2.825</span></div>
+        <h3>Flight Deck Door Panel</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">-</span></div>
         <hr class="popup-divider">
-        <div class="popup-contents">
-            Provides isolated system safety cutoffs targeting engine fuel valves and primary armed discharge squibs.
-        </div>
+        <div class="popup-contents">Manages electronic locking commands and security accessibility profiles.</div>
     </div>
 
-    <div id="popup-lower-cdu" class="popup-box">
+    <div id="popup-engine-fire" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>Center CDU</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">PS317481.36.5.825</span></div>
+        <h3>Engine Fire Panel</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">-</span></div>
         <hr class="popup-divider">
-        <div class="popup-contents">
-            Alphanumeric user management prompt screen interface managing ACARS tracking logs and avionics diagnostics.
-        </div>
+        <div class="popup-contents">Engine fire pull-handles containing chemical fire extinguishing squib deployment controls.</div>
     </div>
 
-    <div id="popup-trim-control" class="popup-box">
+    <div id="popup-center-cdu" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>Aileron/Rudder Trim Panel</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">MA264942.07.2.825</span></div>
+        <h3>Center Control Display Unit</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">-</span></div>
         <hr class="popup-divider">
-        <div class="popup-contents">
-            Features structural alignment dials alongside the rudder position tracking pointer loop.
-        </div>
+        <div class="popup-contents">Flight management alphanumeric entry interface linking directly to central engine parameters and status displays.</div>
     </div>
 
-    <div id="popup-printer" class="popup-box">
+    <div id="popup-rudder-trim-ind" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>Flight Deck Printer</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">PS317509.21.5.842</span></div>
+        <h3>Rudder Trim Position Indicator</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">-</span></div>
         <hr class="popup-divider">
-        <div class="popup-contents">
-            Thermal terminal data printing log for tracking system readouts and ground clearances.
-        </div>
+        <div class="popup-contents">Digital needle display indicating displacement orientation of target rudder assemblies.</div>
     </div>
 
-    <div id="popup-audio-r1" class="popup-box">
+    <div id="popup-aileron-rudder-trm" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>FO's Radio Communications Panel</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">BA205M8114-3</span></div>
+        <h3>Aileron / Rudder Trim Panel</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">-</span></div>
         <hr class="popup-divider">
-        <div class="popup-contents">
-            Right-hand voice management interface layout handling transceiver line routing.
-        </div>
+        <div class="popup-contents">Houses manual rotational control knobs driving active axis alignment adjustments.</div>
+    </div>
+
+    <div id="popup-printer-panel" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>Flight Deck Printer Controls</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">-</span></div>
+        <hr class="popup-divider">
+        <div class="popup-contents">Interfaces paper feeding systems printing route logs and ACARS text data.</div>
+    </div>
+
+    <div id="popup-fo-rtp" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>Radio Tuning Panel (3) — F/O Side</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">-</span></div>
+        <hr class="popup-divider">
+        <div class="popup-contents">Upper-right transceiver navigation stack dedicated to the First Officer.</div>
+    </div>
+
+    <div id="popup-fo-acp" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>Audio Control Panel (3) — F/O Side</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">-</span></div>
+        <hr class="popup-divider">
+        <div class="popup-contents">Routes transmission voice lines and intercom volume metrics for Right seat.</div>
     </div>
 
     <div id="popup-transponder" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>ATC/TCAS Control Panel</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">2054-025</span></div>
+        <h3>Transponder Panel (Typical)</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">-</span></div>
         <hr class="popup-divider">
-        <div class="popup-contents">
-            Sets secondary surveillance radar squawk profile identifiers alongside tracking filters.
-        </div>
+        <div class="popup-contents">Controls secondary air traffic control squawk codes and TCAS threat filtering.</div>
     </div>
 
     <div id="popup-evac-panel" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>Emergency Evac Control Panel</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">2160-025</span></div>
+        <h3>Emergency Evacuation Panel</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">-</span></div>
         <hr class="popup-divider">
-        <div class="popup-contents">
-            Commands audible cabin safety alerts in emergency egress scenarios.
-        </div>
+        <div class="popup-contents">Commands unified cockpit warning tones alerting structural emergency exit profiles.</div>
+    </div>
+
+    <div id="popup-floor-lights" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>Floor Lights Dimming</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">-</span></div>
+        <hr class="popup-divider">
+        <div class="popup-contents">Rheostat node managing floor-level lighting brightness configurations.</div>
+    </div>
+
+    <div id="popup-observer-audio" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>Observer Audio Selector</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">-</span></div>
+        <hr class="popup-divider">
+        <div class="popup-contents">Routes internal communications networks toward auxiliary observer folding jumpseat stations.</div>
     </div>
 
     <div id="popup-aisle-stand" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>Aisle Stand Brightness Control Panel</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">MA264944.05.2.825</span></div>
+        <h3>Aisle Stand Brightness / Flood</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">-</span></div>
         <hr class="popup-divider">
-        <div class="popup-contents">
-            Manages lower workspace illumination and local rheostat levels.
-        </div>
+        <div class="popup-contents">Drives background lighting levels along lower workspace structural components.</div>
     </div>
 
     <div class="parts-section">
         <h2>Pedestal - Parts Index</h2>
-        <input class="search-box" type="text" id="searchPedestal" onkeyup="filterTable('searchPedestal','pedestalTable')" placeholder="Search console description or part identifiers...">
+        <input class="search-box" type="text" id="searchPedestal" onkeyup="filterTable('searchPedestal','pedestalTable')" placeholder="Search console description...">
         <table id="pedestalTable">
             <thead>
                 <tr>
@@ -446,31 +501,32 @@
                 </tr>
             </thead>
             <tbody>
-                <tr><td>Control Stand Assembly (Throttles)</td><td class="pn">BA654M0007-535</td><td class="sn">-</td></tr>
-                <tr><td>Capt's Cursor Control Panel</td><td class="pn">2001-025</td><td class="sn">-</td></tr>
-                <tr><td>FO's Cursor Control Panel</td><td class="pn">2001-025</td><td class="sn">-</td></tr>
-                <tr><td>Speedbrake Lever</td><td class="pn">BA654M0007-535</td><td class="sn">-</td></tr>
-                <tr><td>Parking Brake Assembly</td><td class="pn">BA654M0007-535</td><td class="sn">-</td></tr>
-                <tr><td>Stabilizer cCutout Switches</td><td class="pn">-</td><td class="sn">-</td></tr>
-                <tr><td>Stabilizer Trim Indicator R</td><td class="pn">MP372-879-003</td><td class="sn">-</td></tr>
-                <tr><td>Alternate Flaps Control Panel</td><td class="pn">BA654M0007-535</td><td class="sn">-</td></tr>
-                <tr><td>Capt's Radio Communications Panel</td><td class="pn">BA205M8114-3</td><td class="sn">-</td></tr>
-                <tr><td>Engine Fire Control</td><td class="pn">MA264941.18.2.825</td><td class="sn">-</td></tr>
-                <tr><td>FO's Radio Communications Panel</td><td class="pn">BA205M8114-3</td><td class="sn">-</td></tr>
-                <tr><td>Audio Control Panel - Captain</td><td class="pn">2142-025</td><td class="sn">-</td></tr>
-                <tr><td>Center Control Display Unit</td><td class="pn">PS317481.36.5.825</td><td class="sn">-</td></tr>
-                <tr><td>Audio Control Panel - F/O</td><td class="pn">2142-025</td><td class="sn">-</td></tr>
-                <tr><td>Weather Radar Control Panel</td><td class="pn">PS312578.28.5.825</td><td class="sn">-</td></tr>
-                <tr><td>ATC/TCAS Control Panel</td><td class="pn">2054-025</td><td class="sn">-</td></tr>
-                <tr><td>Center Radio Communications Panel</td><td class="pn">BA205M8114-3</td><td class="sn">-</td></tr>
-                <tr><td>Emergency Evac Control Panel</td><td class="pn">2160-025</td><td class="sn">-</td></tr>
-                <tr><td>Audio Control Panel First Obs.</td><td class="pn">2142-025</td><td class="sn">-</td></tr>
-                <tr><td>Rudder Trim Indicator</td><td class="pn">PS322650.01.2.607</td><td class="sn">-</td></tr>
-                <tr><td>Aileron/Rudder Trim</td><td class="pn">MA264942.07.2.825</td><td class="sn">-</td></tr>
-                <tr><td>Floor Lts Control</td><td class="pn">MA264946.04.2.825</td><td class="sn">-</td></tr>
-                <tr><td>Flight Deck Door Panel</td><td class="pn">MA415938.01.2.825</td><td class="sn">-</td></tr>
-                <tr><td>Flight Deck Printer</td><td class="pn">PS317509.21.5.842</td><td class="sn">-</td></tr>
-                <tr><td>Aisle Stand Brightness Control Panel</td><td class="pn">MA264944.05.2.825</td><td class="sn">-</td></tr>
+                <tr><td>Control Stand Assembly (Throttles)</td><td class="pn">-</td><td class="sn">-</td></tr>
+                <tr><td>Capt's Cursor Control Panel</td><td class="pn">-</td><td class="sn">-</td></tr>
+                <tr><td>FO's Cursor Control Panel</td><td class="pn">-</td><td class="sn">-</td></tr>
+                <tr><td>Autospeedbrake Actuator</td><td class="pn">-</td><td class="sn">-</td></tr>
+                <tr><td>Parking Brake Assembly</td><td class="pn">-</td><td class="sn">-</td></tr>
+                <tr><td>Stabilizer Position Indicator L (Capt)</td><td class="pn">-</td><td class="sn">-</td></tr>
+                <tr><td>Stabilizer Position Indicator R (FO)</td><td class="pn">-</td><td class="sn">-</td></tr>
+                <tr><td>Alternate Flaps Arm Switch &amp; Selector</td><td class="pn">-</td><td class="sn">-</td></tr>
+                <tr><td>Capt's Radio Tuning Panel (3)</td><td class="pn">-</td><td class="sn">-</td></tr>
+                <tr><td>Capt's Audio Control Panel (3)</td><td class="pn">-</td><td class="sn">-</td></tr>
+                <tr><td>Engine Fire Panel Assembly</td><td class="pn">-</td><td class="sn">-</td></tr>
+                <tr><td>FO's Radio Tuning Panel (3)</td><td class="pn">-</td><td class="sn">-</td></tr>
+                <tr><td>FO's Audio Control Panel (3)</td><td class="pn">-</td><td class="sn">-</td></tr>
+                <tr><td>Center Control Display Unit (CDU)</td><td class="pn">-</td><td class="sn">-</td></tr>
+                <tr><td>Weather Radar Control Panel</td><td class="pn">-</td><td class="sn">-</td></tr>
+                <tr><td>ATC/TCAS Transponder Panel</td><td class="pn">-</td><td class="sn">-</td></tr>
+                <tr><td>Lower Left Radio Tuning Panel</td><td class="pn">-</td><td class="sn">-</td></tr>
+                <tr><td>Lower Left Audio Control Panel</td><td class="pn">-</td><td class="sn">-</td></tr>
+                <tr><td>Emergency Evacuation Control Panel</td><td class="pn">-</td><td class="sn">-</td></tr>
+                <tr><td>Rudder Trim Position Indicator</td><td class="pn">-</td><td class="sn">-</td></tr>
+                <tr><td>Aileron/Rudder Trim Control Console</td><td class="pn">-</td><td class="sn">-</td></tr>
+                <tr><td>Floor Lights Dimmer Control</td><td class="pn">-</td><td class="sn">-</td></tr>
+                <tr><td>Observer Audio Selector</td><td class="pn">-</td><td class="sn">-</td></tr>
+                <tr><td>Flight Deck Door Panel</td><td class="pn">-</td><td class="sn">-</td></tr>
+                <tr><td>Flight Deck Printer Control Box</td><td class="pn">-</td><td class="sn">-</td></tr>
+                <tr><td>Aisle Stand Brightness Control Panel</td><td class="pn">-</td><td class="sn">-</td></tr>
             </tbody>
         </table>
     </div>
