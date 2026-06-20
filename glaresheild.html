@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Forward Panel — Flight Deck</title>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: #12161a; color: #e2e8f0;
+            margin: 0; padding: 20px;
+            display: flex; flex-direction: column; align-items: center;
+        }
+        .back-link {
+            align-self: flex-start; color: #38bdf8;
+            text-decoration: none; font-weight: bold; margin-bottom: 20px;
+        }
+        .back-link:hover { text-decoration: underline; }
+        h1 { color: #ffffff; margin-bottom: 5px; }
+        .subtitle { color: #94a3b8; margin-bottom: 25px; text-align: center; }
+
+        .image-container {
+            position: relative;
+            display: inline-block;
+            max-width: 100%;
+            border: 4px solid #1e293b;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px -5px rgba(0,0,0,0.9);
+            overflow: hidden;
+            margin-bottom: 35px;
+        }
+        img { max-width: 100%; height: auto; display: block; max-height: 90vh; }
+
+        /* Interactive zone boxes calibrated for main.jpg */
+        .panel-zone {
+            position: absolute;
+            background: rgba(56, 189, 248, 0.1);
+            border: 1.5px solid rgba(14, 165, 233, 0.4);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2px;
+            overflow: hidden;
+        }
+        .panel-zone:hover {
+            background: rgba(56, 189, 248, 0.25);
+            border-color: #38bdf8;
+        }
+        .panel-zone .zone-label {
+            color: rgba(255,255,255,0.95);
+            font-size: 0.55em;
+            font-weight: 600;
+            line-height: 1.2;
+            pointer-events: none;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.9);
+            letter-spacing: 0.02em;
+        }
+
+        /* ── INTERACTIVE COORDINATES FOR MAIN.JPG FORWARD PANEL ── */
+        /* Glareshield / MCP Group */
+        #zone-left-efis          { top: 2.0%; left: 19.5%; width: 9.5%; height: 11.0%; }
+        #zone-mcp                { top: 2.0%; left: 29.5%; width: 41.0%; height: 11.0%; }
+        #zone-right-efis         { top: 2.0%; left: 71.0%; width: 9.5%; height: 11.0%; }
+
+        /* Captain Main Instrument Panel (Left Side) */
+        #zone-capt-pfd           { top: 24.0%; left: 11.5%; width: 11.5%; height: 32.0%; }
+        #zone-capt-nd            { top: 24.0%; left: 24.2%; width: 11.5%; height: 32.0%; }
+        #zone-brake-accum        { top: 64.0%; left: 20.0%; width: 3.0%; height: 6.0%; }
+        #zone-capt-display-sel   { top: 64.0%; left: 26.0%; width: 4.0%; height: 6.0%; }
+
+        /* Center Panel Group (P2 Panel) */
+        #zone-isfd               { top: 33.0%; left: 37.0%; width: 5.0%; height: 14.0%; }
+        #zone-upper-eicas        { top: 24.0%; left: 43.5%; width: 12.0%; height: 32.0%; }
+        #zone-gear-lever-panel   { top: 22.0%; left: 56.5%; width: 4.5%; height: 34.0%; }
+        #zone-lower-eicas        { top: 65.0%; left: 43.5%; width: 12.0%; height: 28.0%; }
+        #zone-capt-fmc           { top: 71.0%; left: 31.5%; width: 11.0%; height: 28.0%; }
+        #zone-fo-fmc             { top: 71.0%; left: 56.5%; width: 11.0%; height: 28.0%; }
+
+        /* First Officer Main Instrument Panel (Right Side) */
+        #zone-fo-nd              { top: 24.0%; left: 62.5%; width: 11.5%; height: 32.0%; }
+        #zone-fo-pfd             { top: 24.0%; left: 75.2%; width: 11.5%; height: 32.0%; }
+        #zone-fo-display-sel     { top: 64.0%; left: 68.0%; width: 4.0%; height: 6.0%; }
+        #zone-fmc-selector       { top: 64.0%; left: 63.5%; width: 3.5%; height: 6.0%; }
+
+        /* Popup overlay box rules */
+        .overlay-screen {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85);
+            z-index: 99;
+        }
+        .popup-box {
+            display: none;
+            position: fixed;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            background: #1e293b;
+            border: 2px solid #38bdf8;
+            padding: 22px 25px;
+            border-radius: 8px;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.9);
+            z-index: 100;
+            width: 92%; max-width: 440px;
+        }
+        .popup-box h3 { margin: 0 0 12px 0; color: #ffffff; font-size: 1.1em; padding-right: 30px; }
+        .popup-row { display: flex; gap: 8px; margin-bottom: 6px; font-size: 0.85em; }
+        .popup-row .label { color: #94a3b8; min-width: 40px; }
+        .popup-row .value { font-family: monospace; color: #38bdf8; }
+        .popup-divider { border: none; border-top: 1px solid #334155; margin: 12px 0; }
+        .popup-contents { font-size: 0.85em; color: #cbd5e1; line-height: 1.6; }
+        
+        .close-btn {
+            position: absolute; top: 12px; right: 12px;
+            background: #334155; color: white; border: none;
+            padding: 4px 9px; cursor: pointer; border-radius: 4px; font-size: 0.85em;
+        }
+        .close-btn:hover { background: #0284c7; }
+
+        .parts-section { width: 100%; max-width: 900px; margin-top: 20px; }
+        .parts-section h2 { color: #ffffff; border-bottom: 2px solid #334155; padding-bottom: 10px; }
+        .search-box {
+            width: 100%; padding: 10px; margin-bottom: 15px;
+            background: #1e293b; border: 1px solid #334155;
+            border-radius: 6px; color: #f3f4f6; font-size: 0.9em;
+        }
+        .search-box:focus { outline: none; border-color: #38bdf8; }
+        table { width: 100%; border-collapse: collapse; font-size: 0.9em; }
+        thead tr { background: #0f172a; color: #38bdf8; text-align: left; }
+        th { padding: 12px 15px; border-bottom: 2px solid #38bdf8; }
+        td { padding: 10px 15px; border-bottom: 1px solid #334155; }
+        tbody tr:nth-child(even) { background: #1e293b; }
+        tbody tr:hover { background: #334155; }
+        .pn { font-family: monospace; color: #38bdf8; }
+        .sn { font-family: monospace; color: #4ade80; }
+    </style>
+</head>
+<body>
+
+    <a href="index.html" class="back-link">← Back to Panel Overview</a>
+    <h1>Forward Instrument Panel</h1>
+    <p class="subtitle">Click any screen or flight control system to inspect technical configurations.</p>
+
+    <div class="image-container">
+        <img src="main.jpg" alt="Boeing Forward Instrument Panel Map">
+
+        <div class="panel-zone" id="zone-left-efis" onclick="showPopup('left-efis')">
+            <div class="zone-label">CAPT EFIS CONTROL</div>
+        </div>
+        <div class="panel-zone" id="zone-mcp" onclick="showPopup('mcp')">
+            <div class="zone-label">MODE CONTROL PANEL (MCP)</div>
+        </div>
+        <div class="panel-zone" id="zone-right-efis" onclick="showPopup('right-efis')">
+            <div class="zone-label">F/O EFIS CONTROL</div>
+        </div>
+
+        <div class="panel-zone" id="zone-capt-pfd" onclick="showPopup('capt-pfd')">
+            <div class="zone-label">PRIMARY FLIGHT DISPLAY (CAPT)</div>
+        </div>
+        <div class="panel-zone" id="zone-capt-nd" onclick="showPopup('capt-nd')">
+            <div class="zone-label">NAVIGATION DISPLAY (CAPT)</div>
+        </div>
+        <div class="panel-zone" id="zone-brake-accum" onclick="showPopup('brake-accum')">
+            <div class="zone-label">BRAKE ACCUM</div>
+        </div>
+        <div class="panel-zone" id="zone-capt-display-sel" onclick="showPopup('capt-display-sel')">
+            <div class="zone-label">INBD DSPL SEL (CAPT)</div>
+        </div>
+
+        <div class="panel-zone" id="zone-isfd" onclick="showPopup('isfd')">
+            <div class="zone-label">ISFD</div>
+        </div>
+        <div class="panel-zone" id="zone-upper-eicas" onclick="showPopup('upper-eicas')">
+            <div class="zone-label">UPPER EICAS</div>
+        </div>
+        <div class="panel-zone" id="zone-gear-lever-panel" onclick="showPopup('gear-lever-panel')">
+            <div class="zone-label">LANDING GEAR CONTROL</div>
+        </div>
+        <div class="panel-zone" id="zone-lower-eicas" onclick="showPopup('lower-eicas')">
+            <div class="zone-label">LOWER EICAS</div>
+        </div>
+        <div class="panel-zone" id="zone-capt-fmc" onclick="showPopup('capt-fmc')">
+            <div class="zone-label">CAPTAIN FMC</div>
+        </div>
+        <div class="panel-zone" id="zone-fo-fmc" onclick="showPopup('fo-fmc')">
+            <div class="zone-label">F/O FMC</div>
+        </div>
+
+        <div class="panel-zone" id="zone-fo-nd" onclick="showPopup('fo-nd')">
+            <div class="zone-label">NAVIGATION DISPLAY (F/O)</div>
+        </div>
+        <div class="panel-zone" id="zone-fo-pfd" onclick="showPopup('fo-pfd')">
+            <div class="zone-label">PRIMARY FLIGHT DISPLAY (F/O)</div>
+        </div>
+        <div class="panel-zone" id="zone-fo-display-sel" onclick="showPopup('fo-display-sel')">
+            <div class="zone-label">INBD DSPL SEL (F/O)</div>
+        </div>
+        <div class="panel-zone" id="zone-fmc-selector" onclick="showPopup('fmc-selector')">
+            <div class="zone-label">FMC SELECTOR</div>
+        </div>
+    </div>
+
+    <div id="dark-screen" class="overlay-screen" onclick="closeAllPopups()"></div>
+
+    <div id="popup-left-efis" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>EFIS Control Panel — Captain</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">-</span></div>
+        <hr class="popup-divider">
+        <div class="popup-contents">Manages map presentation format scales, weather radar profiling overlays, and barometric altimeter baseline targets.</div>
+    </div>
+
+    <div id="popup-mcp" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>Mode Control Panel (MCP)</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">-</span></div>
+        <hr class="popup-divider">
+        <div class="popup-contents">Central automation command deck housing autopilot, autothrust, and flight director mode configurations.</div>
+    </div>
+
+    <div id="popup-right-efis" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>EFIS Control Panel — First Officer</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">-</span></div>
+        <hr class="popup-divider">
+        <div class="popup-contents">Independent display formatter managing symbology, visual filters, and minimum limits logic for the F/O.</div>
+    </div>
+
+    <div id="popup-capt-pfd" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>Primary Flight Display — Captain</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">-</span></div>
+        <hr class="popup-divider">
+        <div class="popup-contents">Displays core parameters including airspeed velocity columns, attitude horizons, altitude tapes, and vertical speed flags.</div>
+    </div>
+
+    <div id="popup-capt-nd" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>Navigation Display — Captain</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">-</span></div>
+        <hr class="popup-divider">
+        <div class="popup-contents">Presents active flight route planning, geographic map updates, terminal waypoint fixes, and weather hazard radar projections.</div>
+    </div>
+
+    <div id="popup-brake-accum" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>Brake Accumulator Pressure Indicator</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">-</span></div>
+        <hr class="popup-divider">
+        <div class="popup-contents">Monitors standby emergency hydraulic lines designated for main landing gear wheel braking loops.</div>
+    </div>
+
+    <div id="popup-capt-display-sel" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>Inboard Display Selector — Captain</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">-</span></div>
+        <hr class="popup-divider">
+        <div class="popup-contents">Auxiliary system routing selector mapping primary screen display formats on backup visual tubes.</div>
+    </div>
+
+    <div id="popup-isfd" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>Integrated Standby Flight Display (ISFD)</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">-</span></div>
+        <hr class="popup-divider">
+        <div class="popup-contents">Isolated backup instrument calculating situational orientation using decoupled auxiliary sensor inputs.</div>
+    </div>
+
+    <div id="popup-upper-eicas" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>Upper EICAS</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">-</span></div>
+        <hr class="popup-divider">
+        <div class="popup-contents">Hosts primary engine operation parameters, gross fuel monitoring lines, and real-time crew alert system status logs.</div>
+    </div>
+
+    <div id="popup-gear-lever-panel" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>Landing Gear Control Panel</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">-</span></div>
+        <hr class="popup-divider">
+        <div class="popup-contents">Houses structural landing gear sequencing handle, manual lock override nodes, and autobrake profiles.</div>
+    </div>
+
+    <div id="popup-lower-eicas" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>Lower EICAS</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">-</span></div>
+        <hr class="popup-divider">
+        <div class="popup-contents">Dedicated layout display monitoring secondary mechanical structures, configurations, and component checklists.</div>
+    </div>
+
+    <div id="popup-capt-fmc" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>Captain FMC (Control Display Unit)</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">-</span></div>
+        <hr class="popup-divider">
+        <div class="popup-contents">Captain's primary programming console input node communicating route metrics back into the Flight Management Computer.</div>
+    </div>
+
+    <div id="popup-fo-fmc" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>F/O FMC (Control Display Unit)</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">-</span></div>
+        <hr class="popup-divider">
+        <div class="popup-contents">First Officer's key interface entry matrix tracking flight paths, leg metrics, and navigational logistics.</div>
+    </div>
+
+    <div id="popup-fo-nd" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>Navigation Display — First Officer</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">-</span></div>
+        <hr class="popup-divider">
+        <div class="popup-contents">Presents independent terrain mappings, terminal routing markers, and tracking structures for the F/O's instrumentation stack.</div>
+    </div>
+
+    <div id="popup-fo-pfd" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>Primary Flight Display — First Officer</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">-</span></div>
+        <hr class="popup-divider">
+        <div class="popup-contents">Tracks independent airspeed scales, pressure parameters, and orientation vectors for safety cross-checks.</div>
+    </div>
+
+    <div id="popup-fo-display-sel" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>Inboard Display Selector — F/O</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">-</span></div>
+        <hr class="popup-divider">
+        <div class="popup-contents">First officer's diagnostic selector managing localized format overrides.</div>
+    </div>
+
+    <div id="popup-fmc-selector" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>FMC Selector Switch</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">-</span></div>
+        <hr class="popup-divider">
+        <div class="popup-contents">Determines which Flight Management Computer holds master cross-talk command authority over active lines.</div>
+    </div>
+
+    <div class="parts-section">
+        <h2>Forward Instrument Panel - Parts Index</h2>
+        <input class="search-box" type="text" id="searchMainPanel" onkeyup="filterTable('searchMainPanel','mainPanelTable')" placeholder="Search display description...">
+        <table id="mainPanelTable">
+            <thead>
+                <tr>
+                    <th>Description</th>
+                    <th>Part Number</th>
+                    <th>Serial Number</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>EFIS Control Panel - Captain</td><td class="pn">-</td><td class="sn">-</td></tr>
+                <tr><td>Mode Control Panel (MCP)</td><td class="pn">-</td><td class="sn">-</td></tr>
+                <tr><td>EFIS Control Panel - F/O</td><td class="pn">-</td><td class="sn">-</td></tr>
+                <tr><td>Primary Flight Display (PFD) - Captain</td><td class="pn">-</td><td class="sn">-</td></tr>
+                <tr><td>Navigation Display (ND) - Captain</td><td class="pn">-</td><td class="sn">-</td></tr>
+                <tr><td>Brake Accumulator Pressure Indicator</td><td class="pn">-</td><td class="sn">-</td></tr>
+                <tr><td>Inboard Display Selector - Captain</td><td class="pn">-</td><td class="sn">-</td></tr>
+                <tr><td>Integrated Standby Flight Display (ISFD)</td><td class="pn">-</td><td class="sn">-</td></tr>
+                <tr><td>Upper EICAS Display Unit</td><td class="pn">-</td><td class="sn">-</td></tr>
+                <tr><td>Landing Gear Control Lever Assembly</td><td class="pn">-</td><td class="sn">-</td></tr>
+                <tr><td>Lower EICAS Display Unit</td><td class="pn">-</td><td class="sn">-</td></tr>
+                <tr><td>Captain FMC (Control Display Unit)</td><td class="pn">-</td><td class="sn">-</td></tr>
+                <tr><td>F/O FMC (Control Display Unit)</td><td class="pn">-</td><td class="sn">-</td></tr>
+                <tr><td>Navigation Display (ND) - F/O</td><td class="pn">-</td><td class="sn">-</td></tr>
+                <tr><td>Primary Flight Display (PFD) - F/O</td><td class="pn">-</td><td class="sn">-</td></tr>
+                <tr><td>Inboard Display Selector - F/O</td><td class="pn">-</td><td class="sn">-</td></tr>
+                <tr><td>FMC Selector Switch</td><td class="pn">-</td><td class="sn">-</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function showPopup(id) {
+            closeAllPopups();
+            document.getElementById('dark-screen').style.display = 'block';
+            document.getElementById('popup-' + id).style.display = 'block';
+        }
+        function closeAllPopups() {
+            document.getElementById('dark-screen').style.display = 'none';
+            document.querySelectorAll('.popup-box').forEach(p => p.style.display = 'none');
+        }
+        function filterTable(inputId, tableId) {
+            const input = document.getElementById(inputId).value.toLowerCase();
+            document.querySelectorAll('#' + tableId + ' tbody tr').forEach(row => {
+                row.style.display = row.textContent.toLowerCase().includes(input) ? '' : 'none';
+            });
+        }
+    </script>
+
+</body>
+</html>
