@@ -71,7 +71,8 @@
         #zone-parking-brake  { top: 20.0%; left: 10%; width: 6%; height: 11%; }
         #zone-flaps          { top: 10.5%; left: 63%; width: 11%; height: 19%; }
         #zone-alt-flaps      { top: 19.5%; left: 77%; width: 13%; height: 11%; }
-        #zone-fuel-control   { top: 25.5%; left: 25%; width: 35%; height: 6.5%; }
+        #zone-fuel-control   { top: 25.5%; left: 45%; width: 15%; height: 6.5%; }
+        #zone-stabcutout   { top: 26%; left: 25%; width: 15%; height: 6.5%; }
 
         /* Middle Columns Panels */
         #zone-com1           { top: 33.5%; left: 10%; width: 26%; height: 18.5%; }
@@ -176,9 +177,11 @@
             <div class="zone-label">ALTN FLAPS </div>
         </div>
         <div class="panel-zone" id="zone-fuel-control" onclick="showPopup('fuel-control')">
-            <div class="zone-label">ENGINE CONTROLS</div>
+            <div class="zone-label">FUEL CONTROLS</div>
         </div>
-
+ <div class="panel-zone" id="zone-stbcutoff" onclick="showPopup('stbcutout')">
+            <div class="zone-label">STABILIZER CUTOUT SWITCHES</div>
+        </div>
         <div class="panel-zone" id="zone-com1" onclick="showPopup('com1')">
             <div class="zone-label">RADIO COMMUNICATIONS - FO</div>
         </div>
@@ -243,13 +246,23 @@
 
     <div id="popup-speedbrake" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>Autospeedbrake Actuator &amp; Stab Trim Indicators</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">BA654M0007-535 / MP372-879-003</span></div>
+        <h3>Autospeedbrake Actuator </h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value"> 924D100-1 BA654M0007-535 / MP372-879-003</span></div>
         <hr class="popup-divider">
         <div class="popup-contents">
             Consolidates automatic spoiler deployment mechanism with the Left &amp; Right Stabilizer Trim pointer blocks.
         </div>
     </div>
+     <div id="popup-stabcutout" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3> Stabilizer Cutout Switches </h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value"> 924D100-1 BA654M0007-535 / MP372-879-003</span></div>
+        <hr class="popup-divider">
+        <div class="popup-contents">
+            Consolidates automatic spoiler deployment mechanism with the Left &amp; Right Stabilizer Trim pointer blocks.
+        </div>
+    </div>
+
 
     <div id="popup-throttles" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
