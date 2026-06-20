@@ -8,23 +8,23 @@
         * { box-sizing: border-box; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background: #12161a; color: #e2e8f0;
+            background: #1a1412; color: #e2e8f0; /* Boeing dark background */
             margin: 0; padding: 20px;
             display: flex; flex-direction: column; align-items: center;
         }
         .back-link {
-            align-self: flex-start; color: #38bdf8;
+            align-self: flex-start; color: #f59e0b; /* Boeing Amber */
             text-decoration: none; font-weight: bold; margin-bottom: 20px;
         }
         .back-link:hover { text-decoration: underline; }
         h1 { color: #ffffff; margin-bottom: 5px; }
-        .subtitle { color: #94a3b8; margin-bottom: 25px; text-align: center; }
+        .subtitle { color: #bcaaa4; margin-bottom: 25px; text-align: center; }
 
         .image-container {
             position: relative;
             display: inline-block;
             max-width: 100%;
-            border: 4px solid #1e293b;
+            border: 4px solid #3e2723; /* Boeing structural brown */
             border-radius: 8px;
             box-shadow: 0 10px 30px -5px rgba(0,0,0,0.9);
             overflow: hidden;
@@ -32,11 +32,11 @@
         }
         img { max-width: 100%; height: auto; display: block; max-height: 90vh; }
 
-        /* Interactive zone boxes calibrated for main.jpg */
+        /* Interactive zone boxes calibrated for Boeing Brown / Amber */
         .panel-zone {
             position: absolute;
-            background: rgba(56, 189, 248, 0.1);
-            border: 1.5px solid rgba(14, 165, 233, 0.4);
+            background: rgba(141, 110, 99, 0.12);
+            border: 1.5px solid rgba(215, 204, 200, 0.35);
             border-radius: 4px;
             cursor: pointer;
             transition: all 0.2s ease;
@@ -49,8 +49,8 @@
             overflow: hidden;
         }
         .panel-zone:hover {
-            background: rgba(56, 189, 248, 0.25);
-            border-color: #38bdf8;
+            background: rgba(245, 158, 11, 0.25); /* Glow amber on hover */
+            border-color: #f59e0b;
         }
         .panel-zone .zone-label {
             color: rgba(255,255,255,0.95);
@@ -63,26 +63,19 @@
         }
 
         /* ── INTERACTIVE COORDINATES FOR MAIN.JPG FORWARD PANEL ── */
-        /* Glareshield / MCP Group */
         #zone-left-efis          { top: 2.0%; left: 19.5%; width: 9.5%; height: 11.0%; }
         #zone-mcp                { top: 2.0%; left: 29.5%; width: 41.0%; height: 11.0%; }
         #zone-right-efis         { top: 2.0%; left: 71.0%; width: 9.5%; height: 11.0%; }
-
-        /* Captain Main Instrument Panel (Left Side) */
         #zone-capt-pfd           { top: 24.0%; left: 11.5%; width: 11.5%; height: 32.0%; }
         #zone-capt-nd            { top: 24.0%; left: 24.2%; width: 11.5%; height: 32.0%; }
         #zone-brake-accum        { top: 64.0%; left: 20.0%; width: 3.0%; height: 6.0%; }
         #zone-capt-display-sel   { top: 64.0%; left: 26.0%; width: 4.0%; height: 6.0%; }
-
-        /* Center Panel Group (P2 Panel) */
         #zone-isfd               { top: 33.0%; left: 37.0%; width: 5.0%; height: 14.0%; }
         #zone-upper-eicas        { top: 24.0%; left: 43.5%; width: 12.0%; height: 32.0%; }
         #zone-gear-lever-panel   { top: 22.0%; left: 56.5%; width: 4.5%; height: 34.0%; }
         #zone-lower-eicas        { top: 65.0%; left: 43.5%; width: 12.0%; height: 28.0%; }
         #zone-capt-fmc           { top: 71.0%; left: 31.5%; width: 11.0%; height: 28.0%; }
         #zone-fo-fmc             { top: 71.0%; left: 56.5%; width: 11.0%; height: 28.0%; }
-
-        /* First Officer Main Instrument Panel (Right Side) */
         #zone-fo-nd              { top: 24.0%; left: 62.5%; width: 11.5%; height: 32.0%; }
         #zone-fo-pfd             { top: 24.0%; left: 75.2%; width: 11.5%; height: 32.0%; }
         #zone-fo-display-sel     { top: 64.0%; left: 68.0%; width: 4.0%; height: 6.0%; }
@@ -101,8 +94,8 @@
             position: fixed;
             top: 50%; left: 50%;
             transform: translate(-50%, -50%);
-            background: #1e293b;
-            border: 2px solid #38bdf8;
+            background: #2b1f1c;
+            border: 2px solid #f59e0b;
             padding: 22px 25px;
             border-radius: 8px;
             box-shadow: 0 25px 50px -12px rgba(0,0,0,0.9);
@@ -111,45 +104,47 @@
         }
         .popup-box h3 { margin: 0 0 12px 0; color: #ffffff; font-size: 1.1em; padding-right: 30px; }
         .popup-row { display: flex; gap: 8px; margin-bottom: 6px; font-size: 0.85em; }
-        .popup-row .label { color: #94a3b8; min-width: 40px; }
-        .popup-row .value { font-family: monospace; color: #38bdf8; }
-        .popup-divider { border: none; border-top: 1px solid #334155; margin: 12px 0; }
-        .popup-contents { font-size: 0.85em; color: #cbd5e1; line-height: 1.6; }
+        .popup-row .label { color: #bcaaa4; min-width: 40px; }
+        .popup-row .value { font-family: monospace; color: #f59e0b; }
+        .popup-divider { border: none; border-top: 1px solid #4e342e; margin: 12px 0; }
+        .popup-contents { font-size: 0.85em; color: #d7ccc8; line-height: 1.6; }
         
         .close-btn {
             position: absolute; top: 12px; right: 12px;
-            background: #334155; color: white; border: none;
+            background: #4e342e; color: white; border: none;
             padding: 4px 9px; cursor: pointer; border-radius: 4px; font-size: 0.85em;
         }
-        .close-btn:hover { background: #0284c7; }
+        .close-btn:hover { background: #d97706; color: #1a1412; }
 
         .parts-section { width: 100%; max-width: 900px; margin-top: 20px; }
-        .parts-section h2 { color: #ffffff; border-bottom: 2px solid #334155; padding-bottom: 10px; }
+        .parts-section h2 { color: #ffffff; border-bottom: 2px solid #4e342e; padding-bottom: 10px; }
         .search-box {
             width: 100%; padding: 10px; margin-bottom: 15px;
-            background: #1e293b; border: 1px solid #334155;
+            background: #2b1f1c; border: 1px solid #4e342e;
             border-radius: 6px; color: #f3f4f6; font-size: 0.9em;
         }
-        .search-box:focus { outline: none; border-color: #38bdf8; }
+        .search-box:focus { outline: none; border-color: #f59e0b; }
         table { width: 100%; border-collapse: collapse; font-size: 0.9em; }
-        thead tr { background: #0f172a; color: #38bdf8; text-align: left; }
-        th { padding: 12px 15px; border-bottom: 2px solid #38bdf8; }
-        td { padding: 10px 15px; border-bottom: 1px solid #334155; }
-        tbody tr:nth-child(even) { background: #1e293b; }
-        tbody tr:hover { background: #334155; }
-        .pn { font-family: monospace; color: #38bdf8; }
-        .sn { font-family: monospace; color: #4ade80; }
+        thead tr { background: #1a1412; color: #f59e0b; text-align: left; }
+        th { padding: 12px 15px; border-bottom: 2px solid #f59e0b; }
+        td { padding: 10px 15px; border-bottom: 1px solid #4e342e; }
+        tbody tr:nth-child(even) { background: #221816; }
+        tbody tr:hover { background: #3e2723; }
+        .pn { font-family: monospace; color: #f59e0b; }
+        .sn { font-family: monospace; color: #a3e635; }
     </style>
 </head>
 <body>
 
-    <a href="index.html" class="back-link">← Back to Panel Overview</a>
-    <h1>Forward Instrument Panel</h1>
+    <a href="index.html" class="back-link">← Back to Full Cockpit</a>
+    <h1>Glareshield and Main Panel</h1>
     <p class="subtitle">Click any screen or flight control system to inspect technical configurations.</p>
 
     <div class="image-container">
-        <img src="main.jpg" alt="Boeing Forward Instrument Panel Map">
+        <!-- CRITICAL: Ensure 'main.jpg' sits right next to this file in your project directory! -->
+        <img src="main.jpeg" alt="Glareshield and Main Panel">
 
+        <!-- Glareshield / MCP Controls -->
         <div class="panel-zone" id="zone-left-efis" onclick="showPopup('left-efis')">
             <div class="zone-label">CAPT EFIS CONTROL</div>
         </div>
@@ -160,6 +155,7 @@
             <div class="zone-label">F/O EFIS CONTROL</div>
         </div>
 
+        <!-- Captain Panel Components -->
         <div class="panel-zone" id="zone-capt-pfd" onclick="showPopup('capt-pfd')">
             <div class="zone-label">PRIMARY FLIGHT DISPLAY (CAPT)</div>
         </div>
@@ -173,6 +169,7 @@
             <div class="zone-label">INBD DSPL SEL (CAPT)</div>
         </div>
 
+        <!-- Center Panel Components -->
         <div class="panel-zone" id="zone-isfd" onclick="showPopup('isfd')">
             <div class="zone-label">ISFD</div>
         </div>
@@ -192,6 +189,7 @@
             <div class="zone-label">F/O FMC</div>
         </div>
 
+        <!-- First Officer Panel Components -->
         <div class="panel-zone" id="zone-fo-nd" onclick="showPopup('fo-nd')">
             <div class="zone-label">NAVIGATION DISPLAY (F/O)</div>
         </div>
@@ -208,6 +206,7 @@
 
     <div id="dark-screen" class="overlay-screen" onclick="closeAllPopups()"></div>
 
+    <!-- Interface Popup Modals -->
     <div id="popup-left-efis" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
         <h3>EFIS Control Panel — Captain</h3>
@@ -344,6 +343,7 @@
         <div class="popup-contents">Determines which Flight Management Computer holds master cross-talk command authority over active lines.</div>
     </div>
 
+    <!-- Master Inventory Index Table -->
     <div class="parts-section">
         <h2>Forward Instrument Panel - Parts Index</h2>
         <input class="search-box" type="text" id="searchMainPanel" onkeyup="filterTable('searchMainPanel','mainPanelTable')" placeholder="Search display description...">
