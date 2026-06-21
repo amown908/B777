@@ -20,11 +20,10 @@
         h1 { color: #ffffff; margin-bottom: 5px; }
         .subtitle { color: #bcaaa4; margin-bottom: 25px; text-align: center; }
 
-        /* Reduced container size to minimize the layout scale */
         .image-container {
             position: relative;
             display: inline-block;
-            max-width: 70%; /* Resized from 100% down to 70% to shrink the screen footprint */
+            max-width: 70%;
             border: 4px solid #3e2723;
             border-radius: 8px;
             box-shadow: 0 10px 30px -5px rgba(0,0,0,0.9);
@@ -55,15 +54,15 @@
         }
         .panel-zone .zone-label {
             color: rgba(255,255,255,0.95);
-            font-size: 0.52em;
+            font-size: 0.50em;
             font-weight: 600;
-            line-height: 1.2;
+            line-height: 1.1;
             pointer-events: none;
             text-shadow: 0 1px 3px rgba(0,0,0,0.9);
-            letter-spacing: 0.02em;
+            letter-spacing: 0.01em;
         }
 
-        /* ── INTERACTIVE COORDINATES FOR MAIN.JPG FORWARD PANEL ── */
+        /* ── INTERACTIVE COORDINATES FOR FORWARD PANEL ── */
         #zone-left-efis          { top: 2.0%; left: 19.5%; width: 9.5%; height: 11.0%; }
         #zone-mcp                { top: 2.0%; left: 29.5%; width: 41.0%; height: 11.0%; }
         #zone-right-efis         { top: 2.0%; left: 71.0%; width: 9.5%; height: 11.0%; }
@@ -74,7 +73,14 @@
         #zone-isfd               { top: 33.0%; left: 37.0%; width: 5.0%; height: 14.0%; }
         #zone-upper-eicas        { top: 24.0%; left: 43.5%; width: 12.0%; height: 32.0%; }
         #zone-gear-lever-panel   { top: 22.0%; left: 56.5%; width: 4.5%; height: 34.0%; }
-        #zone-lower-eicas        { top: 65.0%; left: 43.5%; width: 12.0%; height: 28.0%; }
+        
+        /* Lower Center & Newly Added Electronics */
+        #zone-lower-eicas        { top: 65.0%; left: 43.5%; width: 12.0%; height: 20.0%; }
+        #zone-brightness-ctrl    { top: 86.0%; left: 43.5%; width: 12.0%; height: 6.0%; } /* Added right under Lower EICAS */
+        #zone-center-dspl-src    { top: 64.0%; left: 38.0%; width: 4.5%; height: 5.5%; }
+        #zone-heading-ref        { top: 24.0%; left: 38.0%; width: 4.5%; height: 6.0%; }
+        #zone-clock              { top: 46.0%; left: 7.0%;  width: 4.0%; height: 7.0%; }
+        
         #zone-capt-fmc           { top: 71.0%; left: 31.5%; width: 11.0%; height: 28.0%; }
         #zone-fo-fmc             { top: 71.0%; left: 56.5%; width: 11.0%; height: 28.0%; }
         #zone-fo-nd              { top: 24.0%; left: 62.5%; width: 11.5%; height: 32.0%; }
@@ -138,11 +144,11 @@
 <body>
 
     <a href="index.html" class="back-link">← Back to Panel Overview</a>
-    <h1>Glareshield & Main Panel</h1>
+    <h1>Forward Instrument Panel</h1>
     <p class="subtitle">Click any screen or flight control system to inspect technical configurations.</p>
 
     <div class="image-container">
-        <img src="main.jpeg" alt="Glareshield and Main Panel">
+        <img src="main.jpeg" alt="Boeing Forward Instrument Panel Map">
 
         <div class="panel-zone" id="zone-left-efis" onclick="showPopup('left-efis')">
             <div class="zone-label">CAPT EFIS CONTROL</div>
@@ -154,6 +160,9 @@
             <div class="zone-label">F/O EFIS CONTROL</div>
         </div>
 
+        <div class="panel-zone" id="zone-clock" onclick="showPopup('clock')">
+            <div class="zone-label">CHRONO / CLOCK</div>
+        </div>
         <div class="panel-zone" id="zone-capt-pfd" onclick="showPopup('capt-pfd')">
             <div class="zone-label">PRIMARY FLIGHT DISPLAY (CAPT)</div>
         </div>
@@ -167,6 +176,9 @@
             <div class="zone-label">INBD DSPL SEL (CAPT)</div>
         </div>
 
+        <div class="panel-zone" id="zone-heading-ref" onclick="showPopup('heading-ref')">
+            <div class="zone-label">HDG REF TRK</div>
+        </div>
         <div class="panel-zone" id="zone-isfd" onclick="showPopup('isfd')">
             <div class="zone-label">ISFD</div>
         </div>
@@ -176,8 +188,14 @@
         <div class="panel-zone" id="zone-gear-lever-panel" onclick="showPopup('gear-lever-panel')">
             <div class="zone-label">LANDING GEAR CONTROL</div>
         </div>
+        <div class="panel-zone" id="zone-center-dspl-src" onclick="showPopup('center-dspl-src')">
+            <div class="zone-label">CTR DSPL SRC</div>
+        </div>
         <div class="panel-zone" id="zone-lower-eicas" onclick="showPopup('lower-eicas')">
             <div class="zone-label">LOWER EICAS</div>
+        </div>
+        <div class="panel-zone" id="zone-brightness-ctrl" onclick="showPopup('brightness-ctrl')">
+            <div class="zone-label">BRT CTRL</div>
         </div>
         <div class="panel-zone" id="zone-capt-fmc" onclick="showPopup('capt-fmc')">
             <div class="zone-label">CAPTAIN FMC</div>
@@ -201,6 +219,38 @@
     </div>
 
     <div id="dark-screen" class="overlay-screen" onclick="closeAllPopups()"></div>
+
+    <div id="popup-heading-ref" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>Heading Reference Switch</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">-</span></div>
+        <hr class="popup-divider">
+        <div class="popup-contents">Selects the attitude and heading data source reference system (True vs Magnetic north calibration targets).</div>
+    </div>
+
+    <div id="popup-clock" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>Flight Deck Chronometer / Clock</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">-</span></div>
+        <hr class="popup-divider">
+        <div class="popup-contents">Displays UTC time, date, and features manual stopwatch timers for block time and waypoint sequence legs.</div>
+    </div>
+
+    <div id="popup-center-dspl-src" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>Center Display Source Switch</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">-</span></div>
+        <hr class="popup-divider">
+        <div class="popup-contents">Manages alternate image generator computing feeds for Upper and Lower EICAS system displays.</div>
+    </div>
+
+    <div id="popup-brightness-ctrl" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>Display Brightness Controls</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">-</span></div>
+        <hr class="popup-divider">
+        <div class="popup-contents">Rheostat selector panel controlling background glare filters and backlight luminance values for the lower screen suites.</div>
+    </div>
 
     <div id="popup-left-efis" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
@@ -353,6 +403,8 @@
                 <tr><td>EFIS Control Panel - Captain</td><td class="pn">-</td><td class="sn">-</td></tr>
                 <tr><td>Mode Control Panel (MCP)</td><td class="pn">-</td><td class="sn">-</td></tr>
                 <tr><td>EFIS Control Panel - F/O</td><td class="pn">-</td><td class="sn">-</td></tr>
+                <tr><td>Heading Reference Switch</td><td class="pn">-</td><td class="sn">-</td></tr>
+                <tr><td>Flight Deck Chronometer / Clock</td><td class="pn">-</td><td class="sn">-</td></tr>
                 <tr><td>Primary Flight Display (PFD) - Captain</td><td class="pn">-</td><td class="sn">-</td></tr>
                 <tr><td>Navigation Display (ND) - Captain</td><td class="pn">-</td><td class="sn">-</td></tr>
                 <tr><td>Brake Accumulator Pressure Indicator</td><td class="pn">-</td><td class="sn">-</td></tr>
@@ -360,7 +412,9 @@
                 <tr><td>Integrated Standby Flight Display (ISFD)</td><td class="pn">-</td><td class="sn">-</td></tr>
                 <tr><td>Upper EICAS Display Unit</td><td class="pn">-</td><td class="sn">-</td></tr>
                 <tr><td>Landing Gear Control Lever Assembly</td><td class="pn">-</td><td class="sn">-</td></tr>
+                <tr><td>Center Display Source Switch</td><td class="pn">-</td><td class="sn">-</td></tr>
                 <tr><td>Lower EICAS Display Unit</td><td class="pn">-</td><td class="sn">-</td></tr>
+                <tr><td>Display Brightness Control Panel</td><td class="pn">-</td><td class="sn">-</td></tr>
                 <tr><td>Captain FMC (Control Display Unit)</td><td class="pn">-</td><td class="sn">-</td></tr>
                 <tr><td>F/O FMC (Control Display Unit)</td><td class="pn">-</td><td class="sn">-</td></tr>
                 <tr><td>Navigation Display (ND) - F/O</td><td class="pn">-</td><td class="sn">-</td></tr>
