@@ -20,25 +20,23 @@
         h1 { color: #ffffff; margin-bottom: 5px; }
         .subtitle { color: #bcaaa4; margin-bottom: 25px; }
 
-        /* Constrain the overall panel container size to fit onto modern monitor screens */
+/* Modified container to allow natural zooming */
         .image-container {
             position: relative;
             display: inline-block;
             max-width: 100%;
-            height: 70vh; /* Limits panel height to 70% of the browser window height */
+            width: 550px; /* Set a default desktop width so it fits cleanly on load */
             border: 4px solid #3e2723;
             border-radius: 8px;
             box-shadow: 0 10px 30px -5px rgba(0,0,0,0.9);
             overflow: hidden;
             margin-bottom: 35px;
         }
-        /* Forces the image to adapt completely to container sizing constraints */
+        /* Forces the image to behave like a standard scaling element */
         img { 
-            width: auto; 
-            height: 100%; 
-            max-width: 100%; 
+            width: 100%; 
+            height: auto; 
             display: block; 
-            object-fit: contain; 
         }
 
         /* Boeing styling for clickable panel zones */
@@ -340,7 +338,7 @@
     </div>
 
     <div class="parts-section">
-        <h2>B777 Overhead Parts Index</h2>
+        <h2>Overhead Panel - Parts Index</h2>
         <input class="search-box" type="text" id="searchOverhead" onkeyup="filterTable('searchOverhead','overheadTable')" placeholder="Search description or part numbers...">
         <table id="overheadTable">
             <thead>
