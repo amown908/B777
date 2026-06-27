@@ -92,12 +92,8 @@
             font-weight: 600; cursor: pointer; text-decoration: none; font-size: 0.9rem;
             transition: background 0.15s;
         }
-        .btn-primary { background: #f59e0b; color: #1a1412; }
-        .btn-primary:hover { background: #d97706; }
         .btn-secondary { background: #4e342e; color: #e2e8f0; }
         .btn-secondary:hover { background: #5d4037; }
-        .btn-accent { background: #0284c7; color: #ffffff; }
-        .btn-accent:hover { background: #0369a1; }
 
         /* Mapped Coordinates */
         #overhead         { top: 0%;    left: 0%;    width: 100%; height: 32%; }
@@ -115,22 +111,23 @@
 <body>
 
     <h1>Boeing 777 Flight Deck Guide</h1>
-    <p class="subtitle">Hover over a layout section to preview. Click to inspect options.</p>
+    <p class="subtitle">Hover over a layout section to preview. Click panels to visit pages, or click yokes for details.</p>
 
     <div class="cockpit-container">
         <img src="b777_cockpit.jpeg" alt="Boeing 777 Flight Deck System Breakdown">
 
-        <a href="overhead.html"     class="panel-box" id="overhead"      title="Overhead Panel System" data-summary="Manages primary electrical, hydraulic, fuel, and air conditioning aircraft sub-systems." data-switches="overhead_switches.html"></a>
+        <a href="overhead.html"     class="panel-box" id="overhead"      title="Overhead Panel System" data-summary="Manages primary electrical, hydraulic, fuel, and air conditioning aircraft sub-systems."></a>
         <a href="compass.html"      class="panel-box" id="compass"       title="Standby Compass & Eye Ref" data-summary="Provides mechanical, magnetic direction backup independent of main systems."></a>
-        <a href="glareshield.html"  class="panel-box" id="glareshield"   title="Glareshield & Main Panel" data-summary="Houses Autoflight system control panel (Mode Control Panel), EFIS display settings and Primary Flight Displays and Engine Indication/Crew Alerting System screens." data-switches="glareshield_switches.html"></a>
+        <a href="glareshield.html"  class="panel-box" id="glareshield"   title="Glareshield & Main Panel" data-summary="Houses Autoflight system control panel (Mode Control Panel), EFIS display settings and Primary Flight Displays and Engine Indication/Crew Alerting System screens."></a>
         <a href="pedestal.html"     class="panel-box" id="pedestal"      title="Control Stand & Pedestal (Throttles/CDUs)" data-summary="Contains thrust levers, flap selectors, radio panels, and Control Display Units."></a>
 
         <a href="CaptLateral.html" class="panel-box" id="lateral-capt"  title="Lateral Console — Capt" data-summary="Houses side window controls, oxygen mask stowage, and audio select panels."></a>
         <a href="FOLateral.html"   class="panel-box" id="lateral-fo"    title="Lateral Console - FO" data-summary="First Officer side instrumentation, window operation, and oxygen interface."></a>
         <a href="capt_seat.html"        class="panel-box" id="seat-capt"     title="Capt Seat" data-summary="Fully adjustable primary crew seat with restraint tracking assemblies."></a>
-        <a href="fo_seat.html"        class="panel-box" id="seat-fo"       title="FOSeat" data-summary="Fully adjustable primary co-pilot crew accommodation seat."></a>
-        <a        class="panel-box" id="yoke-left"     title="Capt Control Column (Yoke)" data-summary="Captain's primary pitch and roll mechanical control interface."></a>
-        <a        class="panel-box" id="yoke-right"    title="FO Control Column (Yoke)" data-summary="First Officer's primary pitch and roll mechanical control interface."></a>
+        <a href="fo_seat.html"        class="panel-box" id="seat-fo"       title="FO Seat" data-summary="Fully adjustable primary co-pilot crew accommodation seat."></a>
+        
+        <div class="panel-box yoke-trigger" id="yoke-left"     title="Capt Control Column (Yoke)" data-summary="Captain's primary pitch and roll mechanical control interface."></div>
+        <div class="panel-box yoke-trigger" id="yoke-right"    title="FO Control Column (Yoke)" data-summary="First Officer's primary pitch and roll mechanical control interface."></div>
     </div>
 
     <div class="modal-overlay" id="infoModal">
@@ -138,9 +135,7 @@
             <h3 id="modalTitle">Panel Name</h3>
             <p id="modalDescription">Quick description overview goes here.</p>
             <div class="modal-buttons">
-                <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
-                <a href="#" id="modalLink" class="btn btn-primary">Go to Detail Page</a>
-                <a href="#" id="modalSwitchesLink" class="btn btn-accent" style="display: none;">Go to Switches Page</a>
+                <button class="btn btn-secondary" onclick="closeModal()">✕ Close</button>
             </div>
         </div>
     </div>
@@ -149,35 +144,19 @@
         const modal = document.getElementById('infoModal');
         const modalTitle = document.getElementById('modalTitle');
         const modalDescription = document.getElementById('modalDescription');
-        const modalLink = document.getElementById('modalLink');
-        const modalSwitchesLink = document.getElementById('modalSwitchesLink');
-        const panels = document.querySelectorAll('.panel-box');
+        const yokeTriggers = document.querySelectorAll('.yoke-trigger');
 
-        panels.forEach(panel => {
-            panel.addEventListener('click', function(e) {
-                // Stop the browser from immediately opening the page
-                e.preventDefault(); 
-                
-                // Extract properties from the clicked element
+        // Setup click listeners exclusively for the yoke boxes
+        yokeTriggers.forEach(yoke => {
+            yoke.addEventListener('click', function() {
                 const title = this.getAttribute('title');
                 const summary = this.getAttribute('data-summary') || "No layout description provided.";
-                const destinationUrl = this.getAttribute('href');
-                const switchesUrl = this.getAttribute('data-switches');
 
-                // Feed values into the pop-up modal box
+                // Feed descriptive values into popup overlay elements
                 modalTitle.textContent = title;
                 modalDescription.textContent = summary;
-                modalLink.setAttribute('href', destinationUrl);
 
-                // Conditional Handling: Only display switches box if the data-switches attribute exists
-                if (switchesUrl) {
-                    modalSwitchesLink.setAttribute('href', switchesUrl);
-                    modalSwitchesLink.style.display = 'inline-block';
-                } else {
-                    modalSwitchesLink.style.display = 'none';
-                }
-
-                // Reveal the modal overlay
+                // Open the modal frame
                 modal.classList.add('active');
             });
         });
@@ -186,7 +165,7 @@
             modal.classList.remove('active');
         }
 
-        // Close the modal if clicking outside the box background container
+        // Close layout layer if outer dim environment gets clicked
         modal.addEventListener('click', function(e) {
             if(e.target === modal) {
                 closeModal();
