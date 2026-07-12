@@ -157,7 +157,7 @@
 
     <a href="index.html" class="back-link">← Back to Full Cockpit</a>
     <h1>Overhead Panel</h1>
-    <p class="subtitle">Click any panel zone to view the P/N and contents. Scroll down for the full parts index.</p>
+    <p class="subtitle">Click any panel zone to view log configurations, component details, and serial trackings.</p>
 
     <div class="image-container">
         <img src="overhead.jpeg" alt="Overhead Panel">
@@ -199,7 +199,7 @@
 
         <div class="panel-zone" id="zone-engine-mcp" onclick="showPopup('engine-mcp')">
             <div class="zone-label">ENGINE START &amp; CARGO FIRE</div>
-            <div class="zone-fin">MA264922.15.2.825</div>
+            <div class="zone-fin">Multiple Logs</div>
         </div>
         <div class="panel-zone" id="zone-fuel-jettison" onclick="showPopup('fuel-jettison')">
             <div class="zone-label">FUEL PUMPS &amp; JETTISON</div>
@@ -268,7 +268,7 @@
         <div class="popup-row"><span class="label">P/N</span><span class="value">MA264921.11.2.825</span></div>
         <div class="popup-row"><span class="label">S/N</span><span class="value sn">-</span></div>
         <hr class="popup-divider">
-        <div class="popup-contents">Controls emergency path lighting deployment toggle, guarded passenger cabin <strong>Oxygen Mask Deployment</strong>, and contains anti-fogging/anti-icing element controllers for the flight deck windshields.</div>
+        <div class="popup-contents">Controls emergency path lighting deployment toggle, guarded passenger cabin <strong>Oxygen Mask Deployment</strong>, and windshield element connections. Includes logged tracking context for **CVR Control Unit** (P/N: 980-6115-001, S/N: CAMPNLMT-00974) mounted in the overhead environment.</div>
     </div>
 
     <div id="popup-hyd-ram-air" class="popup-box">
@@ -283,10 +283,11 @@
     <div id="popup-engine-mcp" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
         <h3>Engine Start &amp; Cargo Fire Panel</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">MA264922.15.2.825</span></div>
-        <div class="popup-row"><span class="label">S/N</span><span class="value sn">-</span></div>
+        <div class="popup-row"><span class="label">APU Fire Switch</span><span class="value">S231W263-6 (S/N: 2098)</span></div>
+        <div class="popup-row"><span class="label">L Start Switch</span><span class="value">AD45-0009-1 (S/N: tba)</span></div>
+        <div class="popup-row"><span class="label">R Start Switch</span><span class="value">AD45-0009-2 (S/N: tba)</span></div>
         <hr class="popup-divider">
-        <div class="popup-contents">Houses left/right pneumatic starter knobs, autostart configurations, and <strong>APU / Cargo Fire Discharge</strong> systems.</div>
+        <div class="popup-contents">Houses engine configuration switches and critical deployment infrastructure. Logged details: **APU Fire Shut Off Switch** (Page Aerospace), and dual **Engine Start Switches** (Boeing A/C Company).</div>
     </div>
 
     <div id="popup-fuel-jettison" class="popup-box">
@@ -340,7 +341,7 @@
         <div class="popup-row"><span class="label">P/N</span><span class="value">MA264918.06.2.825</span></div>
         <div class="popup-row"><span class="label">S/N</span><span class="value sn">-</span></div>
         <hr class="popup-divider">
-        <div class="popup-contents">Controls Wing/Engine induction anti-ice and external lighting toggles (Beacon, Nav, Logo, Strobe, Landing/Taxi arrays).</div>
+        <div class="popup-contents">Controls Wing/Engine induction anti-ice and external lighting toggles. Adjacent area reference logs include the tracked **Standby Compass** assembly (P/N: PS229752-06, S/N: 109) lower down.</div>
     </div>
 
     <div id="popup-lighting-r" class="popup-box">
@@ -353,27 +354,35 @@
     </div>
 
     <div class="parts-section">
-        <h2>Overhead Panel - Parts Index</h2>
-        <input class="search-box" type="text" id="searchOverhead" onkeyup="filterTable('searchOverhead','overheadTable')" placeholder="Search description or part numbers...">
+        <h2>Overhead Panel &amp; Equipment - Parts Index</h2>
+        <input class="search-box" type="text" id="searchOverhead" onkeyup="filterTable('searchOverhead','overheadTable')" placeholder="Search description, log part numbers, manufacturers...">
         <table id="overheadTable">
             <thead>
-                <tr><th>Description</th><th>Part Number</th><th>Serial Number</th></tr>
+                <tr><th>Description</th><th>Part Number</th><th>Serial Number</th><th>Manufacturer / Position</th></tr>
             </thead>
             <tbody>
-                <tr><td>Left Overhead Circuit Breaker Panel (P11)</td><td class="pn">MA263138.22.2.825</td><td class="sn">-</td></tr>
-                <tr><td>Right Overhead Circuit Breaker Panel (P11)</td><td class="pn">MA263139.22.3.825</td><td class="sn">-</td></tr>
-                <tr><td>ADIRU Panel</td><td class="pn">MA264920.08.2.825</td><td class="sn">-</td></tr>
-                <tr><td>Electrical Panel</td><td class="pn">MA264912.13.2.825</td><td class="sn">-</td></tr>
-                <tr><td>Emergency Lighting &amp; Oxygen Panel</td><td class="pn">MA264921.11.2.825</td><td class="sn">-</td></tr>
-                <tr><td>Hydraulic Panel</td><td class="pn">MA264911.12.2.825</td><td class="sn">-</td></tr>
-                <tr><td>Engine Start &amp; Cargo Fire Panel</td><td class="pn">MA264922.15.2.825</td><td class="sn">-</td></tr>
-                <tr><td>Fuel Pumps &amp; Fuel Jettison Panel</td><td class="pn">MA264913.07.2.825</td><td class="sn">-</td></tr>
-                <tr><td>Air Conditioning Pack Panel</td><td class="pn">MA264914.05.2.825</td><td class="sn">-</td></tr>
-                <tr><td>Bleed Air &amp; Pressurization Control Panel</td><td class="pn">MA264924.08.2.825</td><td class="sn">-</td></tr>
-                <tr><td>Wiper Control Captain</td><td class="pn">MA264915.09.2.825</td><td class="sn">-</td></tr>
-                <tr><td>Wiper Control F/O</td><td class="pn">MA264916.08.2.825</td><td class="sn">-</td></tr>
-                <tr><td>Passenger Signs</td><td class="pn">MA264917.08.2.825</td><td class="sn">-</td></tr>
-                <tr><td>Anti-Ice</td><td class="pn">MA264918.06.2.825</td><td class="sn">-</td></tr>
+                <!-- Structural panel maps -->
+                <tr><td>Left Overhead Circuit Breaker Panel (P11)</td><td class="pn">MA263138.22.2.825</td><td class="sn">-</td><td>P11-1 Structure</td></tr>
+                <tr><td>Right Overhead Circuit Breaker Panel (P11)</td><td class="pn">MA263139.22.3.825</td><td class="sn">-</td><td>P11-2 Structure</td></tr>
+                <tr><td>ADIRU / Primary Flight Computers Panel</td><td class="pn">MA264920.08.2.825</td><td class="sn">-</td><td>A503 Structure</td></tr>
+                <tr><td>Electrical Panel Assembly</td><td class="pn">MA264912.13.2.825</td><td class="sn">-</td><td>A502 Structure</td></tr>
+                <tr><td>Window Heat / Emergency Lights Panel</td><td class="pn">MA264921.11.2.825</td><td class="sn">-</td><td>A512 Structure</td></tr>
+                <tr><td>Hydraulic / Ram Air Turbine Panel</td><td class="pn">MA264911.12.2.825</td><td class="sn">-</td><td>A511 Structure</td></tr>
+                <tr><td>Cargo Fire / Engine Control Panel</td><td class="pn">MA264922.15.2.825</td><td class="sn">-</td><td>A522 Structure</td></tr>
+                <tr><td>Fuel / Fuel Jettison Panel</td><td class="pn">MA264913.07.2.825</td><td class="sn">-</td><td>A521 Structure</td></tr>
+                <tr><td>Air Conditioning Panel</td><td class="pn">MA264914.05.2.825</td><td class="sn">-</td><td>A532 Structure</td></tr>
+                <tr><td>Bleed Air / Pressurization Panel</td><td class="pn">MA264924.08.2.825</td><td class="sn">-</td><td>A531 Structure</td></tr>
+                <tr><td>Wiper Control Captain Panel</td><td class="pn">MA264915.09.2.825</td><td class="sn">-</td><td>A501 Structure</td></tr>
+                <tr><td>Wiper Control F/O Panel</td><td class="pn">MA264916.08.2.825</td><td class="sn">-</td><td>A530 Structure</td></tr>
+                <tr><td>Passenger Signs Panel</td><td class="pn">MA264917.08.2.825</td><td class="sn">-</td><td>A510 Structure</td></tr>
+                <tr><td>Anti-Ice Panel</td><td class="pn">MA264918.06.2.825</td><td class="sn">-</td><td>A520 Structure</td></tr>
+                
+                <!-- Specific Component Log matches -->
+                <tr><td>APU Fire Shut Off Switch</td><td class="pn">S231W263-6</td><td class="sn">2098</td><td>Page Aerospace / Overhead FO</td></tr>
+                <tr><td>CVR Control Unit</td><td class="pn">980-6115-001</td><td class="sn">CAMPNLMT-00974</td><td>Honeywell / Overhead</td></tr>
+                <tr><td>Standby Compass</td><td class="pn">PS229752-06</td><td class="sn">109</td><td>Simtek / MIP (A519 Location)</td></tr>
+                <tr><td>Engine Start Switch (L)</td><td class="pn">AD45-0009-1</td><td class="sn">tba</td><td>Boeing A/C Company / Overhead</td></tr>
+                <tr><td>Engine Start Switch (R)</td><td class="pn">AD45-0009-2</td><td class="sn">tba</td><td>Boeing A/C Company / Overhead</td></tr>
             </tbody>
         </table>
     </div>
