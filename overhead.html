@@ -121,9 +121,10 @@
         }
         .popup-box h3 { margin: 0 0 12px 0; color: #ffffff; font-size: 1.1em; padding-right: 30px; }
         .popup-row { display: flex; gap: 8px; margin-bottom: 6px; font-size: 0.85em; }
-        .popup-row .label { color: #bcaaa4; min-width: 40px; }
+        .popup-row .label { color: #bcaaa4; min-width: 110px; }
         .popup-row .value { font-family: monospace; color: #f59e0b; }
         .popup-row .value.sn { color: #a3e635; }
+        .popup-row .value.wire { color: #38bdf8; font-weight: bold; }
         .popup-divider { border: none; border-top: 1px solid #4e342e; margin: 12px 0; }
         .popup-contents { font-size: 0.85em; color: #d7ccc8; line-height: 1.6; }
         .popup-contents strong { color: #ffffff; }
@@ -135,7 +136,7 @@
         }
         .close-btn:hover { background: #d97706; color: #1a1412; }
 
-        .parts-section { width: 100%; max-width: 900px; margin-top: 20px; }
+        .parts-section { width: 100%; max-width: 950px; margin-top: 20px; }
         .parts-section h2 { color: #ffffff; border-bottom: 2px solid #4e342e; padding-bottom: 10px; }
         .search-box {
             width: 100%; padding: 10px; margin-bottom: 15px;
@@ -149,15 +150,17 @@
         td { padding: 10px 15px; border-bottom: 1px solid #4e342e; }
         tbody tr:nth-child(even) { background: #221816; }
         tbody tr:hover { background: #3e2723; }
-        .pn { font-family: monospace; color: #f59e0b; }
+        .pn { font-family: monospace; color: #f59e0b; font-weight: bold; }
         .sn { font-family: monospace; color: #a3e635; }
+        .wire { font-family: monospace; color: #38bdf8; font-weight: bold; }
+        .src-tag { color: #bcaaa4; font-size: 0.85em; font-style: italic; display: block; margin-top: 2px; }
     </style>
 </head>
 <body>
 
     <a href="index.html" class="back-link">← Back to Full Cockpit</a>
     <h1>Overhead Panel</h1>
-    <p class="subtitle">Click any panel zone to view log configurations, component details, and serial trackings.</p>
+    <p class="subtitle">Click any panel zone to view log configurations, cross-reference part metrics, and loop routing tracks.</p>
 
     <div class="image-container">
         <img src="overhead.jpeg" alt="Overhead Panel">
@@ -168,7 +171,7 @@
         </div>
         <div class="panel-zone" id="zone-cb-right" onclick="showPopup('cb-right')">
             <div class="zone-label">RIGHT OVERHEAD CIRCUIT BREAKER PANEL (P11)</div>
-            <div class="zone-fin">MA263139.22.3.825</div>
+            <div class="zone-fin">MA263139.22.2.825</div>
         </div>
 
         <div class="panel-zone" id="zone-adiru" onclick="showPopup('adiru')">
@@ -180,12 +183,12 @@
             <div class="zone-fin">MA264912.13.2.825</div>
         </div>
         <div class="panel-zone" id="zone-wipers-lights" onclick="showPopup('wipers-lights')">
-            <div class="zone-label">L WIPER / CAMERA LTS</div>
+            <div class="zone-label">CAPT WIPER CONTROL</div>
             <div class="zone-fin">MA264915.09.2.825</div>
         </div>
 
         <div class="panel-zone" id="zone-emer-lights" onclick="showPopup('emer-lights')">
-            <div class="zone-label">EMER LIGHTS / PASS OXY / WINDOW HEAT</div>
+            <div class="zone-label">EMER LIGHTS &amp; WINDOW HEAT</div>
             <div class="zone-fin">MA264921.11.2.825</div>
         </div>
         <div class="panel-zone" id="zone-hyd-ram-air" onclick="showPopup('hyd-ram-air')">
@@ -193,196 +196,235 @@
             <div class="zone-fin">MA264911.12.2.825</div>
         </div>
         <div class="panel-zone" id="zone-pass-signs" onclick="showPopup('pass-signs')">
-            <div class="zone-label">PASS SIGNS / COCKPIT LIGHTING</div>
+            <div class="zone-label">PASS SIGNS CONTROLLER</div>
             <div class="zone-fin">MA264917.08.2.825</div>
         </div>
 
         <div class="panel-zone" id="zone-engine-mcp" onclick="showPopup('engine-mcp')">
-            <div class="zone-label">ENGINE START &amp; CARGO FIRE</div>
+            <div class="zone-label">ENGINE START SWITCHES</div>
             <div class="zone-fin">Multiple Logs</div>
         </div>
         <div class="panel-zone" id="zone-fuel-jettison" onclick="showPopup('fuel-jettison')">
-            <div class="zone-label">FUEL PUMPS &amp; JETTISON</div>
+            <div class="zone-label">FUEL &amp; FUEL JETTISON PANEL</div>
             <div class="zone-fin">MA264913.07.2.825</div>
         </div>
         <div class="panel-zone" id="zone-anti-ice" onclick="showPopup('anti-ice')">
-            <div class="zone-label">ANTI-ICE &amp; EXT LIGHTS</div>
+            <div class="zone-label">ANTI-ICE SUBPANEL SYSTEM</div>
             <div class="zone-fin">MA264918.06.2.825</div>
         </div>
 
         <div class="panel-zone" id="zone-air-cond" onclick="showPopup('air-cond')">
-            <div class="zone-label">AIR CONDITIONING / RECIRC</div>
+            <div class="zone-label">AIR CONDITIONING CONTROL</div>
             <div class="zone-fin">MA264914.05.2.825</div>
         </div>
         <div class="panel-zone" id="zone-bleed-press" onclick="showPopup('bleed-press')">
-            <div class="zone-label">BLEED AIR &amp; PRESSURIZATION</div>
-            <div class="zone-fin">MA264924.08.2.825</div>
+            <div class="zone-label">BLEED AIR INTEGRATION PNL</div>
+            <div class="zone-fin">MA264924.06.2.825</div>
         </div>
         <div class="panel-zone" id="zone-lighting-r" onclick="showPopup('lighting-r')">
-            <div class="zone-label">R WIPER CONTROL</div>
+            <div class="zone-label">F/O WIPER CONTROL</div>
             <div class="zone-fin">MA264916.08.2.825</div>
         </div>
     </div>
 
     <div id="dark-screen" class="overlay-screen" onclick="closeAllPopups()"></div>
 
+    <!-- POPUP WINDOW MATRICES -->
     <div id="popup-cb-left" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>Left Overhead Circuit Breaker Panel</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">MA263138.22.2.825</span></div>
-        <div class="popup-row"><span class="label">S/N</span><span class="value sn">-</span></div>
+        <h3>Circuit Breaker Panel P11-1 (Left Section)</h3>
+        <div class="popup-row"><span class="label">Inventory P/N</span><span class="value">Not Installed</span></div>
+        <div class="popup-row"><span class="label">Blueprint P/N</span><span class="value">MA263138.22.2.825</span></div>
+        <div class="popup-row"><span class="label">Hardware S/N</span><span class="value sn">N/A</span></div>
+        <div class="popup-row"><span class="label">Wiring Loop</span><span class="value wire">W2810/11, W8761-W8773</span></div>
         <hr class="popup-divider">
-        <div class="popup-contents">Contains circuit breakers protecting systems for Emer Lights, Comm WFL, Flt Control, Nav, Capt Displays, and primary left-side cockpit avionics lines.</div>
+        <div class="popup-contents">Structural framing array for left overhead power protection lines. Left section contains isolated terminal routing hooks.</div>
     </div>
 
     <div id="popup-cb-right" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>Right Overhead Circuit Breaker Panel</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">MA263139.22.3.825</span></div>
-        <div class="popup-row"><span class="label">S/N</span><span class="value sn">-</span></div>
+        <h3>Circuit Breaker Panel P11-2 (Right Section)</h3>
+        <div class="popup-row"><span class="label">Inventory P/N</span><span class="value">Not Installed</span></div>
+        <div class="popup-row"><span class="label">Blueprint P/N</span><span class="value">MA263139.22.2.825</span></div>
+        <div class="popup-row"><span class="label">Hardware S/N</span><span class="value sn">N/A</span></div>
+        <div class="popup-row"><span class="label">Wiring Loop</span><span class="value wire">W2811, W8761-W8763</span></div>
         <hr class="popup-divider">
-        <div class="popup-contents">Contains circuit breakers protecting right-side electrical paths including systems for Interphone, Air Conditioning loops, Fuel pumps, Engine modules, and Co-Pilot subsystems.</div>
+        <div class="popup-contents">Structural framing array for right overhead power protection networks. Right section incorporates dedicated terminal loops.</div>
     </div>
 
     <div id="popup-adiru" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>ADIRU System Control</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">MA264920.08.2.825</span></div>
-        <div class="popup-row"><span class="label">S/N</span><span class="value sn">-</span></div>
+        <h3>Primary Flight Computers / ADIRU Panel</h3>
+        <div class="popup-row"><span class="label">Inventory P/N</span><span class="value">Not Installed</span></div>
+        <div class="popup-row"><span class="label">Blueprint P/N</span><span class="value">MA264920.08.2.825</span></div>
+        <div class="popup-row"><span class="label">Hardware S/N</span><span class="value sn">N/A</span></div>
+        <div class="popup-row"><span class="label">Wiring Loop</span><span class="value wire">W7562, W8741</span></div>
         <hr class="popup-divider">
-        <div class="popup-contents">Manages the <strong>Air Data Inertial Reference Unit</strong> switch matrix and houses the guarded disconnect toggle for the Fly-By-Wire system <strong>Primary Flight Computers</strong>.</div>
+        <div class="popup-contents">Guarded operational toggle bay for fly-by-wire reference architecture tracking loops.</div>
     </div>
 
     <div id="popup-electrical" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>Electrical Power Control Panel</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">MA264912.13.2.825</span></div>
-        <div class="popup-row"><span class="label">S/N</span><span class="value sn">-</span></div>
+        <h3>Panel Assembly Electrical / Distribution</h3>
+        <div class="popup-row"><span class="label">Inventory P/N</span><span class="value">Not Installed</span></div>
+        <div class="popup-row"><span class="label">Blueprint P/N</span><span class="value">MA264912.13.2.825</span></div>
+        <div class="popup-row"><span class="label">Hardware S/N</span><span class="value sn">N/A</span></div>
+        <div class="popup-row"><span class="label">Wiring Loop</span><span class="value wire">W7561, W8742</span></div>
         <hr class="popup-divider">
-        <div class="popup-contents">Primary electrical node. Controls <strong>Battery, APU Gen, Engine Generators, Bus Ties</strong>, and External Power connections.</div>
+        <div class="popup-contents">Main overhead power architecture controller governing generation connection lines.</div>
     </div>
 
     <div id="popup-emer-lights" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>Emergency Lights &amp; Passenger Oxygen</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">MA264921.11.2.825</span></div>
-        <div class="popup-row"><span class="label">S/N</span><span class="value sn">-</span></div>
+        <h3>Window Heat / Emergency Lighting Control</h3>
+        <div class="popup-row"><span class="label">Inventory P/N</span><span class="value">Not Installed</span></div>
+        <div class="popup-row"><span class="label">Blueprint P/N</span><span class="value">MA30001 / MA264921.11.2.825</span></div>
+        <div class="popup-row"><span class="label">Hardware S/N</span><span class="value sn">N/A</span></div>
+        <div class="popup-row"><span class="label">Wiring Loop</span><span class="value wire">W7566, W8743</span></div>
         <hr class="popup-divider">
-        <div class="popup-contents">Controls emergency path lighting deployment toggle, guarded passenger cabin <strong>Oxygen Mask Deployment</strong>, and windshield element connections. Includes logged tracking context for **CVR Control Unit** (P/N: 980-6115-001, S/N: CAMPNLMT-00974) mounted in the overhead environment.</div>
+        <div class="popup-contents">Manages passenger oxygen mask deployment grids and backup emergency flight deck illuminating paths.</div>
     </div>
 
     <div id="popup-hyd-ram-air" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>Hydraulic &amp; Ram Air Control Panel</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">MA264911.12.2.825</span></div>
-        <div class="popup-row"><span class="label">S/N</span><span class="value sn">-</span></div>
+        <h3>Hydraulic / Ram Air Turbine Control</h3>
+        <div class="popup-row"><span class="label">Inventory P/N</span><span class="value">Not Installed</span></div>
+        <div class="popup-row"><span class="label">Blueprint P/N</span><span class="value">MA264911.12.2.825</span></div>
+        <div class="popup-row"><span class="label">Hardware S/N</span><span class="value sn">N/A</span></div>
+        <div class="popup-row"><span class="label">Wiring Loop</span><span class="value wire">W7565, W8744</span></div>
         <hr class="popup-divider">
-        <div class="popup-contents">Controls Left/Right Engine driven pumps, Central electric system switches, and deployment mechanisms for the <strong>Ram Air Turbine (RAT)</strong>.</div>
+        <div class="popup-contents">Governs electric motor pump lines and deployed backup flow pressure systems.</div>
     </div>
 
     <div id="popup-engine-mcp" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>Engine Start &amp; Cargo Fire Panel</h3>
-        <div class="popup-row"><span class="label">APU Fire Switch</span><span class="value">S231W263-6 (S/N: 2098)</span></div>
-        <div class="popup-row"><span class="label">L Start Switch</span><span class="value">AD45-0009-1 (S/N: tba)</span></div>
-        <div class="popup-row"><span class="label">R Start Switch</span><span class="value">AD45-0009-2 (S/N: tba)</span></div>
+        <h3>Cargo Fire / Engine Control Subpanel</h3>
+        <div class="popup-row"><span class="label">APU Fire P/N</span><span class="value">S231W263-6</span></div>
+        <div class="popup-row"><span class="label">APU Fire S/N</span><span class="value sn">2908</span></div>
+        <div class="popup-row"><span class="label">L Start P/N</span><span class="value">AD45-0009-1</span></div>
+        <div class="popup-row"><span class="label">R Start P/N</span><span class="value">AD45-0009-2</span></div>
+        <div class="popup-row"><span class="label">Wiring Loop</span><span class="value wire">W7511, W7519-21, W8723</span></div>
         <hr class="popup-divider">
-        <div class="popup-contents">Houses engine configuration switches and critical deployment infrastructure. Logged details: **APU Fire Shut Off Switch** (Page Aerospace), and dual **Engine Start Switches** (Boeing A/C Company).</div>
+        <div class="popup-contents">Houses tracked flight lines: **APU Fire Shut Off Switch** (Blueprint P/N: BAS231W263-6) and dual pneumatic **Engine Start Switches** (Blueprint P/Ns: BAAD45-0009-1 / -2).</div>
     </div>
 
     <div id="popup-fuel-jettison" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>Fuel Pumps &amp; Fuel Jettison Panel</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">MA264913.07.2.825</span></div>
-        <div class="popup-row"><span class="label">S/N</span><span class="value sn">-</span></div>
+        <h3>Fuel / Fuel Jettison Panel Group</h3>
+        <div class="popup-row"><span class="label">Inventory P/N</span><span class="value">Not Installed</span></div>
+        <div class="popup-row"><span class="label">Blueprint P/N</span><span class="value">MA264913.07.2.825</span></div>
+        <div class="popup-row"><span class="label">Hardware S/N</span><span class="value sn">N/A</span></div>
+        <div class="popup-row"><span class="label">Wiring Loop</span><span class="value wire">W7510, W8733</span></div>
         <hr class="popup-divider">
-        <div class="popup-contents">Manages wing tank/center tank crossfeed selectors alongside the active fuel dump/jettison computer configurations.</div>
+        <div class="popup-contents">Manages engine feed lines, transfer manifolds, and dump valve isolation paths.</div>
     </div>
 
     <div id="popup-air-cond" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>Environmental &amp; Air Conditioning Pack Panel</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">MA264914.05.2.825</span></div>
-        <div class="popup-row"><span class="label">S/N</span><span class="value sn">-</span></div>
+        <h3>Air Conditioning Control Subpanel</h3>
+        <div class="popup-row"><span class="label">Inventory P/N</span><span class="value">Not Installed</span></div>
+        <div class="popup-row"><span class="label">Blueprint P/N</span><span class="value">MA264914.05.2.825</span></div>
+        <div class="popup-row"><span class="label">Hardware S/N</span><span class="value sn">N/A</span></div>
+        <div class="popup-row"><span class="label">Wiring Loop</span><span class="value wire">W7514, W8722</span></div>
         <hr class="popup-divider">
-        <div class="popup-contents">Manages cabin zone target temperatures, recirculation fan assemblies, and system cooling pack automation switches.</div>
+        <div class="popup-contents">Governs trim air lines, mixer units, and flight cabin thermal feedback profiles.</div>
     </div>
 
     <div id="popup-bleed-press" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>Bleed Air &amp; Pressurization Control</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">MA264924.08.2.825</span></div>
-        <div class="popup-row"><span class="label">S/N</span><span class="value sn">-</span></div>
+        <h3>Bleed Air / Pressurization Integration Pnl</h3>
+        <div class="popup-row"><span class="label">Inventory P/N</span><span class="value">Not Installed</span></div>
+        <div class="popup-row"><span class="label">Blueprint P/N</span><span class="value">MA264924.06.2.825</span></div>
+        <div class="popup-row"><span class="label">Hardware S/N</span><span class="value sn">N/A</span></div>
+        <div class="popup-row"><span class="label">Wiring Loop</span><span class="value wire">W7513, W8731</span></div>
         <hr class="popup-divider">
-        <div class="popup-contents">Controls Engine isolation bleed valves, APU air source supply, and dual channel manual/auto landing altitude air pressurization profiles.</div>
+        <div class="popup-contents">Manages outflow valves, isolation crossovers, and ambient tracking lines.</div>
     </div>
 
     <div id="popup-wipers-lights" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>Captain Controls Node</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">MA264915.09.2.825</span></div>
-        <div class="popup-row"><span class="label">S/N</span><span class="value sn">-</span></div>
+        <h3>Wiper Control Panel (Captain)</h3>
+        <div class="popup-row"><span class="label">Inventory P/N</span><span class="value">Not Installed</span></div>
+        <div class="popup-row"><span class="label">Blueprint P/N</span><span class="value">MA264915.09.2.825</span></div>
+        <div class="popup-row"><span class="label">Hardware S/N</span><span class="value sn">N/A</span></div>
+        <div class="popup-row"><span class="label">Wiring Loop</span><span class="value wire">W7559, W8753</span></div>
         <hr class="popup-divider">
-        <div class="popup-contents">Houses Left Wiper configurations and instrument console/camera brightness dimmers.</div>
+        <div class="popup-contents">Controls left-side motor drives and forward workspace lighting illumination loops.</div>
     </div>
 
     <div id="popup-pass-signs" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>Passenger Signs &amp; Internal Lighting</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">MA264917.08.2.825</span></div>
-        <div class="popup-row"><span class="label">S/N</span><span class="value sn">-</span></div>
+        <h3>Passenger Signs Controller</h3>
+        <div class="popup-row"><span class="label">Inventory P/N</span><span class="value">Not Installed</span></div>
+        <div class="popup-row"><span class="label">Blueprint P/N</span><span class="value">MA264917.08.2.825</span></div>
+        <div class="popup-row"><span class="label">Hardware S/N</span><span class="value sn">N/A</span></div>
+        <div class="popup-row"><span class="label">Wiring Loop</span><span class="value wire">W7563, W7564, W8751</span></div>
         <hr class="popup-divider">
-        <div class="popup-contents">Manages Seatbelts/No Smoking illumination commands and cockpit interior dome/storm lights.</div>
+        <div class="popup-contents">Main cabin notice loop interface and attendant chime control links.</div>
     </div>
 
     <div id="popup-anti-ice" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>Anti-Ice &amp; Exterior Lighting Selector</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">MA264918.06.2.825</span></div>
-        <div class="popup-row"><span class="label">S/N</span><span class="value sn">-</span></div>
+        <h3>Anti-Ice Subpanel System</h3>
+        <div class="popup-row"><span class="label">Inventory P/N</span><span class="value">Not Installed</span></div>
+        <div class="popup-row"><span class="label">Blueprint P/N</span><span class="value">MA264918.06.2.825</span></div>
+        <div class="popup-row"><span class="label">Hardware S/N</span><span class="value sn">N/A</span></div>
+        <div class="popup-row"><span class="label">Wiring Loop</span><span class="value wire">W7509, W8752</span></div>
         <hr class="popup-divider">
-        <div class="popup-contents">Controls Wing/Engine induction anti-ice and external lighting toggles. Adjacent area reference logs include the tracked **Standby Compass** assembly (P/N: PS229752-06, S/N: 109) lower down.</div>
+        <div class="popup-contents">Controls heating grids for engine nacelles and engine surface loops.</div>
     </div>
 
     <div id="popup-lighting-r" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>First Officer Control Node</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">MA264916.08.2.825</span></div>
-        <div class="popup-row"><span class="label">S/N</span><span class="value sn">-</span></div>
+        <h3>Wiper Control Panel (First Officer)</h3>
+        <div class="popup-row"><span class="label">Inventory P/N</span><span class="value">Not Installed</span></div>
+        <div class="popup-row"><span class="label">Blueprint P/N</span><span class="value">MA264916.08.2.825</span></div>
+        <div class="popup-row"><span class="label">Hardware S/N</span><span class="value sn">N/A</span></div>
+        <div class="popup-row"><span class="label">Wiring Loop</span><span class="value wire">W7512, W8721</span></div>
         <hr class="popup-divider">
-        <div class="popup-contents">Houses Right Windshield Wiper control assembly parameters.</div>
+        <div class="popup-contents">Controls right-side motor structures and co-pilot lighting networks.</div>
     </div>
 
+    <!-- MAIN COMPONENT REFRENCING LOG MATRIX -->
     <div class="parts-section">
-        <h2>Overhead Panel &amp; Equipment - Parts Index</h2>
-        <input class="search-box" type="text" id="searchOverhead" onkeyup="filterTable('searchOverhead','overheadTable')" placeholder="Search description, log part numbers, manufacturers...">
+        <h2>Overhead Panel Group — Systems Logistics Matrix</h2>
+        <input class="search-box" type="text" id="searchOverhead" onkeyup="filterTable('searchOverhead','overheadTable')" placeholder="Filter overhead components by descriptions, part identifiers, or loop wires...">
         <table id="overheadTable">
             <thead>
-                <tr><th>Description</th><th>Part Number</th><th>Serial Number</th><th>Manufacturer / Position</th></tr>
+                <tr>
+                    <th>System Description</th>
+                    <th>Master Inventory P/N</th>
+                    <th>Schematic Blueprint P/N</th>
+                    <th>Hardware S/N</th>
+                    <th>Wiring Connection Loop</th>
+                </tr>
             </thead>
             <tbody>
-                <!-- Structural panel maps -->
-                <tr><td>Left Overhead Circuit Breaker Panel (P11)</td><td class="pn">MA263138.22.2.825</td><td class="sn">-</td><td>P11-1 Structure</td></tr>
-                <tr><td>Right Overhead Circuit Breaker Panel (P11)</td><td class="pn">MA263139.22.3.825</td><td class="sn">-</td><td>P11-2 Structure</td></tr>
-                <tr><td>ADIRU / Primary Flight Computers Panel</td><td class="pn">MA264920.08.2.825</td><td class="sn">-</td><td>A503 Structure</td></tr>
-                <tr><td>Electrical Panel Assembly</td><td class="pn">MA264912.13.2.825</td><td class="sn">-</td><td>A502 Structure</td></tr>
-                <tr><td>Window Heat / Emergency Lights Panel</td><td class="pn">MA264921.11.2.825</td><td class="sn">-</td><td>A512 Structure</td></tr>
-                <tr><td>Hydraulic / Ram Air Turbine Panel</td><td class="pn">MA264911.12.2.825</td><td class="sn">-</td><td>A511 Structure</td></tr>
-                <tr><td>Cargo Fire / Engine Control Panel</td><td class="pn">MA264922.15.2.825</td><td class="sn">-</td><td>A522 Structure</td></tr>
-                <tr><td>Fuel / Fuel Jettison Panel</td><td class="pn">MA264913.07.2.825</td><td class="sn">-</td><td>A521 Structure</td></tr>
-                <tr><td>Air Conditioning Panel</td><td class="pn">MA264914.05.2.825</td><td class="sn">-</td><td>A532 Structure</td></tr>
-                <tr><td>Bleed Air / Pressurization Panel</td><td class="pn">MA264924.08.2.825</td><td class="sn">-</td><td>A531 Structure</td></tr>
-                <tr><td>Wiper Control Captain Panel</td><td class="pn">MA264915.09.2.825</td><td class="sn">-</td><td>A501 Structure</td></tr>
-                <tr><td>Wiper Control F/O Panel</td><td class="pn">MA264916.08.2.825</td><td class="sn">-</td><td>A530 Structure</td></tr>
-                <tr><td>Passenger Signs Panel</td><td class="pn">MA264917.08.2.825</td><td class="sn">-</td><td>A510 Structure</td></tr>
-                <tr><td>Anti-Ice Panel</td><td class="pn">MA264918.06.2.825</td><td class="sn">-</td><td>A520 Structure</td></tr>
-                
-                <!-- Specific Component Log matches -->
-                <tr><td>APU Fire Shut Off Switch</td><td class="pn">S231W263-6</td><td class="sn">2098</td><td>Page Aerospace / Overhead FO</td></tr>
-                <tr><td>CVR Control Unit</td><td class="pn">980-6115-001</td><td class="sn">CAMPNLMT-00974</td><td>Honeywell / Overhead</td></tr>
-                <tr><td>Standby Compass</td><td class="pn">PS229752-06</td><td class="sn">109</td><td>Simtek / MIP (A519 Location)</td></tr>
-                <tr><td>Engine Start Switch (L)</td><td class="pn">AD45-0009-1</td><td class="sn">tba</td><td>Boeing A/C Company / Overhead</td></tr>
-                <tr><td>Engine Start Switch (R)</td><td class="pn">AD45-0009-2</td><td class="sn">tba</td><td>Boeing A/C Company / Overhead</td></tr>
+                <tr><td>APU Fire Shut Off Switch</td><td class="pn">S231W263-6 <span class="src-tag">(Inventory)</span></td><td class="pn">BAS231W263-6 <span class="src-tag">(Blueprint)</span></td><td class="sn">2908</td><td class="wire">W7519</td></tr>
+                <tr><td>Engine Start Switch (Left)</td><td class="pn">AD45-0009-1 <span class="src-tag">(Inventory)</span></td><td class="pn">BAAD45-0009-1 <span class="src-tag">(Blueprint)</span></td><td class="sn">tba</td><td class="wire">W7520</td></tr>
+                <tr><td>Engine Start Switch (Right)</td><td class="pn">AD45-0009-2 <span class="src-tag">(Inventory)</span></td><td class="pn">BAAD45-0009-2 <span class="src-tag">(Blueprint)</span></td><td class="sn">tba</td><td class="wire">W7521</td></tr>
+                <tr><td>Standby Compass Assembly</td><td class="pn">PS229752-06 <span class="src-tag">(Inventory)</span></td><td class="pn">PS229752.06.5.607 <span class="src-tag">(Blueprint)</span></td><td class="sn">109</td><td class="wire">W7567, W8641</td></tr>
+                <tr><td>Wiper Control Panel (Captain)</td><td class="pn">Not Installed</td><td class="pn">MA264915.09.2.825</td><td class="sn">N/A</td><td class="wire">W7559, W8753</td></tr>
+                <tr><td>Panel Assembly Electrical / Distribution</td><td class="pn">Not Installed</td><td class="pn">MA264912.13.2.825</td><td class="sn">N/A</td><td class="wire">W7561, W8742</td></tr>
+                <tr><td>Primary Flight Computers / ADIRU Selector</td><td class="pn">Not Installed</td><td class="pn">MA264920.08.2.825</td><td class="sn">N/A</td><td class="wire">W7562, W8741</td></tr>
+                <tr><td>Passenger Signs Controller</td><td class="pn">Not Installed</td><td class="pn">MA264917.08.2.825</td><td class="sn">N/A</td><td class="wire">W7563, W7564, W8751</td></tr>
+                <tr><td>Hydraulic / Ram Air Turbine Control</td><td class="pn">Not Installed</td><td class="pn">MA264911.12.2.825</td><td class="sn">N/A</td><td class="wire">W7565, W8744</td></tr>
+                <tr><td>Window Heat / Emergency Lighting Control</td><td class="pn">Not Installed</td><td class="pn">MA30001 / MA264921.11.2.825</td><td class="sn">N/A</td><td class="wire">W7566, W8743</td></tr>
+                <tr><td>ELT Module Assembly Location</td><td class="pn">Not Installed</td><td class="pn">MA415936.01.2.825</td><td class="sn">N/A</td><td class="wire">W7524, W8734</td></tr>
+                <tr><td>Anti-Ice Subpanel System</td><td class="pn">Not Installed</td><td class="pn">MA264918.06.2.825</td><td class="sn">N/A</td><td class="wire">W7509, W8752</td></tr>
+                <tr><td>Fuel / Fuel Jettison Panel Group</td><td class="pn">Not Installed</td><td class="pn">MA264913.07.2.825</td><td class="sn">N/A</td><td class="wire">W7510, W8733</td></tr>
+                <tr><td>Cargo Fire / Engine Control Subpanel</td><td class="pn">Not Installed</td><td class="pn">MA264922.15.2.825</td><td class="sn">N/A</td><td class="wire">W7511, W7519-21, W8723</td></tr>
+                <tr><td>Wiper Control Panel (First Officer)</td><td class="pn">Not Installed</td><td class="pn">MA264916.08.2.825</td><td class="sn">N/A</td><td class="wire">W7512, W8721</td></tr>
+                <tr><td>Bleed Air / Pressurization Integration Pnl</td><td class="pn">Not Installed</td><td class="pn">MA264924.06.2.825</td><td class="sn">N/A</td><td class="wire">W7513, W8731</td></tr>
+                <tr><td>Air Conditioning Control Subpanel</td><td class="pn">Not Installed</td><td class="pn">MA264914.05.2.825</td><td class="sn">N/A</td><td class="wire">W7514, W8722</td></tr>
+                <tr><td>Flight Control Hydraulic Power Switchblock</td><td class="pn">Not Installed</td><td class="pn">MA264932.06.2.825</td><td class="sn">N/A</td><td class="wire">W7568</td></tr>
+                <tr><td>Window Heat Backup Panel</td><td class="pn">Not Installed</td><td class="pn">MA264931.06.2.825</td><td class="sn">N/A</td><td class="wire">W7569</td></tr>
+                <tr><td>Ground Test Interface Station</td><td class="pn">Not Installed</td><td class="pn">MA264935.06.2.825</td><td class="sn">N/A</td><td class="wire">W7516</td></tr>
+                <tr><td>Cargo Temperature Selection Controller</td><td class="pn">Not Installed</td><td class="pn">MA264933.06.2.825</td><td class="sn">N/A</td><td class="wire">W7517</td></tr>
+                <tr><td>APU Maintenance Test Assembly</td><td class="pn">Not Installed</td><td class="pn">MA264934.06.2.825</td><td class="sn">N/A</td><td class="wire">W7518</td></tr>
+                <tr><td>Medical Outlet Power Supply Module</td><td class="pn">Not Installed</td><td class="pn">BA233W4213-1</td><td class="sn">N/A</td><td class="wire">W7523</td></tr>
+                <tr><td>Circuit Breaker Panel P11-1 (Left Section)</td><td class="pn">Not Installed</td><td class="pn">MA263138.22.2.825</td><td class="sn">N/A</td><td class="wire">W2810/11, W8761-W8773</td></tr>
+                <tr><td>Circuit Breaker Panel P11-2 (Right Section)</td><td class="pn">Not Installed</td><td class="pn">MA263139.22.2.825</td><td class="sn">N/A</td><td class="wire">W2811, W8761-W8763</td></tr>
             </tbody>
         </table>
     </div>
