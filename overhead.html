@@ -20,26 +20,23 @@
         h1 { color: #ffffff; margin-bottom: 5px; }
         .subtitle { color: #bcaaa4; margin-bottom: 25px; }
 
-/* Modified container to allow natural zooming */
         .image-container {
             position: relative;
             display: inline-block;
             max-width: 100%;
-            width: 550px; /* Set a default desktop width so it fits cleanly on load */
+            width: 550px; 
             border: 4px solid #3e2723;
             border-radius: 8px;
             box-shadow: 0 10px 30px -5px rgba(0,0,0,0.9);
             overflow: hidden;
             margin-bottom: 35px;
         }
-        /* Forces the image to behave like a standard scaling element */
         img { 
             width: 100%; 
             height: auto; 
             display: block; 
         }
 
-        /* Boeing styling for clickable panel zones */
         .panel-zone {
             position: absolute;
             background: rgba(141, 110, 99, 0.08);
@@ -167,63 +164,63 @@
 
         <div class="panel-zone" id="zone-cb-left" onclick="showPopup('cb-left')">
             <div class="zone-label">LEFT OVERHEAD CIRCUIT BREAKER PANEL (P11)</div>
-            <div class="zone-fin">P/N</div>
+            <div class="zone-fin">MA263138.22.2.825</div>
         </div>
         <div class="panel-zone" id="zone-cb-right" onclick="showPopup('cb-right')">
             <div class="zone-label">RIGHT OVERHEAD CIRCUIT BREAKER PANEL (P11)</div>
-            <div class="zone-fin">P/N</div>
+            <div class="zone-fin">MA263139.22.3.825</div>
         </div>
 
         <div class="panel-zone" id="zone-adiru" onclick="showPopup('adiru')">
             <div class="zone-label">ADIRU / BACKUP SYS / PFC</div>
-            <div class="zone-fin">P/N</div>
+            <div class="zone-fin">MA264920.08.2.825</div>
         </div>
         <div class="panel-zone" id="zone-electrical" onclick="showPopup('electrical')">
             <div class="zone-label">ELECTRICAL SYSTEM</div>
-            <div class="zone-fin">P/N</div>
+            <div class="zone-fin">MA264912.13.2.825</div>
         </div>
         <div class="panel-zone" id="zone-wipers-lights" onclick="showPopup('wipers-lights')">
             <div class="zone-label">L WIPER / CAMERA LTS</div>
-            <div class="zone-fin">—</div>
+            <div class="zone-fin">MA264915.09.2.825</div>
         </div>
 
         <div class="panel-zone" id="zone-emer-lights" onclick="showPopup('emer-lights')">
             <div class="zone-label">EMER LIGHTS / PASS OXY / WINDOW HEAT</div>
-            <div class="zone-fin">P/N</div>
+            <div class="zone-fin">MA264921.11.2.825</div>
         </div>
         <div class="panel-zone" id="zone-hyd-ram-air" onclick="showPopup('hyd-ram-air')">
             <div class="zone-label">HYDRAULIC &amp; RAM AIR</div>
-            <div class="zone-fin">P/N</div>
+            <div class="zone-fin">MA264911.12.2.825</div>
         </div>
         <div class="panel-zone" id="zone-pass-signs" onclick="showPopup('pass-signs')">
             <div class="zone-label">PASS SIGNS / COCKPIT LIGHTING</div>
-            <div class="zone-fin">—</div>
+            <div class="zone-fin">MA264917.08.2.825</div>
         </div>
 
         <div class="panel-zone" id="zone-engine-mcp" onclick="showPopup('engine-mcp')">
             <div class="zone-label">ENGINE START &amp; CARGO FIRE</div>
-            <div class="zone-fin">P/N</div>
+            <div class="zone-fin">MA264922.15.2.825</div>
         </div>
         <div class="panel-zone" id="zone-fuel-jettison" onclick="showPopup('fuel-jettison')">
             <div class="zone-label">FUEL PUMPS &amp; JETTISON</div>
-            <div class="zone-fin">P/N</div>
+            <div class="zone-fin">MA264913.07.2.825</div>
         </div>
         <div class="panel-zone" id="zone-anti-ice" onclick="showPopup('anti-ice')">
             <div class="zone-label">ANTI-ICE &amp; EXT LIGHTS</div>
-            <div class="zone-fin">—</div>
+            <div class="zone-fin">MA264918.06.2.825</div>
         </div>
 
         <div class="panel-zone" id="zone-air-cond" onclick="showPopup('air-cond')">
             <div class="zone-label">AIR CONDITIONING / RECIRC</div>
-            <div class="zone-fin">P/N</div>
+            <div class="zone-fin">MA264914.05.2.825</div>
         </div>
         <div class="panel-zone" id="zone-bleed-press" onclick="showPopup('bleed-press')">
             <div class="zone-label">BLEED AIR &amp; PRESSURIZATION</div>
-            <div class="zone-fin">P/N</div>
+            <div class="zone-fin">MA264924.08.2.825</div>
         </div>
         <div class="panel-zone" id="zone-lighting-r" onclick="showPopup('lighting-r')">
             <div class="zone-label">R WIPER CONTROL</div>
-            <div class="zone-fin">—</div>
+            <div class="zone-fin">MA264916.08.2.825</div>
         </div>
     </div>
 
@@ -232,7 +229,8 @@
     <div id="popup-cb-left" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
         <h3>Left Overhead Circuit Breaker Panel</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">[Enter P/N Later]</span></div>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">MA263138.22.2.825</span></div>
+        <div class="popup-row"><span class="label">S/N</span><span class="value sn">-</span></div>
         <hr class="popup-divider">
         <div class="popup-contents">Contains circuit breakers protecting systems for Emer Lights, Comm WFL, Flt Control, Nav, Capt Displays, and primary left-side cockpit avionics lines.</div>
     </div>
@@ -240,7 +238,8 @@
     <div id="popup-cb-right" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
         <h3>Right Overhead Circuit Breaker Panel</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">[Enter P/N Later]</span></div>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">MA263139.22.3.825</span></div>
+        <div class="popup-row"><span class="label">S/N</span><span class="value sn">-</span></div>
         <hr class="popup-divider">
         <div class="popup-contents">Contains circuit breakers protecting right-side electrical paths including systems for Interphone, Air Conditioning loops, Fuel pumps, Engine modules, and Co-Pilot subsystems.</div>
     </div>
@@ -248,7 +247,8 @@
     <div id="popup-adiru" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
         <h3>ADIRU System Control</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">[Enter P/N Later]</span></div>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">MA264920.08.2.825</span></div>
+        <div class="popup-row"><span class="label">S/N</span><span class="value sn">-</span></div>
         <hr class="popup-divider">
         <div class="popup-contents">Manages the <strong>Air Data Inertial Reference Unit</strong> switch matrix and houses the guarded disconnect toggle for the Fly-By-Wire system <strong>Primary Flight Computers</strong>.</div>
     </div>
@@ -256,7 +256,8 @@
     <div id="popup-electrical" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
         <h3>Electrical Power Control Panel</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">[Enter P/N Later]</span></div>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">MA264912.13.2.825</span></div>
+        <div class="popup-row"><span class="label">S/N</span><span class="value sn">-</span></div>
         <hr class="popup-divider">
         <div class="popup-contents">Primary electrical node. Controls <strong>Battery, APU Gen, Engine Generators, Bus Ties</strong>, and External Power connections.</div>
     </div>
@@ -264,7 +265,8 @@
     <div id="popup-emer-lights" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
         <h3>Emergency Lights &amp; Passenger Oxygen</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">[Enter P/N Later]</span></div>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">MA264921.11.2.825</span></div>
+        <div class="popup-row"><span class="label">S/N</span><span class="value sn">-</span></div>
         <hr class="popup-divider">
         <div class="popup-contents">Controls emergency path lighting deployment toggle, guarded passenger cabin <strong>Oxygen Mask Deployment</strong>, and contains anti-fogging/anti-icing element controllers for the flight deck windshields.</div>
     </div>
@@ -272,7 +274,8 @@
     <div id="popup-hyd-ram-air" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
         <h3>Hydraulic &amp; Ram Air Control Panel</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">[Enter P/N Later]</span></div>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">MA264911.12.2.825</span></div>
+        <div class="popup-row"><span class="label">S/N</span><span class="value sn">-</span></div>
         <hr class="popup-divider">
         <div class="popup-contents">Controls Left/Right Engine driven pumps, Central electric system switches, and deployment mechanisms for the <strong>Ram Air Turbine (RAT)</strong>.</div>
     </div>
@@ -280,7 +283,8 @@
     <div id="popup-engine-mcp" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
         <h3>Engine Start &amp; Cargo Fire Panel</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">[Enter P/N Later]</span></div>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">MA264922.15.2.825</span></div>
+        <div class="popup-row"><span class="label">S/N</span><span class="value sn">-</span></div>
         <hr class="popup-divider">
         <div class="popup-contents">Houses left/right pneumatic starter knobs, autostart configurations, and <strong>APU / Cargo Fire Discharge</strong> systems.</div>
     </div>
@@ -288,7 +292,8 @@
     <div id="popup-fuel-jettison" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
         <h3>Fuel Pumps &amp; Fuel Jettison Panel</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">[Enter P/N Later]</span></div>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">MA264913.07.2.825</span></div>
+        <div class="popup-row"><span class="label">S/N</span><span class="value sn">-</span></div>
         <hr class="popup-divider">
         <div class="popup-contents">Manages wing tank/center tank crossfeed selectors alongside the active fuel dump/jettison computer configurations.</div>
     </div>
@@ -296,7 +301,8 @@
     <div id="popup-air-cond" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
         <h3>Environmental &amp; Air Conditioning Pack Panel</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">[Enter P/N Later]</span></div>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">MA264914.05.2.825</span></div>
+        <div class="popup-row"><span class="label">S/N</span><span class="value sn">-</span></div>
         <hr class="popup-divider">
         <div class="popup-contents">Manages cabin zone target temperatures, recirculation fan assemblies, and system cooling pack automation switches.</div>
     </div>
@@ -304,7 +310,8 @@
     <div id="popup-bleed-press" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
         <h3>Bleed Air &amp; Pressurization Control</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">[Enter P/N Later]</span></div>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">MA264924.08.2.825</span></div>
+        <div class="popup-row"><span class="label">S/N</span><span class="value sn">-</span></div>
         <hr class="popup-divider">
         <div class="popup-contents">Controls Engine isolation bleed valves, APU air source supply, and dual channel manual/auto landing altitude air pressurization profiles.</div>
     </div>
@@ -312,6 +319,8 @@
     <div id="popup-wipers-lights" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
         <h3>Captain Controls Node</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">MA264915.09.2.825</span></div>
+        <div class="popup-row"><span class="label">S/N</span><span class="value sn">-</span></div>
         <hr class="popup-divider">
         <div class="popup-contents">Houses Left Wiper configurations and instrument console/camera brightness dimmers.</div>
     </div>
@@ -319,6 +328,8 @@
     <div id="popup-pass-signs" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
         <h3>Passenger Signs &amp; Internal Lighting</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">MA264917.08.2.825</span></div>
+        <div class="popup-row"><span class="label">S/N</span><span class="value sn">-</span></div>
         <hr class="popup-divider">
         <div class="popup-contents">Manages Seatbelts/No Smoking illumination commands and cockpit interior dome/storm lights.</div>
     </div>
@@ -326,6 +337,8 @@
     <div id="popup-anti-ice" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
         <h3>Anti-Ice &amp; Exterior Lighting Selector</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">MA264918.06.2.825</span></div>
+        <div class="popup-row"><span class="label">S/N</span><span class="value sn">-</span></div>
         <hr class="popup-divider">
         <div class="popup-contents">Controls Wing/Engine induction anti-ice and external lighting toggles (Beacon, Nav, Logo, Strobe, Landing/Taxi arrays).</div>
     </div>
@@ -333,6 +346,8 @@
     <div id="popup-lighting-r" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
         <h3>First Officer Control Node</h3>
+        <div class="popup-row"><span class="label">P/N</span><span class="value">MA264916.08.2.825</span></div>
+        <div class="popup-row"><span class="label">S/N</span><span class="value sn">-</span></div>
         <hr class="popup-divider">
         <div class="popup-contents">Houses Right Windshield Wiper control assembly parameters.</div>
     </div>
@@ -345,16 +360,20 @@
                 <tr><th>Description</th><th>Part Number</th><th>Serial Number</th></tr>
             </thead>
             <tbody>
-                <tr><td>Left Overhead Circuit Breaker Panel (P11)</td><td class="pn">[-]</td><td class="sn">-</td></tr>
-                <tr><td>Right Overhead Circuit Breaker Panel (P11)</td><td class="pn">[-]</td><td class="sn">-</td></tr>
-                <tr><td>ADIRU Panel</td><td class="pn">[-]</td><td class="sn">-</td></tr>
-                <tr><td>Electrical Panel</td><td class="pn">[-]</td><td class="sn">-</td></tr>
-                <tr><td>Emergency Lighting &amp; Oxygen Panel</td><td class="pn">[-]</td><td class="sn">-</td></tr>
-                <tr><td>Hydraulic Panel</td><td class="pn">[-]</td><td class="sn">-</td></tr>
-                <tr><td>Engine Start &amp; Cargo Fire Panel</td><td class="pn">[-]</td><td class="sn">-</td></tr>
-                <tr><td>Fuel Pumps &amp; Fuel Jettison Panel</td><td class="pn">[-]</td><td class="sn">-</td></tr>
-                <tr><td>Air Conditioning Pack Panel</td><td class="pn">[-]</td><td class="sn">-</td></tr>
-                <tr><td>Bleed Air &amp; Pressurization Control Panel</td><td class="pn">-</td><td class="sn">-</td></tr>
+                <tr><td>Left Overhead Circuit Breaker Panel (P11)</td><td class="pn">MA263138.22.2.825</td><td class="sn">-</td></tr>
+                <tr><td>Right Overhead Circuit Breaker Panel (P11)</td><td class="pn">MA263139.22.3.825</td><td class="sn">-</td></tr>
+                <tr><td>ADIRU Panel</td><td class="pn">MA264920.08.2.825</td><td class="sn">-</td></tr>
+                <tr><td>Electrical Panel</td><td class="pn">MA264912.13.2.825</td><td class="sn">-</td></tr>
+                <tr><td>Emergency Lighting &amp; Oxygen Panel</td><td class="pn">MA264921.11.2.825</td><td class="sn">-</td></tr>
+                <tr><td>Hydraulic Panel</td><td class="pn">MA264911.12.2.825</td><td class="sn">-</td></tr>
+                <tr><td>Engine Start &amp; Cargo Fire Panel</td><td class="pn">MA264922.15.2.825</td><td class="sn">-</td></tr>
+                <tr><td>Fuel Pumps &amp; Fuel Jettison Panel</td><td class="pn">MA264913.07.2.825</td><td class="sn">-</td></tr>
+                <tr><td>Air Conditioning Pack Panel</td><td class="pn">MA264914.05.2.825</td><td class="sn">-</td></tr>
+                <tr><td>Bleed Air &amp; Pressurization Control Panel</td><td class="pn">MA264924.08.2.825</td><td class="sn">-</td></tr>
+                <tr><td>Wiper Control Captain</td><td class="pn">MA264915.09.2.825</td><td class="sn">-</td></tr>
+                <tr><td>Wiper Control F/O</td><td class="pn">MA264916.08.2.825</td><td class="sn">-</td></tr>
+                <tr><td>Passenger Signs</td><td class="pn">MA264917.08.2.825</td><td class="sn">-</td></tr>
+                <tr><td>Anti-Ice</td><td class="pn">MA264918.06.2.825</td><td class="sn">-</td></tr>
             </tbody>
         </table>
     </div>
