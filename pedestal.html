@@ -62,36 +62,28 @@
         }
 
         /* Interactive Boundary Mapping Coordinates */
-        #zone-capt-cdu-upper     { top: 7.0%; left: 1.5%; width: 14%; height: 6.5%; }
-        #zone-fo-cdu-upper       { top: 7.0%; left: 83.5%; width: 14%; height: 6.5%; }
+        #zone-capt-ccd           { top: 7.0%; left: 1.5%; width: 14%; height: 6.5%; }
+        #zone-fo-ccd             { top: 7.0%; left: 83.5%; width: 14%; height: 6.5%; }
         #zone-capt-stab-ind      { top: 25.0%; left: 16.5%; width: 4.5%; height: 9.5%; }
         #zone-fo-stab-ind        { top: 25.0%; left: 76.5%; width: 4.5%; height: 9.5%; }
         #zone-speedbrake-lever   { top: 7.0%; left: 21.0%; width: 13%; height: 16.0%; }
-        #zone-throttles-lever    { top: 1.0%; left: 36.5%; width: 26.5%; height: 23.0%; }
-        #zone-flap-lever         { top: 7.0%; left: 65.5%; width: 9%; height: 16.5%; }
         #zone-parking-brake      { top: 24.5%; left: 9.5%; width: 5.5%; height: 11.5%; }
-        #zone-stab-cutout        { top: 28.0%; left: 27.0%; width: 10.5%; height: 5.5%; }
-        #zone-fuel-control       { top: 27.5%; left: 41.5%; width: 18.0%; height: 6.0%; }
-        #zone-alt-flaps-group    { top: 23.0%; left: 83.0%; width: 10.5%; height: 12.0%; }
+        #zone-stand-structure    { top: 1.0%; left: 36.5%; width: 26.5%; height: 23.0%; }
 
         #zone-capt-rtp           { top: 39.5%; left: 9.5%; width: 26.5%; height: 6.5%; }
         #zone-capt-acp           { top: 46.5%; left: 9.5%; width: 26.5%; height: 11.5%; }
         #zone-weather-radar      { top: 58.5%; left: 9.5%; width: 26.5%; height: 7.0%; }
-        #zone-mid-left-rtp       { top: 66.0%; left: 9.5%; width: 26.5%; height: 6.5%; }
-        #zone-mid-left-acp       { top: 73.0%; left: 9.5%; width: 26.5%; height: 11.5%; }
-        #zone-flight-deck-door   { top: 87.5%; left: 9.5%; width: 26.5%; height: 6.5%; }
 
         #zone-engine-fire        { top: 39.5%; left: 36.5%; width: 26.5%; height: 8.5%; }
         #zone-center-cdu         { top: 48.5%; left: 36.5%; width: 26.5%; height: 25.0%; }
         #zone-rudder-trim-ind    { top: 74.0%; left: 36.5%; width: 26.5%; height: 3.5%; }
-        #zone-aileron-rudder-trm { top: 78.0%; left: 36.5%; width: 26.5%; height: 9.0%; }
+        #zone-rudder-trim-ctrl   { top: 78.0%; left: 36.5%; width: 26.5%; height: 9.0%; }
         #zone-printer-panel      { top: 87.5%; left: 36.5%; width: 26.5%; height: 3.5%; }
 
         #zone-fo-rtp             { top: 39.5%; left: 63.5%; width: 26.5%; height: 6.5%; }
         #zone-fo-acp             { top: 46.5%; left: 63.5%; width: 26.5%; height: 11.5%; }
         #zone-transponder        { top: 58.5%; left: 63.5%; width: 26.5%; height: 6.5%; }
         #zone-evac-panel         { top: 75.5%; left: 63.5%; width: 26.5%; height: 6.5%; }
-        #zone-floor-lights       { top: 82.5%; left: 63.5%; width: 13.0%; height: 4.5%; }
         #zone-observer-audio     { top: 82.5%; left: 77.0%; width: 13.0%; height: 4.5%; }
         #zone-aisle-stand        { top: 87.5%; left: 63.5%; width: 26.5%; height: 6.5%; }
 
@@ -117,7 +109,7 @@
         }
         .popup-box h3 { margin: 0 0 12px 0; color: #ffffff; font-size: 1.1em; padding-right: 30px; }
         .popup-row { display: flex; gap: 8px; margin-bottom: 6px; font-size: 0.85em; }
-        .popup-row .label { color: #bcaaa4; min-width: 90px; }
+        .popup-row .label { color: #bcaaa4; min-width: 100px; }
         .popup-row .value { font-family: monospace; color: #f59e0b; }
         .popup-row .value-sn { font-family: monospace; color: #a3e635; }
         .popup-row .value-wire { font-family: monospace; color: #38bdf8; font-weight: bold; }
@@ -145,9 +137,10 @@
         td { padding: 10px 15px; border-bottom: 1px solid #4e342e; }
         tbody tr:nth-child(even) { background: #221816; }
         tbody tr:hover { background: #3e2723; }
-        .pn { font-family: monospace; color: #f59e0b; }
+        .pn { font-family: monospace; color: #f59e0b; font-weight: bold; }
         .sn { font-family: monospace; color: #a3e635; }
         .wire { font-family: monospace; color: #38bdf8; font-weight: bold; }
+        .src-tag { color: #bcaaa4; font-size: 0.85em; font-style: italic; display: block; margin-top: 2px; }
     </style>
 </head>
 <body>
@@ -157,13 +150,13 @@
     <p class="subtitle">Click any panel zone to view inventory numbers and explicit harness wiring codes.</p>
 
     <div class="image-container">
-        <img src="pedestal1.jpeg" alt="Boeing Control Stand & Pedestal Breakdown">
+        <img src="pedestal1.jpeg" alt="Control Stand & Pedestal Breakdown">
 
-        <!-- Upper Control Stand Elements -->
-        <div class="panel-zone" id="zone-capt-cdu-upper" onclick="showPopup('capt-cdu-upper')">
+        <!-- Upper Control Stand Map -->
+        <div class="panel-zone" id="zone-capt-ccd" onclick="showPopup('capt-ccd')">
             <div class="zone-label">CAPT CURSOR CONTROL PANEL</div>
         </div>
-        <div class="panel-zone" id="zone-fo-cdu-upper" onclick="showPopup('fo-cdu-upper')">
+        <div class="panel-zone" id="zone-fo-ccd" onclick="showPopup('fo-ccd')">
             <div class="zone-label">F/O CURSOR CONTROL PANEL</div>
         </div>
         <div class="panel-zone" id="zone-capt-stab-ind" onclick="showPopup('capt-stab-ind')">
@@ -173,421 +166,337 @@
             <div class="zone-label">F/O STAB IND</div>
         </div>
         <div class="panel-zone" id="zone-speedbrake-lever" onclick="showPopup('speedbrake-lever')">
-            <div class="zone-label">SPEEDBRAKE LEVER</div>
-        </div>
-        <div class="panel-zone" id="zone-throttles-lever" onclick="showPopup('throttles-lever')">
-            <div class="zone-label">THRUST LEVERS</div>
-        </div>
-        <div class="panel-zone" id="zone-flap-lever" onclick="showPopup('flap-lever')">
-            <div class="zone-label">FLAP LEVER</div>
+            <div class="zone-label">SPEEDBRAKE ACTUATOR</div>
         </div>
         <div class="panel-zone" id="zone-parking-brake" onclick="showPopup('parking-brake')">
-            <div class="zone-label">PARKING BRAKE</div>
+            <div class="zone-label">PARKING BRAKE LOCK</div>
         </div>
-        <div class="panel-zone" id="zone-stab-cutout" onclick="showPopup('stab-cutout')">
-            <div class="zone-label">STABILIZER CUTOUT</div>
-        </div>
-        <div class="panel-zone" id="zone-fuel-control" onclick="showPopup('fuel-control')">
-            <div class="zone-label">FUEL CONTROL</div>
-        </div>
-        <div class="panel-zone" id="zone-alt-flaps-group" onclick="showPopup('alt-flaps-group')">
-            <div class="zone-label">ALTN FLAPS PANEL</div>
+        <div class="panel-zone" id="zone-stand-structure" onclick="showPopup('stand-structure')">
+            <div class="zone-label">CONTROL STAND MECHANISM</div>
         </div>
 
-        <!-- Left Stack elements -->
+        <!-- Lower Aisle Stand Left Column -->
         <div class="panel-zone" id="zone-capt-rtp" onclick="showPopup('capt-rtp')">
-            <div class="zone-label">RADIO TUNING PANEL - CAPT</div>
+            <div class="zone-label">RADIO TUNING (LEFT)</div>
         </div>
         <div class="panel-zone" id="zone-capt-acp" onclick="showPopup('capt-acp')">
-            <div class="zone-label">AUDIO CONTROL PANEL - CAPT</div>
+            <div class="zone-label">AUDIO CONTROL (CAPT)</div>
         </div>
         <div class="panel-zone" id="zone-weather-radar" onclick="showPopup('weather-radar')">
             <div class="zone-label">WEATHER RADAR</div>
         </div>
-        <div class="panel-zone" id="zone-mid-left-rtp" onclick="showPopup('mid-left-rtp')">
-            <div class="zone-label">RADIO TUNING PANEL - LOWER LEFT</div>
-        </div>
-        <div class="panel-zone" id="zone-mid-left-acp" onclick="showPopup('mid-left-acp')">
-            <div class="zone-label">AUDIO CONTROL PANEL - LOWER LEFT</div>
-        </div>
-        <div class="panel-zone" id="zone-flight-deck-door" onclick="showPopup('flight-deck-door')">
-            <div class="zone-label">FLIGHT DECK DOOR</div>
-        </div>
 
-        <!-- Center Stack elements -->
+        <!-- Center Column Avionics -->
         <div class="panel-zone" id="zone-engine-fire" onclick="showPopup('engine-fire')">
-            <div class="zone-label">ENGINE FIRE PANEL</div>
+            <div class="zone-label">ENGINE FIRE HANDLES</div>
         </div>
         <div class="panel-zone" id="zone-center-cdu" onclick="showPopup('center-cdu')">
-            <div class="zone-label">CENTER CDU</div>
+            <div class="zone-label">CDU — AFT FMC STATION</div>
         </div>
         <div class="panel-zone" id="zone-rudder-trim-ind" onclick="showPopup('rudder-trim-ind')">
-            <div class="zone-label">RUDDER TRIM IND</div>
+            <div class="zone-label">RUDDER TRIM INDICATOR</div>
         </div>
-        <div class="panel-zone" id="zone-aileron-rudder-trm" onclick="showPopup('aileron-rudder-trm')">
-            <div class="zone-label">AILERON/RUDDER TRIM</div>
+        <div class="panel-zone" id="zone-rudder-trim-ctrl" onclick="showPopup('rudder-trim-ctrl')">
+            <div class="zone-label">RUDDER TRIM CONTROL</div>
         </div>
         <div class="panel-zone" id="zone-printer-panel" onclick="showPopup('printer-panel')">
-            <div class="zone-label">PRINTER CONTROLS</div>
+            <div class="zone-label">INTERACTIVE PRINTER</div>
         </div>
 
-        <!-- Right Stack elements -->
+        <!-- Right Column Avionics -->
         <div class="panel-zone" id="zone-fo-rtp" onclick="showPopup('fo-rtp')">
-            <div class="zone-label">RADIO TUNING PANEL - F/O</div>
+            <div class="zone-label">RADIO TUNING (RIGHT)</div>
         </div>
         <div class="panel-zone" id="zone-fo-acp" onclick="showPopup('fo-acp')">
-            <div class="zone-label">AUDIO CONTROL PANEL - F/O</div>
+            <div class="zone-label">AUDIO CONTROL (F/O)</div>
         </div>
         <div class="panel-zone" id="zone-transponder" onclick="showPopup('transponder')">
-            <div class="zone-label">ATC/TCAS PANEL</div>
+            <div class="zone-label">ATC / TCAS PANEL</div>
         </div>
         <div class="panel-zone" id="zone-evac-panel" onclick="showPopup('evac-panel')">
-            <div class="zone-label">EMERGENCY EVACUATION PANEL</div>
-        </div>
-        <div class="panel-zone" id="zone-floor-lights" onclick="showPopup('floor-lights')">
-            <div class="zone-label">FLOOR LIGHTS</div>
+            <div class="zone-label">EMERGENCY EVACUATION</div>
         </div>
         <div class="panel-zone" id="zone-observer-audio" onclick="showPopup('observer-audio')">
-            <div class="zone-label">OBS AUDIO SELECTOR</div>
+            <div class="zone-label">AUDIO (OBSERVER)</div>
         </div>
         <div class="panel-zone" id="zone-aisle-stand" onclick="showPopup('aisle-stand')">
-            <div class="zone-label">AISLE STAND LIGHTS</div>
+            <div class="zone-label">BACKLIGHT CONTROLLER</div>
         </div>
     </div>
 
     <div id="dark-screen" class="overlay-screen" onclick="closeAllPopups()"></div>
 
-    <!-- POPUP BLOCKS WITH UPDATED HARNESS/CABLE DEFINITIONS -->
-    <div id="popup-capt-cdu-upper" class="popup-box">
+    <!-- POPUP DETAILS MATRICES -->
+    <div id="popup-capt-ccd" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>Capt's Cursor Control Panel</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">4073970-901</span></div>
-        <div class="popup-row"><span class="label">S/N</span><span class="value-sn">32237431</span></div>
-        <div class="popup-row"><span class="label">Wiring Ref</span><span class="value-wire">W7860, W7861, W8501</span></div>
+        <h3>Cursor Control Device — Captain</h3>
+        <div class="popup-row"><span class="label">Inventory P/N</span><span class="value">4073970-901</span></div>
+        <div class="popup-row"><span class="label">Blueprint P/N</span><span class="value">2000-825</span></div>
+        <div class="popup-row"><span class="label">Hardware S/N</span><span class="value-sn">32237431</span></div>
+        <div class="popup-row"><span class="label">Wiring Loop</span><span class="value-wire">W7850, W7861, W8501</span></div>
         <hr class="popup-divider">
-        <div class="popup-contents">Left outboard primary command tracking unit for navigating localized screen arrays.</div>
+        <div class="popup-contents">Primary command selector array track mounted at the left station of the control stand structure.</div>
     </div>
 
-    <div id="popup-fo-cdu-upper" class="popup-box">
+    <div id="popup-fo-ccd" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>FO's Cursor Control Panel</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">4073970-901</span></div>
-        <div class="popup-row"><span class="label">S/N</span><span class="value-sn">96100419</span></div>
-        <div class="popup-row"><span class="label">Wiring Ref</span><span class="value-wire">W7859, W7860, W8502</span></div>
+        <h3>Cursor Control Device — First Officer</h3>
+        <div class="popup-row"><span class="label">Inventory P/N</span><span class="value">4073970-951</span></div>
+        <div class="popup-row"><span class="label">Blueprint P/N</span><span class="value">2001-825</span></div>
+        <div class="popup-row"><span class="label">Hardware S/N</span><span class="value-sn">96100419</span></div>
+        <div class="popup-row"><span class="label">Wiring Loop</span><span class="value-wire">W7859, W7860, W8502</span></div>
         <hr class="popup-divider">
-        <div class="popup-contents">Right outboard primary command tracking unit for interactive display targeting loops.</div>
+        <div class="popup-contents">Co-pilot interface terminal tracker mounted at the right station of the pedestal assembly.</div>
     </div>
 
     <div id="popup-capt-stab-ind" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>Stabilizer Position Indicator L (Capt)</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">372-079-003</span></div>
-        <div class="popup-row"><span class="label">S/N</span><span class="value-sn">1251</span></div>
-        <div class="popup-row"><span class="label">Wiring Ref</span><span class="value-wire">W7861, W8571</span></div>
+        <h3>Stabilizer Trim Indicator (Left Track)</h3>
+        <div class="popup-row"><span class="label">Inventory P/N</span><span class="value">372-079-003</span></div>
+        <div class="popup-row"><span class="label">Blueprint P/N</span><span class="value">MP372-079-003</span></div>
+        <div class="popup-row"><span class="label">Hardware S/N</span><span class="value-sn">1251</span></div>
+        <div class="popup-row"><span class="label">Wiring Loop</span><span class="value-wire">W7861, W8571</span></div>
         <hr class="popup-divider">
-        <div class="popup-contents">Displays left-side mechanical trim indicator green-band settings.</div>
+        <div class="popup-contents">Mechanical movement indicator linkage assembly on the left engine track of the stand housing.</div>
     </div>
 
     <div id="popup-fo-stab-ind" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>Stabilizer Position Indicator R (FO)</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">372-079-003</span></div>
-        <div class="popup-row"><span class="label">S/N</span><span class="value-sn">388</span></div>
-        <div class="popup-row"><span class="label">Wiring Ref</span><span class="value-wire">W7861, W8572</span></div>
+        <h3>Stabilizer Trim Indicator (Right Track)</h3>
+        <div class="popup-row"><span class="label">Inventory P/N</span><span class="value">372-079-003</span></div>
+        <div class="popup-row"><span class="label">Blueprint P/N</span><span class="value">MP372-079-003</span></div>
+        <div class="popup-row"><span class="label">Hardware S/N</span><span class="value-sn">388</span></div>
+        <div class="popup-row"><span class="label">Wiring Loop</span><span class="value-wire">W7861, W8572</span></div>
         <hr class="popup-divider">
-        <div class="popup-contents">Displays right-side localized trim settings matching trailing edge alignments.</div>
+        <div class="popup-contents">Mechanical position slider assembly monitored via the right console engine track tracking layout.</div>
     </div>
 
     <div id="popup-speedbrake-lever" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>Autospeedbrake Actuator</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">924D100-1</span></div>
-        <div class="popup-row"><span class="label">S/N</span><span class="value-sn">1221</span></div>
-        <div class="popup-row"><span class="label">Wiring Ref</span><span class="value-wire">W8207</span></div>
+        <h3>Actuator, Auto Speedbrake Assembly</h3>
+        <div class="popup-row"><span class="label">Inventory P/N</span><span class="value">924D100-1</span></div>
+        <div class="popup-row"><span class="label">Blueprint P/N</span><span class="value">BA654W0007-535</span></div>
+        <div class="popup-row"><span class="label">Hardware S/N</span><span class="value-sn">1221</span></div>
+        <div class="popup-row"><span class="label">Wiring Loop</span><span class="value-wire">W8057</span></div>
         <hr class="popup-divider">
-        <div class="popup-contents">Manages speedbrake deployment settings across armed, down, and extended positions.</div>
-    </div>
-
-    <div id="popup-throttles-lever" class="popup-box">
-        <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>Control Stand Assembly (Throttles)</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">BA654W0007-535</span></div>
-        <div class="popup-row"><span class="label">S/N</span><span class="value-sn">—</span></div>
-        <div class="popup-row"><span class="label">Wiring Ref</span><span class="value-wire">W7859-W7861, W7878-W7881</span></div>
-        <hr class="popup-divider">
-        <div class="popup-contents">Dual engine throttle controls equipped with reverse thrust engagement mechanisms.</div>
-    </div>
-
-    <div id="popup-flap-lever" class="popup-box">
-        <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>Flap Selection Lever</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">—</span></div>
-        <div class="popup-row"><span class="label">S/N</span><span class="value-sn">—</span></div>
-        <div class="popup-row"><span class="label">Wiring Ref</span><span class="value-wire">—</span></div>
-        <hr class="popup-divider">
-        <div class="popup-contents">Controls trailing edge flap extensions through standard detent gates.</div>
+        <div class="popup-contents">Automated mechanical spoiler actuator component built deep into the A207A13 console profile.</div>
     </div>
 
     <div id="popup-parking-brake" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>Parking Brake Assembly</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">BA654W0007-535</span></div>
-        <div class="popup-row"><span class="label">S/N</span><span class="value-sn">—</span></div>
-        <div class="popup-row"><span class="label">Wiring Ref</span><span class="value-wire">W7863</span></div>
+        <h3>Parking Brake Lock Interlock Module</h3>
+        <div class="popup-row"><span class="label">Inventory P/N</span><span class="value">Not Installed</span></div>
+        <div class="popup-row"><span class="label">Blueprint P/N</span><span class="value">BA654W0007-535</span></div>
+        <div class="popup-row"><span class="label">Hardware S/N</span><span class="value-sn">N/A</span></div>
+        <div class="popup-row"><span class="label">Wiring Loop</span><span class="value-wire">W7853</span></div>
         <hr class="popup-divider">
-        <div class="popup-contents">Locks main landing gear wheel braking cylinders mechanically into secure state.</div>
+        <div class="popup-contents">Solenoid interlock retention logic block positioned near zone A209 of the lower mechanism.</div>
     </div>
 
-    <div id="popup-stab-cutout" class="popup-box">
+    <div id="popup-stand-structure" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>Stabilizer Cutout Switches</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">—</span></div>
-        <div class="popup-row"><span class="label">S/N</span><span class="value-sn">—</span></div>
-        <div class="popup-row"><span class="label">Wiring Ref</span><span class="value-wire">—</span></div>
+        <h3>Control Stand Core Housing Structure</h3>
+        <div class="popup-row"><span class="label">Inventory P/N</span><span class="value">Not Installed</span></div>
+        <div class="popup-row"><span class="label">Blueprint P/N</span><span class="value">BA654W0007-535</span></div>
+        <div class="popup-row"><span class="label">Hardware S/N</span><span class="value-sn">N/A</span></div>
+        <div class="popup-row"><span class="label">Wiring Loop</span><span class="value-wire">W7854-W7861, W7878-W7881</span></div>
         <hr class="popup-divider">
-        <div class="popup-contents">Disconnects power directly from electronic signal logic loops to prevent uncommanded runaway inputs.</div>
-    </div>
-
-    <div id="popup-fuel-control" class="popup-box">
-        <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>Fuel Control Switches</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">—</span></div>
-        <div class="popup-row"><span class="label">S/N</span><span class="value-sn">—</span></div>
-        <div class="popup-row"><span class="label">Wiring Ref</span><span class="value-wire">—</span></div>
-        <hr class="popup-divider">
-        <div class="popup-contents">Switches fuel feed pathways between Run and Cutoff positions for dual engine blocks.</div>
-    </div>
-
-    <div id="popup-alt-flaps-group" class="popup-box">
-        <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>Alternate Flaps Arm Switch & Selector</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">—</span></div>
-        <div class="popup-row"><span class="label">S/N</span><span class="value-sn">—</span></div>
-        <div class="popup-row"><span class="label">Wiring Ref</span><span class="value-wire">—</span></div>
-        <hr class="popup-divider">
-        <div class="popup-contents">Combined backup node allowing manual electronic command override of wing high-lift surfaces.</div>
+        <div class="popup-contents">Structural framing shell enclosing core dual thrust mechanics and friction adjustments.</div>
     </div>
 
     <div id="popup-capt-rtp" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>Capt's Radio Tuning Panel (3)</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">285W0114-5</span></div>
-        <div class="popup-row"><span class="label">S/N</span><span class="value-sn">D01950</span></div>
-        <div class="popup-row"><span class="label">Wiring Ref</span><span class="value-wire">W7909, W8514, W8551</span></div>
+        <h3>Radio Tuning Comm Control Panel (Left)</h3>
+        <div class="popup-row"><span class="label">Inventory P/N</span><span class="value">285W0114-5</span></div>
+        <div class="popup-row"><span class="label">Blueprint P/N</span><span class="value">BA285W0114-3</span></div>
+        <div class="popup-row"><span class="label">Hardware S/N</span><span class="value-sn">D01950</span></div>
+        <div class="popup-row"><span class="label">Wiring Loop</span><span class="value-wire">W7909, W8514, W8551</span></div>
         <hr class="popup-divider">
-        <div class="popup-contents">Upper-left active transceiver tuning console serving the Captain.</div>
-    </div>
-
-    <div id="popup-capt-acp" class="popup-box">
-        <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>Capt's Audio Control Panel (3)</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">5701-1-1</span></div>
-        <div class="popup-row"><span class="label">S/N</span><span class="value-sn">6440</span></div>
-        <div class="popup-row"><span class="label">Wiring Ref</span><span class="value-wire">W7912, W8512</span></div>
-        <hr class="popup-divider">
-        <div class="popup-contents">Routes microphone signals, audio volume settings, and intercom loops for Left seat.</div>
-    </div>
-
-    <div id="popup-weather-radar" class="popup-box">
-        <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>Weather Radar Control Panel</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">2041220-0430</span></div>
-        <div class="popup-row"><span class="label">S/N</span><span class="value-sn">CON4B-05244</span></div>
-        <div class="popup-row"><span class="label">Wiring Ref</span><span class="value-wire">W7915, W7917, W8541, W8542</span></div>
-        <hr class="popup-divider">
-        <div class="popup-contents">Controls gain settings, ground clutter filters, and tilt sweeping ranges.</div>
-    </div>
-
-    <div id="popup-mid-left-rtp" class="popup-box">
-        <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>Lower Left Radio Tuning Panel</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">285W0114-5</span></div>
-        <div class="popup-row"><span class="label">S/N</span><span class="value-sn">F04182</span></div>
-        <div class="popup-row"><span class="label">Wiring Ref</span><span class="value-wire">W7911, W8531, W8551</span></div>
-        <hr class="popup-divider">
-        <div class="popup-contents">Secondary communication transceiver tuning node for voice data pathways.</div>
-    </div>
-
-    <div id="popup-mid-left-acp" class="popup-box">
-        <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>Lower Left Audio Control Panel</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">5701-1-1</span></div>
-        <div class="popup-row"><span class="label">S/N</span><span class="value-sn">2966</span></div>
-        <div class="popup-row"><span class="label">Wiring Ref</span><span class="value-wire">W7913, W8522</span></div>
-        <hr class="popup-divider">
-        <div class="popup-contents">Secondary routing station managing auxiliary audio cross-points.</div>
-    </div>
-
-    <div id="popup-flight-deck-door" class="popup-box">
-        <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>Flight Deck Door Panel</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">—</span></div>
-        <div class="popup-row"><span class="label">S/N</span><span class="value-sn">—</span></div>
-        <div class="popup-row"><span class="label">Wiring Ref</span><span class="value-wire">W7968, W8521</span></div>
-        <hr class="popup-divider">
-        <div class="popup-contents">Manages electronic locking commands and security accessibility profiles.</div>
-    </div>
-
-    <div id="popup-engine-fire" class="popup-box">
-        <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>Engine Fire Panel Assembly</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">D731-04-001 / D731-05-001</span></div>
-        <div class="popup-row"><span class="label">S/N</span><span class="value-sn">3037/07-2007 / 2875</span></div>
-        <div class="popup-row"><span class="label">Wiring Ref</span><span class="value-wire">W7973 / W7971 / W7972</span></div>
-        <hr class="popup-divider">
-        <div class="popup-contents">Engine fire pull-handles containing chemical fire extinguishing squib deployment controls.</div>
-    </div>
-
-    <div id="popup-center-cdu" class="popup-box">
-        <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>Center Control Display Unit (CDU)</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">4088240-901</span></div>
-        <div class="popup-row"><span class="label">S/N</span><span class="value-sn">36015423</span></div>
-        <div class="popup-row"><span class="label">Wiring Ref</span><span class="value-wire">W7963, W7964, W8043, W8544</span></div>
-        <hr class="popup-divider">
-        <div class="popup-contents">Flight management alphanumeric entry interface linking directly to central engine parameters and status displays.</div>
-    </div>
-
-    <div id="popup-rudder-trim-ind" class="popup-box">
-        <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>Rudder Trim Position Indicator</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">372-078-002</span></div>
-        <div class="popup-row"><span class="label">S/N</span><span class="value-sn">1047</span></div>
-        <div class="popup-row"><span class="label">Wiring Ref</span><span class="value-wire">W7965, W8573</span></div>
-        <hr class="popup-divider">
-        <div class="popup-contents">Digital needle display indicating displacement orientation of target rudder assemblies.</div>
-    </div>
-
-    <div id="popup-aileron-rudder-trm" class="popup-box">
-        <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>Aileron/Rudder Trim Control Console</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">654W0007-498</span></div>
-        <div class="popup-row"><span class="label">S/N</span><span class="value-sn">0112</span></div>
-        <div class="popup-row"><span class="label">Wiring Ref</span><span class="value-wire">W7966, W8513</span></div>
-        <hr class="popup-divider">
-        <div class="popup-contents">Houses manual rotational control knobs driving active axis alignment adjustments.</div>
-    </div>
-
-    <div id="popup-printer-panel" class="popup-box">
-        <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>Flight Deck Printer Control Box</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">C12349AD03</span></div>
-        <div class="popup-row"><span class="label">S/N</span><span class="value-sn">4094</span></div>
-        <div class="popup-row"><span class="label">Wiring Ref</span><span class="value-wire">W7969, W8525</span></div>
-        <hr class="popup-divider">
-        <div class="popup-contents">Interfaces paper feeding systems printing route logs and ACARS text data.</div>
+        <div class="popup-contents">Primary communications digital selector head integrated at the left upper shelf (A220).</div>
     </div>
 
     <div id="popup-fo-rtp" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>FO's Radio Tuning Panel (3)</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">285W0114-5</span></div>
-        <div class="popup-row"><span class="label">S/N</span><span class="value-sn">D02818</span></div>
-        <div class="popup-row"><span class="label">Wiring Ref</span><span class="value-wire">W7910, W8523, W8562</span></div>
+        <h3>Radio Tuning Comm Control Panel (Right)</h3>
+        <div class="popup-row"><span class="label">Inventory P/N</span><span class="value">285W0114-5</span></div>
+        <div class="popup-row"><span class="label">Blueprint P/N</span><span class="value">BA285W0114-3</span></div>
+        <div class="popup-row"><span class="label">Hardware S/N</span><span class="value-sn">D02818</span></div>
+        <div class="popup-row"><span class="label">Wiring Loop</span><span class="value-wire">W7910, W8523, W8562</span></div>
         <hr class="popup-divider">
-        <div class="popup-contents">Upper-right transceiver navigation stack dedicated to the First Officer.</div>
+        <div class="popup-contents">Co-pilot communications frequency transceiver control node aligned inside zone A222.</div>
+    </div>
+
+    <div id="popup-capt-acp" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>Audio Control Panel — Captain</h3>
+        <div class="popup-row"><span class="label">Inventory P/N</span><span class="value">5701-1-1</span></div>
+        <div class="popup-row"><span class="label">Blueprint P/N</span><span class="value">2142-825</span></div>
+        <div class="popup-row"><span class="label">Hardware S/N</span><span class="value-sn">6440</span></div>
+        <div class="popup-row"><span class="label">Wiring Loop</span><span class="value-wire">W7912, W8512</span></div>
+        <hr class="popup-divider">
+        <div class="popup-contents">Left digital audio matrix managing amplifier selection levels via zone A223.</div>
     </div>
 
     <div id="popup-fo-acp" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>FO's Audio Control Panel (3)</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">5701-1-1</span></div>
-        <div class="popup-row"><span class="label">S/N</span><span class="value-sn">2509</span></div>
-        <div class="popup-row"><span class="label">Wiring Ref</span><span class="value-wire">W7912, W8512</span></div>
+        <h3>Audio Control Panel — First Officer</h3>
+        <div class="popup-row"><span class="label">Inventory P/N</span><span class="value">5701-1-1</span></div>
+        <div class="popup-row"><span class="label">Blueprint P/N</span><span class="value">2142-825</span></div>
+        <div class="popup-row"><span class="label">Hardware S/N</span><span class="value-sn">2509</span></div>
+        <div class="popup-row"><span class="label">Wiring Loop</span><span class="value-wire">W7913, W8522</span></div>
         <hr class="popup-divider">
-        <div class="popup-contents">Routes transmission voice lines and intercom volume metrics for Right seat.</div>
+        <div class="popup-contents">Right side digital voice path management panel array grouped inside zone A225.</div>
+    </div>
+
+    <div id="popup-weather-radar" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>Weather Radar Operation Control Panel</h3>
+        <div class="popup-row"><span class="label">Inventory P/N</span><span class="value">Not Installed</span></div>
+        <div class="popup-row"><span class="label">Blueprint P/N</span><span class="value">PS312578.20.5.825</span></div>
+        <div class="popup-row"><span class="label">Hardware S/N</span><span class="value-sn">N/A</span></div>
+        <div class="popup-row"><span class="label">Wiring Loop</span><span class="value-wire">W7916, W7917, W8541, W8542</span></div>
+        <hr class="popup-divider">
+        <div class="popup-contents">Antenna tilt control deck mapping transponder lines, tracked to position block A226.</div>
     </div>
 
     <div id="popup-transponder" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>ATC/TCAS Transponder Panel</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">G7131-02</span></div>
-        <div class="popup-row"><span class="label">S/N</span><span class="value-sn">52116</span></div>
-        <div class="popup-row"><span class="label">Wiring Ref</span><span class="value-wire">W7918, W7919, W8552</span></div>
+        <h3>ATC / TCAS Operations Control Panel</h3>
+        <div class="popup-row"><span class="label">Inventory P/N</span><span class="value">G7131-02</span></div>
+        <div class="popup-row"><span class="label">Blueprint P/N</span><span class="value">2054-825</span></div>
+        <div class="popup-row"><span class="label">Hardware S/N</span><span class="value-sn">52116</span></div>
+        <div class="popup-row"><span class="label">Wiring Loop</span><span class="value-wire">W7918, W7919, W8552</span></div>
         <hr class="popup-divider">
-        <div class="popup-contents">Controls secondary air traffic control squawk codes and TCAS threat filtering.</div>
+        <div class="popup-contents">Surveillance identification encoder module running directly through zone A227 tracking lines.</div>
+    </div>
+
+    <div id="popup-engine-fire" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>Engine Fire Control Operational Module</h3>
+        <div class="popup-row"><span class="label">Blueprint P/N</span><span class="value">MA264941.10.2.825</span></div>
+        <div class="popup-row"><span class="label">L Valve Handle</span><span class="value">D731-04-001 (S/N: 3037)</span></div>
+        <div class="popup-row"><span class="label">R Valve Handle</span><span class="value">D731-05-001 (S/N: 2875)</span></div>
+        <div class="popup-row"><span class="label">Wiring Loop</span><span class="value-wire">W7971, W7972, W7973</span></div>
+        <hr class="popup-divider">
+        <div class="popup-contents">Center console termination grid for squib deployment hooks. Dual mechanical fire handle mechanisms track to blueprint layout A221.</div>
+    </div>
+
+    <div id="popup-center-cdu" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>Control Display Unit - Aft FMC FMC Station</h3>
+        <div class="popup-row"><span class="label">Inventory P/N</span><span class="value">4088240-901</span></div>
+        <div class="popup-row"><span class="label">Blueprint P/N</span><span class="value">PS317481.38.5.825</span></div>
+        <div class="popup-row"><span class="label">Hardware S/N</span><span class="value-sn">36015423</span></div>
+        <div class="popup-row"><span class="label">Wiring Loop</span><span class="value-wire">W7963, W7964, W2843, W8544</span></div>
+        <hr class="popup-divider">
+        <div class="popup-contents">Central alphanumeric computer keyboard assembly tracked directly within mid console station A224.</div>
+    </div>
+
+    <div id="popup-rudder-trim-ind" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>Rudder Trim Structural Position Indicator</h3>
+        <div class="popup-row"><span class="label">Inventory P/N</span><span class="value">372-078-002</span></div>
+        <div class="popup-row"><span class="label">Blueprint P/N</span><span class="value">PS322658.01.5.607</span></div>
+        <div class="popup-row"><span class="label">Hardware S/N</span><span class="value-sn">1047</span></div>
+        <div class="popup-row"><span class="label">Wiring Loop</span><span class="value-wire">W7965, W8573</span></div>
+        <hr class="popup-divider">
+        <div class="popup-contents">Synchro-driven deflection gauge module displaying angular offsets via console layout block A231.</div>
+    </div>
+
+    <div id="popup-rudder-trim-ctrl" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>Rudder Trim System Control Panel</h3>
+        <div class="popup-row"><span class="label">Inventory P/N</span><span class="value">654W0007-498</span></div>
+        <div class="popup-row"><span class="label">Blueprint P/N</span><span class="value">MA264942.07.2.825</span></div>
+        <div class="popup-row"><span class="label">Hardware S/N</span><span class="value-sn">0112</span></div>
+        <div class="popup-row"><span class="label">Wiring Loop</span><span class="value-wire">W7966, W8513</span></div>
+        <hr class="popup-divider">
+        <div class="popup-contents">Manual trim selector dial structure commanding artificial feel networks via frame block A232.</div>
     </div>
 
     <div id="popup-evac-panel" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>Emergency Evacuation Control Panel</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">C6031-05</span></div>
-        <div class="popup-row"><span class="label">S/N</span><span class="value-sn">2263</span></div>
-        <div class="popup-row"><span class="label">Wiring Ref</span><span class="value-wire">W7928, W8543</span></div>
+        <h3>Emergency Evac Operational Module</h3>
+        <div class="popup-row"><span class="label">Inventory P/N</span><span class="value">G6031-05</span></div>
+        <div class="popup-row"><span class="label">Blueprint P/N</span><span class="value">2168-825</span></div>
+        <div class="popup-row"><span class="label">Hardware S/N</span><span class="value-sn">2263</span></div>
+        <div class="popup-row"><span class="label">Wiring Loop</span><span class="value-wire">W7928, W8543</span></div>
         <hr class="popup-divider">
-        <div class="popup-contents">Commands unified cockpit warning tones alerting structural emergency exit profiles.</div>
-    </div>
-
-    <div id="popup-floor-lights" class="popup-box">
-        <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>Floor Lights Dimmer Control</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">—</span></div>
-        <div class="popup-row"><span class="label">S/N</span><span class="value-sn">—</span></div>
-        <div class="popup-row"><span class="label">Wiring Ref</span><span class="value-wire">W7967, W8516</span></div>
-        <hr class="popup-divider">
-        <div class="popup-contents">Rheostat node managing floor-level lighting brightness configurations.</div>
+        <div class="popup-contents">Command horn signaling matrix linked directly inside structural section A229 tracking loops.</div>
     </div>
 
     <div id="popup-observer-audio" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>Observer Audio Selector</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">5701-1-1</span></div>
-        <div class="popup-row"><span class="label">S/N</span><span class="value-sn">2969 (Now 2034)</span></div>
-        <div class="popup-row"><span class="label">Wiring Ref</span><span class="value-wire">W7914, W8524</span></div>
+        <h3>Audio Control Panel — Observer Line</h3>
+        <div class="popup-row"><span class="label">Inventory P/N</span><span class="value">5701-1-1</span></div>
+        <div class="popup-row"><span class="label">Blueprint P/N</span><span class="value">2142-825</span></div>
+        <div class="popup-row"><span class="label">Hardware S/N</span><span class="value-sn">2969, Now 2034</span></div>
+        <div class="popup-row"><span class="label">Wiring Loop</span><span class="value-wire">W7914, W8524</span></div>
         <hr class="popup-divider">
-        <div class="popup-contents">Routes internal communications networks toward auxiliary observer folding jumpseat stations.</div>
+        <div class="popup-contents">Third operational jump-seat audio connection interface, located inside lower zone array A230.</div>
+    </div>
+
+    <div id="popup-printer-panel" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>Flight Deck Interactive Printer Assembly</h3>
+        <div class="popup-row"><span class="label">Inventory P/N</span><span class="value">C12349AD03</span></div>
+        <div class="popup-row"><span class="label">Blueprint P/N</span><span class="value">PS317509.21.5.842</span></div>
+        <div class="popup-row"><span class="label">Hardware S/N</span><span class="value-sn">4094</span></div>
+        <div class="popup-row"><span class="label">Wiring Loop</span><span class="value-wire">W7969, W8525</span></div>
+        <hr class="popup-divider">
+        <div class="popup-contents">Thermal datalink hardcopy receiver console housed inside center-bottom tracking zone A237.</div>
     </div>
 
     <div id="popup-aisle-stand" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>Aisle Stand Brightness Control Panel</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">—</span></div>
-        <div class="popup-row"><span class="label">S/N</span><span class="value-sn">—</span></div>
-        <div class="popup-row"><span class="label">Wiring Ref</span><span class="value-wire">W7970, W8515</span></div>
+        <h3>Aisle Stand Integrated Backlight Controller</h3>
+        <div class="popup-row"><span class="label">Inventory P/N</span><span class="value">Not Installed</span></div>
+        <div class="popup-row"><span class="label">Blueprint P/N</span><span class="value">MA264944.25.2.825</span></div>
+        <div class="popup-row"><span class="label">Hardware S/N</span><span class="value-sn">N/A</span></div>
+        <div class="popup-row"><span class="label">Wiring Loop</span><span class="value-wire">W7970, W8515</span></div>
         <hr class="popup-divider">
-        <div class="popup-contents">Drives background lighting levels along lower workspace structural components.</div>
+        <div class="popup-contents">Provides filament power balancing loops across pedestal background panels via region A238.</div>
     </div>
 
-    <!-- INDEX TABLE SECTION WITH UPDATED WIRING REFERENCE COLUMN -->
+    <!-- MAIN PEDESTAL REGISTRY REFRENCING DATA GRID -->
     <div class="parts-section">
-        <h2>Pedestal - Parts Index</h2>
-        <input class="search-box" type="text" id="searchPedestal" onkeyup="filterTable('searchPedestal','pedestalTable')" placeholder="Search console description...">
+        <h2>Pedestal / Aisle Stand — Component Logistics Registry</h2>
+        <input class="search-box" type="text" id="searchPedestal" onkeyup="filterTable('searchPedestal','pedestalTable')" placeholder="Filter pedestal components by identifiers, serial metrics, or harness loops...">
         <table id="pedestalTable">
             <thead>
                 <tr>
-                    <th>Description</th>
-                    <th>Part Number</th>
-                    <th>Serial Number</th>
-                    <th>Harness / Cable Ref</th>
+                    <th>System Description</th>
+                    <th>Master Inventory P/N</th>
+                    <th>Schematic Blueprint P/N</th>
+                    <th>Hardware S/N</th>
+                    <th>Wiring Connection Loop</th>
                 </tr>
             </thead>
             <tbody>
-                <tr><td>Control Stand Assembly (Throttles)</td><td class="pn">BA654W0007-535</td><td class="sn">—</td><td class="wire">W7859-W7861, W7878-W7881</td></tr>
-                <tr><td>Capt's Cursor Control Panel</td><td class="pn">4073970-901</td><td class="sn">32237431</td><td class="wire">W7860, W7861, W8501</td></tr>
-                <tr><td>FO's Cursor Control Panel</td><td class="pn">4073970-901</td><td class="sn">96100419</td><td class="wire">W7859, W7860, W8502</td></tr>
-                <tr><td>Autospeedbrake Actuator</td><td class="pn">924D100-1</td><td class="sn">1221</td><td class="wire">W8207</td></tr>
-                <tr><td>Parking Brake Assembly</td><td class="pn">BA654W0007-535</td><td class="sn">—</td><td class="wire">W7863</td></tr>
-                <tr><td>Stabilizer Position Indicator L (Capt)</td><td class="pn">372-079-003</td><td class="sn">1251</td><td class="wire">W7861, W8571</td></tr>
-                <tr><td>Stabilizer Position Indicator R (FO)</td><td class="pn">372-079-003</td><td class="sn">388</td><td class="wire">W7861, W8572</td></tr>
-                <tr><td>Alternate Flaps Arm Switch &amp; Selector</td><td class="pn">—</td><td class="sn">—</td><td class="wire">—</td></tr>
-                <tr><td>Capt's Radio Tuning Panel (3)</td><td class="pn">285W0114-5</td><td class="sn">D01950</td><td class="wire">W7909, W8514, W8551</td></tr>
-                <tr><td>Capt's Audio Control Panel (3)</td><td class="pn">5701-1-1</td><td class="sn">6440</td><td class="wire">W7912, W8512</td></tr>
-                <tr><td>Engine Fire Panel Assembly</td><td class="pn">D731-04-001 / D731-05-001</td><td class="sn">3037/07-2007 / 2875</td><td class="wire">W7973 / W7971 / W7972</td></tr>
-                <tr><td>FO's Radio Tuning Panel (3)</td><td class="pn">285W0114-5</td><td class="sn">D02818</td><td class="wire">W7910, W8523, W8562</td></tr>
-                <tr><td>FO's Audio Control Panel (3)</td><td class="pn">5701-1-1</td><td class="sn">2509</td><td class="wire">W7912, W8512</td></tr>
-                <tr><td>Center Control Display Unit (CDU)</td><td class="pn">4088240-901</td><td class="sn">36015423</td><td class="wire">W7963, W7964, W8043, W8544</td></tr>
-                <tr><td>Weather Radar Control Panel</td><td class="pn">2041220-0430</td><td class="sn">CON4B-05244</td><td class="wire">W7915, W7917, W8541, W8542</td></tr>
-                <tr><td>ATC/TCAS Transponder Panel</td><td class="pn">G7131-02</td><td class="sn">52116</td><td class="wire">W7918, W7919, W8552</td></tr>
-                <tr><td>Lower Left Radio Tuning Panel</td><td class="pn">285W0114-5</td><td class="sn">F04182</td><td class="wire">W7911, W8531, W8551</td></tr>
-                <tr><td>Lower Left Audio Control Panel</td><td class="pn">5701-1-1</td><td class="sn">2966</td><td class="wire">W7913, W8522</td></tr>
-                <tr><td>Emergency Evacuation Control Panel</td><td class="pn">C6031-05</td><td class="sn">2263</td><td class="wire">W7928, W8543</td></tr>
-                <tr><td>Rudder Trim Position Indicator</td><td class="pn">372-078-002</td><td class="sn">1047</td><td class="wire">W7965, W8573</td></tr>
-                <tr><td>Aileron/Rudder Trim Control Console</td><td class="pn">654W0007-498</td><td class="sn">0112</td><td class="wire">W7966, W8513</td></tr>
-                <tr><td>Floor Lights Dimmer Control</td><td class="pn">—</td><td class="sn">—</td><td class="wire">W7967, W8516</td></tr>
-                <tr><td>Observer Audio Selector</td><td class="pn">5701-1-1</td><td class="sn">2969 (Now 2034)</td><td class="wire">W7914, W8524</td></tr>
-                <tr><td>Flight Deck Door Panel</td><td class="pn">—</td><td class="sn">—</td><td class="wire">W7968, W8521</td></tr>
-                <tr><td>Flight Deck Printer Control Box</td><td class="pn">C12349AD03</td><td class="sn">4094</td><td class="wire">W7969, W8525</td></tr>
-                <tr><td>Aisle Stand Brightness Control Panel</td><td class="pn">—</td><td class="sn">—</td><td class="wire">W7970, W8515</td></tr>
+                <tr><td>Actuator, Auto Speedbrake Assembly</td><td class="pn">924D100-1 <span class="src-tag">(Inventory)</span></td><td class="pn">BA654W0007-535 <span class="src-tag">(Blueprint)</span></td><td class="sn">1221</td><td class="wire">W8057</td></tr>
+                <tr><td>ATC / TCAS Operations Control Panel</td><td class="pn">G7131-02 <span class="src-tag">(Inventory)</span></td><td class="pn">2054-825 <span class="src-tag">(Blueprint)</span></td><td class="sn">52116</td><td class="wire">W7918, W7919, W8552</td></tr>
+                <tr><td>Audio Control Panel — Captain</td><td class="pn">5701-1-1 <span class="src-tag">(Inventory)</span></td><td class="pn">2142-825 <span class="src-tag">(Blueprint)</span></td><td class="sn">6440</td><td class="wire">W7912, W8512</td></tr>
+                <tr><td>Audio Control Panel — First Officer</td><td class="pn">5701-1-1 <span class="src-tag">(Inventory)</span></td><td class="pn">2142-825 <span class="src-tag">(Blueprint)</span></td><td class="sn">2509</td><td class="wire">W7913, W8522</td></tr>
+                <tr><td>Audio Control Panel — Observer Line</td><td class="pn">5701-1-1 <span class="src-tag">(Inventory)</span></td><td class="pn">2142-825 <span class="src-tag">(Blueprint)</span></td><td class="sn">2969, Now 2034</td><td class="wire">W7914, W8524</td></tr>
+                <tr><td>Control Display Unit - Aft FMC Station</td><td class="pn">4088240-901 <span class="src-tag">(Inventory)</span></td><td class="pn">PS317481.38.5.825 <span class="src-tag">(Blueprint)</span></td><td class="sn">36015423</td><td class="wire">W7963, W7964, W2843, W8544</td></tr>
+                <tr><td>Cursor Control Device — Captain</td><td class="pn">4073970-901 <span class="src-tag">(Inventory)</span></td><td class="pn">2000-825 <span class="src-tag">(Blueprint)</span></td><td class="sn">32237431</td><td class="wire">W7850, W7861, W8501</td></tr>
+                <tr><td>Cursor Control Device — First Officer</td><td class="pn">4073970-951 <span class="src-tag">(Inventory)</span></td><td class="pn">2001-825 <span class="src-tag">(Blueprint)</span></td><td class="sn">96100419</td><td class="wire">W7859, W7860, W8502</td></tr>
+                <tr><td>Emergency Evac Operational Module</td><td class="pn">G6031-05 <span class="src-tag">(Inventory)</span></td><td class="pn">2168-825 <span class="src-tag">(Blueprint)</span></td><td class="sn">2263</td><td class="wire">W7928, W8543</td></tr>
+                <tr><td>Radio Tuning Comm Control Panel (Left)</td><td class="pn">285W0114-5 <span class="src-tag">(Inventory)</span></td><td class="pn">BA285W0114-3 <span class="src-tag">(Blueprint)</span></td><td class="sn">D01950</td><td class="wire">W7909, W8514, W8551</td></tr>
+                <tr><td>Radio Tuning Comm Control Panel (Right)</td><td class="pn">285W0114-5 <span class="src-tag">(Inventory)</span></td><td class="pn">BA285W0114-3 <span class="src-tag">(Blueprint)</span></td><td class="sn">D02818</td><td class="wire">W7910, W8523, W8562</td></tr>
+                <tr><td>Radio Tuning Comm Control Panel (Center)</td><td class="pn">285W0114-5 <span class="src-tag">(Inventory)</span></td><td class="pn">BA285W0114-3 <span class="src-tag">(Blueprint)</span></td><td class="sn">F04182</td><td class="wire">W7911, W8531, W8561</td></tr>
+                <tr><td>Rudder Trim System Control Panel</td><td class="pn">654W0007-498 <span class="src-tag">(Inventory)</span></td><td class="pn">MA264942.07.2.825 <span class="src-tag">(Blueprint)</span></td><td class="sn">0112</td><td class="wire">W7966, W8513</td></tr>
+                <tr><td>Rudder Trim Structural Position Indicator</td><td class="pn">372-078-002 <span class="src-tag">(Inventory)</span></td><td class="pn">PS322658.01.5.607 <span class="src-tag">(Blueprint)</span></td><td class="sn">1047</td><td class="wire">W7965, W8573</td></tr>
+                <tr><td>Stabilizer Trim Indicator (Left Engine Track)</td><td class="pn">372-079-003 <span class="src-tag">(Inventory)</span></td><td class="pn">MP372-079-003 <span class="src-tag">(Blueprint)</span></td><td class="sn">1251</td><td class="wire">W7861, W8571</td></tr>
+                <tr><td>Stabilizer Trim Indicator (Right Engine Track)</td><td class="pn">372-079-003 <span class="src-tag">(Inventory)</span></td><td class="pn">MP372-079-003 <span class="src-tag">(Blueprint)</span></td><td class="sn">388</td><td class="wire">W7861, W8572</td></tr>
+                <tr><td>Flight Deck Interactive Printer Assembly</td><td class="pn">C12349AD03 <span class="src-tag">(Inventory)</span></td><td class="pn">PS317509.21.5.842 <span class="src-tag">(Blueprint)</span></td><td class="sn">4094</td><td class="wire">W7969, W8525</td></tr>
+                <tr><td>Control Stand Core Mech Housing Structure</td><td class="pn">Not Installed</td><td class="pn">BA654W0007-535</td><td class="sn">N/A</td><td class="wire">W7854-W7861, W7878-W7881</td></tr>
+                <tr><td>Parking Brake Lock Interlock Module</td><td class="pn">Not Installed</td><td class="pn">BA654W0007-535</td><td class="sn">N/A</td><td class="wire">W7853</td></tr>
+                <tr><td>Engine Fire Control Operational Module</td><td class="pn">Not Installed</td><td class="pn">MA264941.10.2.825</td><td class="sn">N/A</td><td class="wire">W7973</td></tr>
+                <tr><td>Engine Fire Shutoff Handle Valve (Left)</td><td class="pn">D731-04-001 <span class="src-tag">(Inventory)</span></td><td class="pn">MA264941.10.2.825</td><td class="sn">3037/07-2007</td><td class="wire">W7971</td></tr>
+                <tr><td>Engine Fire Shutoff Handle Valve (Right)</td><td class="pn">D731-05-001 <span class="src-tag">(Inventory)</span></td><td class="pn">MA264941.10.2.825</td><td class="sn">2875</td><td class="wire">W7972</td></tr>
+                <tr><td>Weather Radar Operation Control Panel</td><td class="pn">Not Installed</td><td class="pn">PS312578.20.5.825</td><td class="sn">N/A</td><td class="wire">W7916, W7917, W8541, W8542</td></tr>
+                <tr><td>Aisle Stand Integrated Backlight Controller</td><td class="pn">Not Installed</td><td class="pn">MA264944.25.2.825</td><td class="sn">N/A</td><td class="wire">W7970, W8515</td></tr>
             </tbody>
         </table>
     </div>
