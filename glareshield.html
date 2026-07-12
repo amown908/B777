@@ -110,11 +110,10 @@
             width: 92%; max-width: 460px;
         }
         .popup-box h3 { margin: 0 0 12px 0; color: #ffffff; font-size: 1.1em; padding-right: 30px; }
-        .popup-row { display: flex; flex-direction: column; margin-bottom: 8px; font-size: 0.85em; background: rgba(0,0,0,0.15); padding: 6px; border-radius: 4px; }
-        .popup-meta { display: flex; gap: 8px; margin-top: 2px; }
-        .popup-row .label { color: #bcaaa4; font-weight: 600; font-size: 0.9em; text-transform: uppercase; letter-spacing: 0.05em; }
+        .popup-row { display: flex; gap: 8px; margin-bottom: 6px; font-size: 0.85em; }
+        .popup-row .label { color: #bcaaa4; min-width: 110px; }
         .popup-row .value { font-family: monospace; color: #f59e0b; }
-        .popup-row .wire-value { font-family: monospace; color: #38bdf8; font-weight: bold; }
+        .popup-row .value.sn { color: #a3e635; }
         .popup-divider { border: none; border-top: 1px solid #4e342e; margin: 12px 0; }
         .popup-contents { font-size: 0.85em; color: #d7ccc8; line-height: 1.6; }
         
@@ -125,7 +124,7 @@
         }
         .close-btn:hover { background: #d97706; color: #1a1412; }
 
-        .parts-section { width: 100%; max-width: 900px; margin-top: 20px; }
+        .parts-section { width: 100%; max-width: 1100px; margin-top: 20px; }
         .parts-section h2 { color: #ffffff; border-bottom: 2px solid #4e342e; padding-bottom: 10px; }
         .search-box {
             width: 100%; padding: 10px; margin-bottom: 15px;
@@ -133,21 +132,22 @@
             border-radius: 6px; color: #f3f4f6; font-size: 0.9em;
         }
         .search-box:focus { outline: none; border-color: #f59e0b; }
-        table { width: 100%; border-collapse: collapse; font-size: 0.9em; }
+        table { width: 100%; border-collapse: collapse; font-size: 0.85em; }
         thead tr { background: #1a1412; color: #f59e0b; text-align: left; }
-        th { padding: 12px 15px; border-bottom: 2px solid #f59e0b; }
-        td { padding: 10px 15px; border-bottom: 1px solid #4e342e; }
+        th { padding: 12px 10px; border-bottom: 2px solid #f59e0b; }
+        td { padding: 10px 10px; border-bottom: 1px solid #4e342e; }
         tbody tr:nth-child(even) { background: #221816; }
         tbody tr:hover { background: #3e2723; }
         .pn { font-family: monospace; color: #f59e0b; }
         .sn { font-family: monospace; color: #a3e635; }
+        .ref { font-family: monospace; color: #38bdf8; }
     </style>
 </head>
 <body>
 
     <a href="index.html" class="back-link">← Back to Full Cockpit</a>
     <h1>Glareshield & Main Panel</h1>
-    <p class="subtitle">Click any panel zone to view the P/N and contents. Scroll down for the full parts index.</p>
+    <p class="subtitle">Click any panel zone to view structural P/N, S/N, and wiring schematics. Scroll down for the full logistics index.</p>
 
     <div class="image-container">
         <img src="main.jpeg" alt="Boeing Forward Instrument Panel Map">
@@ -222,88 +222,80 @@
 
     <div id="dark-screen" class="overlay-screen" onclick="closeAllPopups()"></div>
 
-    <!-- ── Interactive Popups with Dual P/N Configurations ── -->
-
+    <!-- POPUPS DATA POPULATION -->
     <div id="popup-heading-ref" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
         <h3>Heading Reference Switch</h3>
-        <div class="popup-row">
-            <span class="label">Main Unit</span>
-            <div class="popup-meta"><span>P/N:</span><span class="value">Not Listed</span></div>
-            <div class="popup-meta"><span>Ref:</span><span class="wire-value">Not Listed</span></div>
-        </div>
+        <div class="popup-row"><span class="label">Part Number</span><span class="value">MA264902.09.2.825</span></div>
+        <div class="popup-row"><span class="label">Serial Number</span><span class="value sn">-</span></div>
+        <div class="popup-row"><span class="label">Schematic Ref</span><span class="value">14-003, 40-023</span></div>
+        <div class="popup-row"><span class="label">Wiring Reference</span><span class="value">W7811, W8633</span></div>
         <hr class="popup-divider">
-        <div class="popup-contents">Selects the attitude and heading data source reference system (True vs Magnetic north calibration targets).</div>
+        <div class="popup-contents">Selects the attitude and heading data source reference system (True vs Magnetic north calibration targets). Located physically inside the A421 Captain Display Switching block layout.</div>
     </div>
 
     <div id="popup-clock" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
         <h3>Flight Deck Chronometer / Clock</h3>
-        <div class="popup-row">
-            <span class="label">Main Clock Unit</span>
-            <div class="popup-meta"><span>P/N:</span><span class="value">2319-607</span></div>
-            <div class="popup-meta"><span>Ref:</span><span class="wire-value">W7810, W8621</span></div>
-        </div>
+        <div class="popup-row"><span class="label">Capt P/N (S/N)</span><span class="value">2620-02-1 (1010)</span></div>
+        <div class="popup-row"><span class="label">F/O P/N (S/N)</span><span class="value">2620-02-1 (CL6229)</span></div>
+        <div class="popup-row"><span class="label">Schematic Ref</span><span class="value">14-002, 14-006</span></div>
+        <div class="popup-row"><span class="label">Wiring Reference</span><span class="value">W7810 / W7814</span></div>
         <hr class="popup-divider">
-        <div class="popup-contents">Displays UTC time, date, and features manual stopwatch timers for block time and waypoint sequence legs.</div>
+        <div class="popup-contents">Displays UTC time, date, and features manual stopwatch timers for block time tracking. Aircraft blueprint matches internal manufacturing code 2319-607.</div>
     </div>
 
     <div id="popup-center-dspl-src" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
         <h3>Center Display Source Switch</h3>
-        <div class="popup-row">
-            <span class="label">Main Unit</span>
-            <div class="popup-meta"><span>P/N:</span><span class="value">Not Listed</span></div>
-            <div class="popup-meta"><span>Ref:</span><span class="wire-value">Not Listed</span></div>
-        </div>
+        <div class="popup-row"><span class="label">Part Number</span><span class="value">PS32263.13.5.825</span></div>
+        <div class="popup-row"><span class="label">Serial Number</span><span class="value sn">-</span></div>
+        <div class="popup-row"><span class="label">Schematic Ref</span><span class="value">14-011-012, 40-025</span></div>
+        <div class="popup-row"><span class="label">Wiring Reference</span><span class="value">W7819, W8653</span></div>
         <hr class="popup-divider">
-        <div class="popup-contents">Manages alternate image generator computing feeds for Upper and Lower EICAS system displays.</div>
+        <div class="popup-contents">Manages alternate image generator computing feeds for Upper and Lower EICAS system displays (EICAS Display Select Panel).</div>
     </div>
 
     <div id="popup-brightness-ctrl" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
         <h3>Display Brightness Controls</h3>
-        <div class="popup-row">
-            <span class="label">EICAS Display Light Control</span>
-            <div class="popup-meta"><span>P/N:</span><span class="value">MA264943.08.2.825</span></div>
-            <div class="popup-meta"><span>Ref:</span><span class="wire-value">W7768, W8533</span></div>
-        </div>
+        <div class="popup-row"><span class="label">Part Number</span><span class="value">MA264943.08.2.825</span></div>
+        <div class="popup-row"><span class="label">Serial Number</span><span class="value sn">-</span></div>
+        <div class="popup-row"><span class="label">Schematic Ref</span><span class="value">14-051-052, 40-013</span></div>
+        <div class="popup-row"><span class="label">Wiring Reference</span><span class="value">W7768, W8533</span></div>
         <hr class="popup-divider">
-        <div class="popup-contents">Rheostat selector panel controlling background glare filters and backlight luminance values for the lower screen suites.</div>
+        <div class="popup-contents">Rheostat selector panel controlling background glare filters and backlight luminance values for the lower screen suites (EICAS Display Light Control).</div>
     </div>
 
     <div id="popup-left-efis" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
         <h3>EFIS Control Panel — Captain</h3>
-        <div class="popup-row">
-            <span class="label">Control Panel Unit</span>
-            <div class="popup-meta"><span>P/N:</span><span class="value">PS322663.01.5.825</span></div>
-            <div class="popup-meta"><span>Ref:</span><span class="wire-value">W7820, W7821, W8651</span></div>
-        </div>
+        <div class="popup-row"><span class="label">Part Number</span><span class="value">4073770-902</span></div>
+        <div class="popup-row"><span class="label">Serial Number</span><span class="value sn">32448056</span></div>
+        <div class="popup-row"><span class="label">Schematic Ref</span><span class="value">14-013, 40-025</span></div>
+        <div class="popup-row"><span class="label">Wiring Reference</span><span class="value">W7820, W7821, W8651</span></div>
         <hr class="popup-divider">
-        <div class="popup-contents">Manages map presentation format scales, weather radar profiling overlays, and barometric altimeter baseline targets.</div>
+        <div class="popup-contents">Manages map presentation format scales, weather radar profiling overlays, and barometric altimeter baseline targets. Blueprint drawing maps to Honeywell specification PS32263.01.5.825.</div>
     </div>
 
     <div id="popup-mcp" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
         <h3>Mode Control Panel (MCP)</h3>
-        <div class="popup-row">
-            <span class="label">AFCS Control Panel Assembly</span>
-            <div class="popup-meta"><span>P/N:</span><span class="value">PS309377.11.5.825</span></div>
-            <div class="popup-meta"><span>Ref:</span><span class="wire-value">W7816, W7817, W7818, W8661</span></div>
-        </div>
+        <div class="popup-row"><span class="label">Part Number</span><span class="value">822-1494-103</span></div>
+        <div class="popup-row"><span class="label">Serial Number</span><span class="value sn">1158</span></div>
+        <div class="popup-row"><span class="label">Schematic Ref</span><span class="value">14-008, 14-010, 40-026</span></div>
+        <div class="popup-row"><span class="label">Wiring Reference</span><span class="value">W7816 to W7818, W8661</span></div>
         <hr class="popup-divider">
-        <div class="popup-contents">Central automation command deck housing autopilot, autothrust, and flight director mode configurations.</div>
+        <div class="popup-contents">Central automation command deck housing autopilot, autothrust, and flight director mode configurations. Schematics detail unit configuration under system component M22016 (AFCS Control Panel).</div>
     </div>
 
     <div id="popup-right-efis" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
         <h3>EFIS Control Panel — First Officer</h3>
-        <div class="popup-row">
-            <span class="label">Control Panel Unit</span>
-            <div class="popup-meta"><span>P/N:</span><span class="value">PS322663.01.5.825</span></div>
-            <div class="popup-meta"><span>Ref:</span><span class="wire-value">W7822, W7823, W8652</span></div>
-        </div>
+        <div class="popup-row"><span class="label">Part Number</span><span class="value">4073770-902</span></div>
+        <div class="popup-row"><span class="label">Serial Number</span><span class="value sn">32568089</span></div>
+        <div class="popup-row"><span class="label">Schematic Ref</span><span class="value">14-014, 40-025</span></div>
+        <div class="popup-row"><span class="label">Wiring Reference</span><span class="value">W7822, W7823, W8652</span></div>
         <hr class="popup-divider">
         <div class="popup-contents">Independent display formatter managing symbology, visual filters, and minimum limits logic for the F/O.</div>
     </div>
@@ -311,255 +303,194 @@
     <div id="popup-capt-pfd" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
         <h3>Primary Flight Display — Captain</h3>
-        <div class="popup-row">
-            <span class="label">Liquid Crystal Display Unit</span>
-            <div class="popup-meta"><span>P/N:</span><span class="value">MP4086850-923</span></div>
-            <div class="popup-meta"><span>Ref:</span><span class="wire-value">W2813, W2814, W2815, W2816, W7759</span></div>
-        </div>
-        <div class="popup-row">
-            <span class="label">Display Mounting Bracket Switch</span>
-            <div class="popup-meta"><span>P/N:</span><span class="value">PS265037.01.5.244</span></div>
-            <div class="popup-meta"><span>Ref:</span><span class="wire-value">W7759</span></div>
-        </div>
+        <div class="popup-row"><span class="label">Part Number</span><span class="value">4086850-921</span></div>
+        <div class="popup-row"><span class="label">Serial Number</span><span class="value sn">32009728</span></div>
+        <div class="popup-row"><span class="label">Schematic Ref</span><span class="value">14-025, 14-027, 034</span></div>
+        <div class="popup-row"><span class="label">Wiring Reference</span><span class="value">W2813-16, W7759</span></div>
         <hr class="popup-divider">
-        <div class="popup-contents">Displays core parameters including airspeed velocity columns, attitude horizons, altitude tapes, and vertical speed flags.</div>
+        <div class="popup-contents">Displays core parameters including airspeed velocity columns, attitude horizons, and altitude tapes. Hardware cross-references blueprint line tracking module MP4086850-923.</div>
     </div>
 
     <div id="popup-capt-nd" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
         <h3>Navigation Display — Captain</h3>
-        <div class="popup-row">
-            <span class="label">Full Color Display Unit</span>
-            <div class="popup-meta"><span>P/N:</span><span class="value">PS317430.19.5.607</span></div>
-            <div class="popup-meta"><span>Ref:</span><span class="wire-value">W2817, W2818, W2819, W2820, W7760</span></div>
-        </div>
-        <div class="popup-row">
-            <span class="label">Display Mounting Bracket Switch</span>
-            <div class="popup-meta"><span>P/N:</span><span class="value">PS265037.01.5.244</span></div>
-            <div class="popup-meta"><span>Ref:</span><span class="wire-value">W7760</span></div>
-        </div>
+        <div class="popup-row"><span class="label">Part Number</span><span class="value">4091900-943</span></div>
+        <div class="popup-row"><span class="label">Serial Number</span><span class="value sn">40771891</span></div>
+        <div class="popup-row"><span class="label">Schematic Ref</span><span class="value">14-028-030, 034</span></div>
+        <div class="popup-row"><span class="label">Wiring Reference</span><span class="value">W2817-20, W7760</span></div>
         <hr class="popup-divider">
-        <div class="popup-contents">Presents active flight route planning, geographic map updates, terminal waypoint fixes, and weather hazard radar projections.</div>
+        <div class="popup-contents">Presents active flight route planning, geographic map updates, terminal waypoint fixes, and weather hazard radar projections. Schematic tracking lists module under Full Color Display Unit type PS317430.19.5.607.</div>
     </div>
 
     <div id="popup-brake-accum" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>Brake Accumulator Pressure Indicator</h3>
-        <div class="popup-row">
-            <span class="label">Brake Pressure Indicator</span>
-            <div class="popup-meta"><span>P/N:</span><span class="value">2220-607</span></div>
-            <div class="popup-meta"><span>Ref:</span><span class="wire-value">W2880, W8622</span></div>
-        </div>
+        <h3>Brake Accumulator Indicator</h3>
+        <div class="popup-row"><span class="label">Part Number</span><span class="value">163LCP74</span></div>
+        <div class="popup-row"><span class="label">Serial Number</span><span class="value sn">07069727</span></div>
+        <div class="popup-row"><span class="label">Schematic Ref</span><span class="value">14-004, 40-022</span></div>
+        <div class="popup-row"><span class="label">Wiring Reference</span><span class="value">W2880, W8622</span></div>
         <hr class="popup-divider">
-        <div class="popup-contents">Monitors standby emergency hydraulic lines designated for main landing gear wheel braking loops.</div>
+        <div class="popup-contents">Monitors standby emergency hydraulic lines designated for main landing gear wheel braking loops. Interfaced into localized module A424/N32001 (Brake Pressure Indicator type 2220-607).</div>
     </div>
 
     <div id="popup-capt-display-sel" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
         <h3>Inboard Display Selector — Captain</h3>
-        <div class="popup-row">
-            <span class="label">Display Switching Panel</span>
-            <div class="popup-meta"><span>P/N:</span><span class="value">MA264902.09.2.825</span></div>
-            <div class="popup-meta"><span>Ref:</span><span class="wire-value">W7811, W8633</span></div>
-        </div>
+        <div class="popup-row"><span class="label">Part Number</span><span class="value">MA264902.09.2.825</span></div>
+        <div class="popup-row"><span class="label">Serial Number</span><span class="value sn">-</span></div>
+        <div class="popup-row"><span class="label">Schematic Ref</span><span class="value">14-003, 40-023</span></div>
+        <div class="popup-row"><span class="label">Wiring Reference</span><span class="value">W7811, W8633</span></div>
         <hr class="popup-divider">
-        <div class="popup-contents">Auxiliary system routing selector mapping primary screen display formats on backup visual tubes.</div>
+        <div class="popup-contents">Auxiliary system routing selector mapping primary screen display formats on backup visual tubes (Display Switching Panel Captain A421).</div>
     </div>
 
     <div id="popup-isfd" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
         <h3>Integrated Standby Flight Display (ISFD)</h3>
-        <div class="popup-row">
-            <span class="label">Main Display Chassis</span>
-            <div class="popup-meta"><span>P/N:</span><span class="value">MPC16769LA01</span></div>
-            <div class="popup-meta"><span>Ref:</span><span class="wire-value">W7784, W8614</span></div>
-        </div>
+        <div class="popup-row"><span class="label">Part Number</span><span class="value">C16795FA01</span></div>
+        <div class="popup-row"><span class="label">Serial Number</span><span class="value sn">C16795001504</span></div>
+        <div class="popup-row"><span class="label">Schematic Ref</span><span class="value">14-065-67, 40-021</span></div>
+        <div class="popup-row"><span class="label">Wiring Reference</span><span class="value">W7784, W8614</span></div>
         <hr class="popup-divider">
-        <div class="popup-contents">Isolated backup instrument calculating situational orientation using decoupled auxiliary sensor inputs.</div>
+        <div class="popup-contents">Isolated backup instrument calculating situational orientation using decoupled auxiliary sensor inputs. Tracked under part schematic number MPC16769LA01.</div>
     </div>
 
     <div id="popup-upper-eicas" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>Upper EICAS</h3>
-        <div class="popup-row">
-            <span class="label">Full Color Display Unit</span>
-            <div class="popup-meta"><span>P/N:</span><span class="value">PS317430.19.5.607</span></div>
-            <div class="popup-meta"><span>Ref:</span><span class="wire-value">W2821, W2822, W2823, W2824, W7761</span></div>
-        </div>
-        <div class="popup-row">
-            <span class="label">Display Mounting Bracket Switch</span>
-            <div class="popup-meta"><span>P/N:</span><span class="value">PS265037.01.5.244</span></div>
-            <div class="popup-meta"><span>Ref:</span><span class="wire-value">W7761</span></div>
-        </div>
+        <h3>Upper EICAS Display Unit</h3>
+        <div class="popup-row"><span class="label">Part Number</span><span class="value">4086850-921</span></div>
+        <div class="popup-row"><span class="label">Serial Number</span><span class="value sn">31888277</span></div>
+        <div class="popup-row"><span class="label">Schematic Ref</span><span class="value">14-031 to 14-034</span></div>
+        <div class="popup-row"><span class="label">Wiring Reference</span><span class="value">W2821-24, W7761</span></div>
         <hr class="popup-divider">
-        <div class="popup-contents">Hosts primary engine operation parameters, gross fuel monitoring lines, and real-time crew alert system status logs.</div>
+        <div class="popup-contents">Hosts primary engine operation parameters, gross fuel monitoring lines, and real-time crew alert system status logs. Blueprints show full color installation line A432/N31301.</div>
     </div>
 
     <div id="popup-gear-lever-panel" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
         <h3>Landing Gear Control Panel</h3>
-        <div class="popup-row">
-            <span class="label">Landing Gear Panel</span>
-            <div class="popup-meta"><span>P/N:</span><span class="value">MA264904.19.2.825</span></div>
-            <div class="popup-meta"><span>Ref:</span><span class="wire-value">W7824, W8672</span></div>
-        </div>
-        <div class="popup-row">
-            <span class="label">Control Lever Handle</span>
-            <div class="popup-meta"><span>P/N:</span><span class="value">BAS231W260-1</span></div>
-            <div class="popup-meta"><span>Ref:</span><span class="wire-value">W7825</span></div>
-        </div>
-        <div class="popup-row">
-            <span class="label">Autobrake Module</span>
-            <div class="popup-meta"><span>P/N:</span><span class="value">BAS294W203-1</span></div>
-            <div class="popup-meta"><span>Ref:</span><span class="wire-value">W7826</span></div>
-        </div>
+        <div class="popup-row"><span class="label">Part Number</span><span class="value">D724-03-001</span></div>
+        <div class="popup-row"><span class="label">Serial Number</span><span class="value sn">115/12-95</span></div>
+        <div class="popup-row"><span class="label">Schematic Ref</span><span class="value">14-015, 14-016, 40-027</span></div>
+        <div class="popup-row"><span class="label">Wiring Reference</span><span class="value">W7824, W8672</span></div>
         <hr class="popup-divider">
-        <div class="popup-contents">Houses structural landing gear sequencing handle, manual lock override nodes, and autobrake profiles.</div>
+        <div class="popup-contents">Houses structural landing gear sequencing handle, manual lock override nodes, and autobrake profiles. Schematics group under assembly module MA264904.19.2.825.</div>
     </div>
 
     <div id="popup-lower-eicas" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>Lower EICAS</h3>
-        <div class="popup-row">
-            <span class="label">Liquid Crystal Display Unit</span>
-            <div class="popup-meta"><span>P/N:</span><span class="value">MP4086850-923</span></div>
-            <div class="popup-meta"><span>Ref:</span><span class="wire-value">W2825, W2826, W2827, W2828, W7764</span></div>
-        </div>
-        <div class="popup-row">
-            <span class="label">Display Mounting Bracket Switch</span>
-            <div class="popup-meta"><span>P/N:</span><span class="value">PS265037.01.5.244</span></div>
-            <div class="popup-meta"><span>Ref:</span><span class="wire-value">W7764</span></div>
-        </div>
+        <h3>Lower EICAS Display Unit</h3>
+        <div class="popup-row"><span class="label">Part Number</span><span class="value">4091900-921</span></div>
+        <div class="popup-row"><span class="label">Serial Number</span><span class="value sn">40785987</span></div>
+        <div class="popup-row"><span class="label">Schematic Ref</span><span class="value">14-041 to 14-044</span></div>
+        <div class="popup-row"><span class="label">Wiring Reference</span><span class="value">W2825-28, W7764</span></div>
         <hr class="popup-divider">
-        <div class="popup-contents">Dedicated layout display monitoring secondary mechanical structures, configurations, and component checklists.</div>
+        <div class="popup-contents">Dedicated layout display monitoring secondary mechanical structures, configurations, and component checklists. System hardware component layout identifier A434/N31302.</div>
     </div>
 
     <div id="popup-capt-fmc" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
         <h3>Captain FMC (Control Display Unit)</h3>
-        <div class="popup-row">
-            <span class="label">Control Display Unit</span>
-            <div class="popup-meta"><span>P/N:</span><span class="value">PS317481.36.5.825</span></div>
-            <div class="popup-meta"><span>Ref:</span><span class="wire-value">W2842, W7959, W7960, W8511</span></div>
-        </div>
-        <div class="popup-row">
-            <span class="label">Bracket Momentary Switch</span>
-            <div class="popup-meta"><span>P/N:</span><span class="value">PS265037.01.5.244</span></div>
-            <div class="popup-meta"><span>Ref:</span><span class="wire-value">W7959</span></div>
-        </div>
+        <div class="popup-row"><span class="label">Part Number</span><span class="value">4088240-901</span></div>
+        <div class="popup-row"><span class="label">Serial Number</span><span class="value sn">32475926</span></div>
+        <div class="popup-row"><span class="label">Schematic Ref</span><span class="value">12-050-053, 40-011</span></div>
+        <div class="popup-row"><span class="label">Wiring Reference</span><span class="value">W2842, W7959, W7960, W8511</span></div>
         <hr class="popup-divider">
-        <div class="popup-contents">Captain's primary programming console input node communicating route metrics back into the Flight Management Computer.</div>
+        <div class="popup-contents">Captain's primary programming console input node communicating route metrics back into the Flight Management Computer. Blueprint reference designator A201 (Control Display Unit Left).</div>
     </div>
 
     <div id="popup-fo-fmc" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
         <h3>F/O FMC (Control Display Unit)</h3>
-        <div class="popup-row">
-            <span class="label">Control Display Unit</span>
-            <div class="popup-meta"><span>P/N:</span><span class="value">PS317481.36.5.825</span></div>
-            <div class="popup-meta"><span>Ref:</span><span class="wire-value">W2844, W7961, W7962, W8535</span></div>
-        </div>
-        <div class="popup-row">
-            <span class="label">Bracket Momentary Switch</span>
-            <div class="popup-meta"><span>P/N:</span><span class="value">PS265037.01.5.244</span></div>
-            <div class="popup-meta"><span>Ref:</span><span class="wire-value">W7961</span></div>
-        </div>
+        <div class="popup-row"><span class="label">Part Number</span><span class="value">4088240-901</span></div>
+        <div class="popup-row"><span class="label">Serial Number</span><span class="value sn">32474863</span></div>
+        <div class="popup-row"><span class="label">Schematic Ref</span><span class="value">12-054-057</span></div>
+        <div class="popup-row"><span class="label">Wiring Reference</span><span class="value">W2844, W7961, W7962, W8535</span></div>
         <hr class="popup-divider">
-        <div class="popup-contents">First Officer's key interface entry matrix tracking flight paths, leg metrics, and navigational logistics.</div>
+        <div class="popup-contents">First Officer's key interface entry matrix tracking flight paths, leg metrics, and navigational logistics. Component frame entry A202.</div>
     </div>
 
     <div id="popup-fo-nd" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
         <h3>Navigation Display — First Officer</h3>
-        <div class="popup-row">
-            <span class="label">Full Color Display Unit</span>
-            <div class="popup-meta"><span>P/N:</span><span class="value">PS317430.19.5.607</span></div>
-            <div class="popup-meta"><span>Ref:</span><span class="wire-value">W2833, W2834, W2835, W2836, W7763</span></div>
-        </div>
-        <div class="popup-row">
-            <span class="label">Display Mounting Bracket Switch</span>
-            <div class="popup-meta"><span>P/N:</span><span class="value">PS265037.01.5.244</span></div>
-            <div class="popup-meta"><span>Ref:</span><span class="wire-value">W7763</span></div>
-        </div>
+        <div class="popup-row"><span class="label">Part Number</span><span class="value">4091900-943</span></div>
+        <div class="popup-row"><span class="label">Serial Number</span><span class="value sn">40151825</span></div>
+        <div class="popup-row"><span class="label">Schematic Ref</span><span class="value">14-038-040, 044</span></div>
+        <div class="popup-row"><span class="label">Wiring Reference</span><span class="value">W2833-36, W7763</span></div>
         <hr class="popup-divider">
-        <div class="popup-contents">Presents independent terrain mappings, terminal routing markers, and tracking structures for the F/O's instrumentation stack.</div>
+        <div class="popup-contents">Presents independent terrain mappings, terminal routing markers, and tracking structures for the F/O's instrumentation stack (Module reference: A443/N31202).</div>
     </div>
 
     <div id="popup-fo-pfd" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
         <h3>Primary Flight Display — First Officer</h3>
-        <div class="popup-row">
-            <span class="label">Liquid Crystal Display Unit</span>
-            <div class="popup-meta"><span>P/N:</span><span class="value">MP4086850-923</span></div>
-            <div class="popup-meta"><span>Ref:</span><span class="wire-value">W2829, W2830, W2831, W2832, W7762</span></div>
-        </div>
-        <div class="popup-row">
-            <span class="label">Display Mounting Bracket Switch</span>
-            <div class="popup-meta"><span>P/N:</span><span class="value">PS265037.01.5.244</span></div>
-            <div class="popup-meta"><span>Ref:</span><span class="wire-value">W7762</span></div>
-        </div>
+        <div class="popup-row"><span class="label">Part Number</span><span class="value">4091900-941</span></div>
+        <div class="popup-row"><span class="label">Serial Number</span><span class="value sn">31871153</span></div>
+        <div class="popup-row"><span class="label">Schematic Ref</span><span class="value">14-035-037, 044</span></div>
+        <div class="popup-row"><span class="label">Wiring Reference</span><span class="value">W2829-32, W7762</span></div>
         <hr class="popup-divider">
-        <div class="popup-contents">Tracks independent airspeed scales, pressure parameters, and orientation vectors for safety cross-checks.</div>
+        <div class="popup-contents">Tracks independent airspeed scales, pressure parameters, and orientation vectors for safety cross-checks. Component map listing A442/N31201.</div>
     </div>
 
     <div id="popup-fo-display-sel" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
         <h3>Inboard Display Selector — F/O</h3>
-        <div class="popup-row">
-            <span class="label">Display Switching Panel</span>
-            <div class="popup-meta"><span>P/N:</span><span class="value">MA264906.09.2.825</span></div>
-            <div class="popup-meta"><span>Ref:</span><span class="wire-value">W7815, W8674</span></div>
-        </div>
+        <div class="popup-row"><span class="label">Part Number</span><span class="value">MA264906.09.2.825</span></div>
+        <div class="popup-row"><span class="label">Serial Number</span><span class="value sn">-</span></div>
+        <div class="popup-row"><span class="label">Schematic Ref</span><span class="value">14-007, 40-027</span></div>
+        <div class="popup-row"><span class="label">Wiring Reference</span><span class="value">W7815, W8674</span></div>
         <hr class="popup-divider">
-        <div class="popup-contents">First officer's diagnostic selector managing localized format overrides.</div>
+        <div class="popup-contents">First officer's diagnostic selector managing localized format overrides. Integrated into unit deck assembly block A441.</div>
     </div>
 
     <div id="popup-fmc-selector" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
         <h3>FMC Selector Switch</h3>
-        <div class="popup-row">
-            <span class="label">Main Unit</span>
-            <div class="popup-meta"><span>P/N:</span><span class="value">Not Listed</span></div>
-            <div class="popup-meta"><span>Ref:</span><span class="wire-value">Not Listed</span></div>
-        </div>
+        <div class="popup-row"><span class="label">Part Number</span><span class="value">MA264906.09.2.825</span></div>
+        <div class="popup-row"><span class="label">Serial Number</span><span class="value sn">-</span></div>
+        <div class="popup-row"><span class="label">Schematic Ref</span><span class="value">14-007, 40-027</span></div>
+        <div class="popup-row"><span class="label">Wiring Reference</span><span class="value">W7815, W8674</span></div>
         <hr class="popup-divider">
-        <div class="popup-contents">Determines which Flight Management Computer holds master cross-talk command authority over active lines.</div>
+        <div class="popup-contents">Determines which Flight Management Computer holds master cross-talk command authority over active lines. Shared structure framework inside structural panel block A441.</div>
     </div>
 
-    <!-- ── Bottom Parts List Table ── -->
+    <!-- ENRICHED PARTS INDEX SECTION -->
     <div class="parts-section">
         <h2>Forward Instrument Panel - Parts Index</h2>
-        <input class="search-box" type="text" id="searchMainPanel" onkeyup="filterTable('searchMainPanel','mainPanelTable')" placeholder="Search display description...">
+        <input class="search-box" type="text" id="searchMainPanel" onkeyup="filterTable('searchMainPanel','mainPanelTable')" placeholder="Search display description, P/N, wires, or schematics...">
         <table id="mainPanelTable">
             <thead>
                 <tr>
                     <th>Description</th>
                     <th>Part Number</th>
                     <th>Serial Number</th>
+                    <th>Schematic Ref</th>
+                    <th>Wiring Reference</th>
                 </tr>
             </thead>
             <tbody>
-                <tr><td>EFIS Control Panel - Captain</td><td class="pn">PS322663.01.5.825</td><td class="sn">[Not in Log]</td></tr>
-                <tr><td>Mode Control Panel (MCP)</td><td class="pn">PS309377.11.5.825</td><td class="sn">[Not in Log]</td></tr>
-                <tr><td>EFIS Control Panel - F/O</td><td class="pn">PS322663.01.5.825</td><td class="sn">[Not in Log]</td></tr>
-                <tr><td>Heading Reference Switch</td><td class="pn">Not Listed</td><td class="sn">[Not in Log]</td></tr>
-                <tr><td>Flight Deck Chronometer / Clock</td><td class="pn">2319-607</td><td class="sn">[Not in Log]</td></tr>
-                <tr><td>Captain PFD</td><td class="pn">MP4086850-923</td><td class="sn">[Not in Log]</td></tr>
-                <tr><td>Captain ND</td><td class="pn">PS317430.19.5.607</td><td class="sn">[Not in Log]</td></tr>
-                <tr><td>Brake Accumulator Pressure Indicator</td><td class="pn">2220-607</td><td class="sn">[Not in Log]</td></tr>
-                <tr><td>Inboard Display Selector - Captain</td><td class="pn">MA264902.09.2.825</td><td class="sn">[Not in Log]</td></tr>
-                <tr><td>Integrated Standby Flight Display (ISFD)</td><td class="pn">MPC16769LA01</td><td class="sn">[Not in Log]</td></tr>
-                <tr><td>Upper EICAS Display Unit</td><td class="pn">PS317430.19.5.607</td><td class="sn">[Not in Log]</td></tr>
-                <tr><td>Landing Gear Control Lever Assembly</td><td class="pn">BAS231W260-1</td><td class="sn">[Not in Log]</td></tr>
-                <tr><td>Center Display Source Switch</td><td class="pn">Not Listed</td><td class="sn">[Not in Log]</td></tr>
-                <tr><td>Lower EICAS Display Unit</td><td class="pn">MP4086850-923</td><td class="sn">[Not in Log]</td></tr>
-                <tr><td>Display Brightness Control Panel</td><td class="pn">MA264943.08.2.825</td><td class="sn">[Not in Log]</td></tr>
-                <tr><td>Captain FMC (Control Display Unit)</td><td class="pn">PS317481.36.5.825</td><td class="sn">[Not in Log]</td></tr>
-                <tr><td>F/O FMC (Control Display Unit)</td><td class="pn">PS317481.36.5.825</td><td class="sn">[Not in Log]</td></tr>
-                <tr><td>F/O ND</td><td class="pn">PS317430.19.5.607</td><td class="sn">[Not in Log]</td></tr>
-                <tr><td>F/O PFD</td><td class="pn">MP4086850-923</td><td class="sn">[Not in Log]</td></tr>
-                <tr><td>Inboard Display Selector - F/O</td><td class="pn">MA264906.09.2.825</td><td class="sn">[Not in Log]</td></tr>
-                <tr><td>FMC Selector Switch</td><td class="pn">Not Listed</td><td class="sn">[Not in Log]</td></tr>
+                <tr><td>EFIS Control Panel - Captain</td><td class="pn">4073770-902</td><td class="sn">32448056</td><td class="ref">14-013, 40-025</td><td class="ref">W7820, W7821, W8651</td></tr>
+                <tr><td>Mode Control Panel (MCP)</td><td class="pn">822-1494-103</td><td class="sn">1158</td><td class="ref">14-008, 14-010, 40-026</td><td class="ref">W7816-W7818, W8661</td></tr>
+                <tr><td>EFIS Control Panel - F/O</td><td class="pn">4073770-902</td><td class="sn">32568089</td><td class="ref">14-014, 40-025</td><td class="ref">W7822, W7823, W8652</td></tr>
+                <tr><td>Heading Reference Switch</td><td class="pn">MA264902.09.2.825</td><td class="sn">-</td><td class="ref">14-003, 40-023</td><td class="ref">W7811, W8633</td></tr>
+                <tr><td>Flight Deck Chronometer / Clock (Capt)</td><td class="pn">2620-02-1</td><td class="sn">1010</td><td class="ref">14-002, 40-022</td><td class="ref">W7810, W8621</td></tr>
+                <tr><td>Flight Deck Chronometer / Clock (F/O)</td><td class="pn">2620-02-1</td><td class="sn">CL6229</td><td class="ref">14-006, 40-028</td><td class="ref">W7814, W8681</td></tr>
+                <tr><td>Captain PFD</td><td class="pn">4086850-921</td><td class="sn">32009728</td><td class="ref">14-025, 14-027, 034</td><td class="ref">W2813-16, W7759</td></tr>
+                <tr><td>Captain ND</td><td class="pn">4091900-943</td><td class="sn">40771891</td><td class="ref">14-028-030, 034</td><td class="ref">W2817-20, W7760</td></tr>
+                <tr><td>Brake Accumulator Pressure Indicator</td><td class="pn">163LCP74</td><td class="sn">07069727</td><td class="ref">14-004, 40-022</td><td class="ref">W2880, W8622</td></tr>
+                <tr><td>Inboard Display Selector - Captain</td><td class="pn">MA264902.09.2.825</td><td class="sn">-</td><td class="ref">14-003, 40-023</td><td class="ref">W7811, W8633</td></tr>
+                <tr><td>Integrated Standby Flight Display (ISFD)</td><td class="pn">C16795FA01</td><td class="sn">C16795001504</td><td class="ref">14-065-67, 40-021</td><td class="ref">W7784, W8614</td></tr>
+                <tr><td>Upper EICAS Display Unit</td><td class="pn">4086850-921</td><td class="sn">31888277</td><td class="ref">14-031 - 14-034</td><td class="ref">W2821-24, W7761</td></tr>
+                <tr><td>Landing Gear Control Lever Assembly</td><td class="pn">D724-03-001</td><td class="sn">115/12-95</td><td class="ref">14-015, 14-016, 40-027</td><td class="ref">W7824, W8672</td></tr>
+                <tr><td>Center Display Source Switch</td><td class="pn">PS32263.13.5.825</td><td class="sn">-</td><td class="ref">14-011-012, 40-025</td><td class="ref">W7819, W8653</td></tr>
+                <tr><td>Lower EICAS Display Unit</td><td class="pn">4091900-921</td><td class="sn">40785987</td><td class="ref">14-041 - 14-044</td><td class="ref">W2825-28, W7764</td></tr>
+                <tr><td>Display Brightness Control Panel</td><td class="pn">MA264943.08.2.825</td><td class="sn">-</td><td class="ref">14-051, 14-052, 40-013</td><td class="ref">W7768, W8533</td></tr>
+                <tr><td>Captain FMC (Control Display Unit)</td><td class="pn">4088240-901</td><td class="sn">32475926</td><td class="ref">12-050-053, 40-011</td><td class="ref">W2842, W7959, W8511</td></tr>
+                <tr><td>F/O FMC (Control Display Unit)</td><td class="pn">4088240-901</td><td class="sn">32474863</td><td class="ref">12-054-057</td><td class="ref">W2844, W7961, W8535</td></tr>
+                <tr><td>F/O ND</td><td class="pn">4091900-943</td><td class="sn">40151825</td><td class="ref">14-038-040, 044</td><td class="ref">W2833-36, W7763</td></tr>
+                <tr><td>F/O PFD</td><td class="pn">4091900-941</td><td class="sn">31871153</td><td class="ref">14-035-037, 044</td><td class="ref">W2829-32, W7762</td></tr>
+                <tr><td>Inboard Display Selector - F/O</td><td class="pn">MA264906.09.2.825</td><td class="sn">-</td><td class="ref">14-007, 40-027</td><td class="ref">W7815, W8674</td></tr>
+                <tr><td>FMC Selector Switch</td><td class="pn">MA264906.09.2.825</td><td class="sn">-</td><td class="ref">14-007, 40-027</td><td class="ref">W7815, W8674</td></tr>
             </tbody>
         </table>
     </div>
