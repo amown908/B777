@@ -76,7 +76,7 @@
         
         /* Lower Center & Newly Added Electronics */
         #zone-lower-eicas        { top: 65.0%; left: 43.5%; width: 12.0%; height: 20.0%; }
-        #zone-brightness-ctrl    { top: 86.0%; left: 43.5%; width: 12.0%; height: 6.0%; } /* Added right under Lower EICAS */
+        #zone-brightness-ctrl    { top: 86.0%; left: 43.5%; width: 12.0%; height: 6.0%; }
         #zone-center-dspl-src    { top: 64.0%; left: 38.0%; width: 4.5%; height: 5.5%; }
         #zone-heading-ref        { top: 24.0%; left: 38.0%; width: 4.5%; height: 6.0%; }
         #zone-clock              { top: 46.0%; left: 7.0%;  width: 4.0%; height: 7.0%; }
@@ -107,11 +107,12 @@
             border-radius: 8px;
             box-shadow: 0 25px 50px -12px rgba(0,0,0,0.9);
             z-index: 100;
-            width: 92%; max-width: 440px;
+            width: 92%; max-width: 460px;
         }
         .popup-box h3 { margin: 0 0 12px 0; color: #ffffff; font-size: 1.1em; padding-right: 30px; }
-        .popup-row { display: flex; gap: 8px; margin-bottom: 6px; font-size: 0.85em; }
-        .popup-row .label { color: #bcaaa4; min-width: 80px; }
+        .popup-row { display: flex; flex-direction: column; margin-bottom: 8px; font-size: 0.85em; background: rgba(0,0,0,0.15); padding: 6px; border-radius: 4px; }
+        .popup-meta { display: flex; gap: 8px; margin-top: 2px; }
+        .popup-row .label { color: #bcaaa4; font-weight: 600; font-size: 0.9em; text-transform: uppercase; letter-spacing: 0.05em; }
         .popup-row .value { font-family: monospace; color: #f59e0b; }
         .popup-row .wire-value { font-family: monospace; color: #38bdf8; font-weight: bold; }
         .popup-divider { border: none; border-top: 1px solid #4e342e; margin: 12px 0; }
@@ -214,18 +215,23 @@
         <div class="panel-zone" id="zone-fo-display-sel" onclick="showPopup('fo-display-sel')">
             <div class="zone-label">INBD DSPL SEL (F/O)</div>
         </div>
-        <div class="panel-zone" id="fmc-selector" onclick="showPopup('fmc-selector')">
+        <div class="panel-zone" id="zone-fmc-selector" onclick="showPopup('fmc-selector')">
             <div class="zone-label">FMC SELECTOR</div>
         </div>
     </div>
 
     <div id="dark-screen" class="overlay-screen" onclick="closeAllPopups()"></div>
 
+    <!-- ── Interactive Popups with Dual P/N Configurations ── -->
+
     <div id="popup-heading-ref" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
         <h3>Heading Reference Switch</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">Not Listed</span></div>
-        <div class="popup-row"><span class="label">Reference</span><span class="wire-value">Not Listed</span></div>
+        <div class="popup-row">
+            <span class="label">Main Unit</span>
+            <div class="popup-meta"><span>P/N:</span><span class="value">Not Listed</span></div>
+            <div class="popup-meta"><span>Ref:</span><span class="wire-value">Not Listed</span></div>
+        </div>
         <hr class="popup-divider">
         <div class="popup-contents">Selects the attitude and heading data source reference system (True vs Magnetic north calibration targets).</div>
     </div>
@@ -233,8 +239,11 @@
     <div id="popup-clock" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
         <h3>Flight Deck Chronometer / Clock</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">2319-607</span></div>
-        <div class="popup-row"><span class="label">Reference</span><span class="wire-value">W7810, W8621</span></div>
+        <div class="popup-row">
+            <span class="label">Main Clock Unit</span>
+            <div class="popup-meta"><span>P/N:</span><span class="value">2319-607</span></div>
+            <div class="popup-meta"><span>Ref:</span><span class="wire-value">W7810, W8621</span></div>
+        </div>
         <hr class="popup-divider">
         <div class="popup-contents">Displays UTC time, date, and features manual stopwatch timers for block time and waypoint sequence legs.</div>
     </div>
@@ -242,8 +251,11 @@
     <div id="popup-center-dspl-src" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
         <h3>Center Display Source Switch</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">Not Listed</span></div>
-        <div class="popup-row"><span class="label">Reference</span><span class="wire-value">Not Listed</span></div>
+        <div class="popup-row">
+            <span class="label">Main Unit</span>
+            <div class="popup-meta"><span>P/N:</span><span class="value">Not Listed</span></div>
+            <div class="popup-meta"><span>Ref:</span><span class="wire-value">Not Listed</span></div>
+        </div>
         <hr class="popup-divider">
         <div class="popup-contents">Manages alternate image generator computing feeds for Upper and Lower EICAS system displays.</div>
     </div>
@@ -251,8 +263,11 @@
     <div id="popup-brightness-ctrl" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
         <h3>Display Brightness Controls</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">MA264943.08.2.825</span></div>
-        <div class="popup-row"><span class="label">Reference</span><span class="wire-value">W7768, W8533</span></div>
+        <div class="popup-row">
+            <span class="label">EICAS Display Light Control</span>
+            <div class="popup-meta"><span>P/N:</span><span class="value">MA264943.08.2.825</span></div>
+            <div class="popup-meta"><span>Ref:</span><span class="wire-value">W7768, W8533</span></div>
+        </div>
         <hr class="popup-divider">
         <div class="popup-contents">Rheostat selector panel controlling background glare filters and backlight luminance values for the lower screen suites.</div>
     </div>
@@ -260,8 +275,11 @@
     <div id="popup-left-efis" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
         <h3>EFIS Control Panel — Captain</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">PS322663.01.5.825</span></div>
-        <div class="popup-row"><span class="label">Reference</span><span class="wire-value">W7820, W7821, W8651</span></div>
+        <div class="popup-row">
+            <span class="label">Control Panel Unit</span>
+            <div class="popup-meta"><span>P/N:</span><span class="value">PS322663.01.5.825</span></div>
+            <div class="popup-meta"><span>Ref:</span><span class="wire-value">W7820, W7821, W8651</span></div>
+        </div>
         <hr class="popup-divider">
         <div class="popup-contents">Manages map presentation format scales, weather radar profiling overlays, and barometric altimeter baseline targets.</div>
     </div>
@@ -269,8 +287,11 @@
     <div id="popup-mcp" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
         <h3>Mode Control Panel (MCP)</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">PS309377.11.5.825</span></div>
-        <div class="popup-row"><span class="label">Reference</span><span class="wire-value">W7816, W7817, W7818, W8661</span></div>
+        <div class="popup-row">
+            <span class="label">AFCS Control Panel Assembly</span>
+            <div class="popup-meta"><span>P/N:</span><span class="value">PS309377.11.5.825</span></div>
+            <div class="popup-meta"><span>Ref:</span><span class="wire-value">W7816, W7817, W7818, W8661</span></div>
+        </div>
         <hr class="popup-divider">
         <div class="popup-contents">Central automation command deck housing autopilot, autothrust, and flight director mode configurations.</div>
     </div>
@@ -278,8 +299,11 @@
     <div id="popup-right-efis" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
         <h3>EFIS Control Panel — First Officer</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">PS322663.01.5.825</span></div>
-        <div class="popup-row"><span class="label">Reference</span><span class="wire-value">W7822, W7823, W8652</span></div>
+        <div class="popup-row">
+            <span class="label">Control Panel Unit</span>
+            <div class="popup-meta"><span>P/N:</span><span class="value">PS322663.01.5.825</span></div>
+            <div class="popup-meta"><span>Ref:</span><span class="wire-value">W7822, W7823, W8652</span></div>
+        </div>
         <hr class="popup-divider">
         <div class="popup-contents">Independent display formatter managing symbology, visual filters, and minimum limits logic for the F/O.</div>
     </div>
@@ -287,8 +311,16 @@
     <div id="popup-capt-pfd" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
         <h3>Primary Flight Display — Captain</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">MP4086850-923</span></div>
-        <div class="popup-row"><span class="label">Reference</span><span class="wire-value">W2813, W2814, W2815, W2816, W7759</span></div>
+        <div class="popup-row">
+            <span class="label">Liquid Crystal Display Unit</span>
+            <div class="popup-meta"><span>P/N:</span><span class="value">MP4086850-923</span></div>
+            <div class="popup-meta"><span>Ref:</span><span class="wire-value">W2813, W2814, W2815, W2816, W7759</span></div>
+        </div>
+        <div class="popup-row">
+            <span class="label">Display Mounting Bracket Switch</span>
+            <div class="popup-meta"><span>P/N:</span><span class="value">PS265037.01.5.244</span></div>
+            <div class="popup-meta"><span>Ref:</span><span class="wire-value">W7759</span></div>
+        </div>
         <hr class="popup-divider">
         <div class="popup-contents">Displays core parameters including airspeed velocity columns, attitude horizons, altitude tapes, and vertical speed flags.</div>
     </div>
@@ -296,8 +328,16 @@
     <div id="popup-capt-nd" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
         <h3>Navigation Display — Captain</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">PS317430.19.5.607</span></div>
-        <div class="popup-row"><span class="label">Reference</span><span class="wire-value">W2817, W2818, W2819, W2820, W7760</span></div>
+        <div class="popup-row">
+            <span class="label">Full Color Display Unit</span>
+            <div class="popup-meta"><span>P/N:</span><span class="value">PS317430.19.5.607</span></div>
+            <div class="popup-meta"><span>Ref:</span><span class="wire-value">W2817, W2818, W2819, W2820, W7760</span></div>
+        </div>
+        <div class="popup-row">
+            <span class="label">Display Mounting Bracket Switch</span>
+            <div class="popup-meta"><span>P/N:</span><span class="value">PS265037.01.5.244</span></div>
+            <div class="popup-meta"><span>Ref:</span><span class="wire-value">W7760</span></div>
+        </div>
         <hr class="popup-divider">
         <div class="popup-contents">Presents active flight route planning, geographic map updates, terminal waypoint fixes, and weather hazard radar projections.</div>
     </div>
@@ -305,8 +345,11 @@
     <div id="popup-brake-accum" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
         <h3>Brake Accumulator Pressure Indicator</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">2220-607</span></div>
-        <div class="popup-row"><span class="label">Reference</span><span class="wire-value">W2880, W8622</span></div>
+        <div class="popup-row">
+            <span class="label">Brake Pressure Indicator</span>
+            <div class="popup-meta"><span>P/N:</span><span class="value">2220-607</span></div>
+            <div class="popup-meta"><span>Ref:</span><span class="wire-value">W2880, W8622</span></div>
+        </div>
         <hr class="popup-divider">
         <div class="popup-contents">Monitors standby emergency hydraulic lines designated for main landing gear wheel braking loops.</div>
     </div>
@@ -314,8 +357,11 @@
     <div id="popup-capt-display-sel" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
         <h3>Inboard Display Selector — Captain</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">MA264902.09.2.825</span></div>
-        <div class="popup-row"><span class="label">Reference</span><span class="wire-value">W7811, W8633</span></div>
+        <div class="popup-row">
+            <span class="label">Display Switching Panel</span>
+            <div class="popup-meta"><span>P/N:</span><span class="value">MA264902.09.2.825</span></div>
+            <div class="popup-meta"><span>Ref:</span><span class="wire-value">W7811, W8633</span></div>
+        </div>
         <hr class="popup-divider">
         <div class="popup-contents">Auxiliary system routing selector mapping primary screen display formats on backup visual tubes.</div>
     </div>
@@ -323,8 +369,11 @@
     <div id="popup-isfd" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
         <h3>Integrated Standby Flight Display (ISFD)</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">MPC16769LA01</span></div>
-        <div class="popup-row"><span class="label">Reference</span><span class="wire-value">W7784, W8614</span></div>
+        <div class="popup-row">
+            <span class="label">Main Display Chassis</span>
+            <div class="popup-meta"><span>P/N:</span><span class="value">MPC16769LA01</span></div>
+            <div class="popup-meta"><span>Ref:</span><span class="wire-value">W7784, W8614</span></div>
+        </div>
         <hr class="popup-divider">
         <div class="popup-contents">Isolated backup instrument calculating situational orientation using decoupled auxiliary sensor inputs.</div>
     </div>
@@ -332,8 +381,16 @@
     <div id="popup-upper-eicas" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
         <h3>Upper EICAS</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">PS317430.19.5.607</span></div>
-        <div class="popup-row"><span class="label">Reference</span><span class="wire-value">W2821, W2822, W2823, W2824, W7761</span></div>
+        <div class="popup-row">
+            <span class="label">Full Color Display Unit</span>
+            <div class="popup-meta"><span>P/N:</span><span class="value">PS317430.19.5.607</span></div>
+            <div class="popup-meta"><span>Ref:</span><span class="wire-value">W2821, W2822, W2823, W2824, W7761</span></div>
+        </div>
+        <div class="popup-row">
+            <span class="label">Display Mounting Bracket Switch</span>
+            <div class="popup-meta"><span>P/N:</span><span class="value">PS265037.01.5.244</span></div>
+            <div class="popup-meta"><span>Ref:</span><span class="wire-value">W7761</span></div>
+        </div>
         <hr class="popup-divider">
         <div class="popup-contents">Hosts primary engine operation parameters, gross fuel monitoring lines, and real-time crew alert system status logs.</div>
     </div>
@@ -341,8 +398,21 @@
     <div id="popup-gear-lever-panel" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
         <h3>Landing Gear Control Panel</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">MA264904.19.2.825</span></div>
-        <div class="popup-row"><span class="label">Reference</span><span class="wire-value">W7824, W8672</span></div>
+        <div class="popup-row">
+            <span class="label">Landing Gear Panel</span>
+            <div class="popup-meta"><span>P/N:</span><span class="value">MA264904.19.2.825</span></div>
+            <div class="popup-meta"><span>Ref:</span><span class="wire-value">W7824, W8672</span></div>
+        </div>
+        <div class="popup-row">
+            <span class="label">Control Lever Handle</span>
+            <div class="popup-meta"><span>P/N:</span><span class="value">BAS231W260-1</span></div>
+            <div class="popup-meta"><span>Ref:</span><span class="wire-value">W7825</span></div>
+        </div>
+        <div class="popup-row">
+            <span class="label">Autobrake Module</span>
+            <div class="popup-meta"><span>P/N:</span><span class="value">BAS294W203-1</span></div>
+            <div class="popup-meta"><span>Ref:</span><span class="wire-value">W7826</span></div>
+        </div>
         <hr class="popup-divider">
         <div class="popup-contents">Houses structural landing gear sequencing handle, manual lock override nodes, and autobrake profiles.</div>
     </div>
@@ -350,8 +420,16 @@
     <div id="popup-lower-eicas" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
         <h3>Lower EICAS</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">MP4086850-923</span></div>
-        <div class="popup-row"><span class="label">Reference</span><span class="wire-value">W2825, W2826, W2827, W2828, W7764</span></div>
+        <div class="popup-row">
+            <span class="label">Liquid Crystal Display Unit</span>
+            <div class="popup-meta"><span>P/N:</span><span class="value">MP4086850-923</span></div>
+            <div class="popup-meta"><span>Ref:</span><span class="wire-value">W2825, W2826, W2827, W2828, W7764</span></div>
+        </div>
+        <div class="popup-row">
+            <span class="label">Display Mounting Bracket Switch</span>
+            <div class="popup-meta"><span>P/N:</span><span class="value">PS265037.01.5.244</span></div>
+            <div class="popup-meta"><span>Ref:</span><span class="wire-value">W7764</span></div>
+        </div>
         <hr class="popup-divider">
         <div class="popup-contents">Dedicated layout display monitoring secondary mechanical structures, configurations, and component checklists.</div>
     </div>
@@ -359,8 +437,16 @@
     <div id="popup-capt-fmc" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
         <h3>Captain FMC (Control Display Unit)</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">PS317481.36.5.825</span></div>
-        <div class="popup-row"><span class="label">Reference</span><span class="wire-value">W2842, W7959, W7960, W8511</span></div>
+        <div class="popup-row">
+            <span class="label">Control Display Unit</span>
+            <div class="popup-meta"><span>P/N:</span><span class="value">PS317481.36.5.825</span></div>
+            <div class="popup-meta"><span>Ref:</span><span class="wire-value">W2842, W7959, W7960, W8511</span></div>
+        </div>
+        <div class="popup-row">
+            <span class="label">Bracket Momentary Switch</span>
+            <div class="popup-meta"><span>P/N:</span><span class="value">PS265037.01.5.244</span></div>
+            <div class="popup-meta"><span>Ref:</span><span class="wire-value">W7959</span></div>
+        </div>
         <hr class="popup-divider">
         <div class="popup-contents">Captain's primary programming console input node communicating route metrics back into the Flight Management Computer.</div>
     </div>
@@ -368,8 +454,16 @@
     <div id="popup-fo-fmc" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
         <h3>F/O FMC (Control Display Unit)</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">PS317481.36.5.825</span></div>
-        <div class="popup-row"><span class="label">Reference</span><span class="wire-value">W2844, W7961, W7962, W8535</span></div>
+        <div class="popup-row">
+            <span class="label">Control Display Unit</span>
+            <div class="popup-meta"><span>P/N:</span><span class="value">PS317481.36.5.825</span></div>
+            <div class="popup-meta"><span>Ref:</span><span class="wire-value">W2844, W7961, W7962, W8535</span></div>
+        </div>
+        <div class="popup-row">
+            <span class="label">Bracket Momentary Switch</span>
+            <div class="popup-meta"><span>P/N:</span><span class="value">PS265037.01.5.244</span></div>
+            <div class="popup-meta"><span>Ref:</span><span class="wire-value">W7961</span></div>
+        </div>
         <hr class="popup-divider">
         <div class="popup-contents">First Officer's key interface entry matrix tracking flight paths, leg metrics, and navigational logistics.</div>
     </div>
@@ -377,8 +471,16 @@
     <div id="popup-fo-nd" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
         <h3>Navigation Display — First Officer</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">PS317430.19.5.607</span></div>
-        <div class="popup-row"><span class="label">Reference</span><span class="wire-value">W2833, W2834, W2835, W2836, W7763</span></div>
+        <div class="popup-row">
+            <span class="label">Full Color Display Unit</span>
+            <div class="popup-meta"><span>P/N:</span><span class="value">PS317430.19.5.607</span></div>
+            <div class="popup-meta"><span>Ref:</span><span class="wire-value">W2833, W2834, W2835, W2836, W7763</span></div>
+        </div>
+        <div class="popup-row">
+            <span class="label">Display Mounting Bracket Switch</span>
+            <div class="popup-meta"><span>P/N:</span><span class="value">PS265037.01.5.244</span></div>
+            <div class="popup-meta"><span>Ref:</span><span class="wire-value">W7763</span></div>
+        </div>
         <hr class="popup-divider">
         <div class="popup-contents">Presents independent terrain mappings, terminal routing markers, and tracking structures for the F/O's instrumentation stack.</div>
     </div>
@@ -386,8 +488,16 @@
     <div id="popup-fo-pfd" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
         <h3>Primary Flight Display — First Officer</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">MP4086850-923</span></div>
-        <div class="popup-row"><span class="label">Reference</span><span class="wire-value">W2829, W2830, W2831, W2832, W7762</span></div>
+        <div class="popup-row">
+            <span class="label">Liquid Crystal Display Unit</span>
+            <div class="popup-meta"><span>P/N:</span><span class="value">MP4086850-923</span></div>
+            <div class="popup-meta"><span>Ref:</span><span class="wire-value">W2829, W2830, W2831, W2832, W7762</span></div>
+        </div>
+        <div class="popup-row">
+            <span class="label">Display Mounting Bracket Switch</span>
+            <div class="popup-meta"><span>P/N:</span><span class="value">PS265037.01.5.244</span></div>
+            <div class="popup-meta"><span>Ref:</span><span class="wire-value">W7762</span></div>
+        </div>
         <hr class="popup-divider">
         <div class="popup-contents">Tracks independent airspeed scales, pressure parameters, and orientation vectors for safety cross-checks.</div>
     </div>
@@ -395,8 +505,11 @@
     <div id="popup-fo-display-sel" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
         <h3>Inboard Display Selector — F/O</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">MA264906.09.2.825</span></div>
-        <div class="popup-row"><span class="label">Reference</span><span class="wire-value">W7815, W8674</span></div>
+        <div class="popup-row">
+            <span class="label">Display Switching Panel</span>
+            <div class="popup-meta"><span>P/N:</span><span class="value">MA264906.09.2.825</span></div>
+            <div class="popup-meta"><span>Ref:</span><span class="wire-value">W7815, W8674</span></div>
+        </div>
         <hr class="popup-divider">
         <div class="popup-contents">First officer's diagnostic selector managing localized format overrides.</div>
     </div>
@@ -404,12 +517,16 @@
     <div id="popup-fmc-selector" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
         <h3>FMC Selector Switch</h3>
-        <div class="popup-row"><span class="label">P/N</span><span class="value">Not Listed</span></div>
-        <div class="popup-row"><span class="label">Reference</span><span class="wire-value">Not Listed</span></div>
+        <div class="popup-row">
+            <span class="label">Main Unit</span>
+            <div class="popup-meta"><span>P/N:</span><span class="value">Not Listed</span></div>
+            <div class="popup-meta"><span>Ref:</span><span class="wire-value">Not Listed</span></div>
+        </div>
         <hr class="popup-divider">
         <div class="popup-contents">Determines which Flight Management Computer holds master cross-talk command authority over active lines.</div>
     </div>
 
+    <!-- ── Bottom Parts List Table ── -->
     <div class="parts-section">
         <h2>Forward Instrument Panel - Parts Index</h2>
         <input class="search-box" type="text" id="searchMainPanel" onkeyup="filterTable('searchMainPanel','mainPanelTable')" placeholder="Search display description...">
