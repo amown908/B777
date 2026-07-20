@@ -172,10 +172,18 @@
     </div>
 
     <!-- INDEX INVENTORY TABLE ELEMENT -->
-    <div class="table-container">
-        <table>
+       <div class="parts-section">
+
+        <h2>Parts Index </h2>
+
+        <input class="search-box" type="text" id="searchSwitches" onkeyup="filterTable('searchSwitches','SwitchesTable')" placeholder="Search by descriptor fields, component parts numbers, or structural wiring lines...">
+
+        <table id="SwitchesTable">
+
             <thead>
+
                 <tr>
+
                     <th>Name</th>
                     <th>Boeing Top Level</th>
                     <th>Korry Top Level</th>
@@ -183,62 +191,62 @@
                 </tr>
             </thead>
             <tbody>
-                <tr onclick="showPopup('top-left-warn')">
+                <tr>
                     <td><b>Capt Master Warning/Caution</b></td>
                     <td class="part-no">S231W240-224</td>
                     <td class="part-no">32500-224</td>
                     <td class="part-no">32500-724</td>
                 </tr>
-                <tr onclick="showPopup('top-right-warn')">
+                <tr>
                     <td><b>F/O Master Warning/Caution</b></td>
                     <td class="part-no">S231W240-224</td>
                     <td class="part-no">32500-224</td>
                     <td class="part-no">32500-724</td>
                 </tr>
-                <tr onclick="showPopup('left-aux')">
+                <tr>
                     <td><b>Capt NAV Switching </b></td>
                     <td class="part-no">S231W240-233</td>
                     <td class="part-no">32500-233</td>
                     <td class="part-no">32500-733</td>
                 </tr>
-                    <tr onclick="showPopup('left-aux')">
+                    <tr>
                     <td><b>Capt DSPL CTRL / AIR DATA ATT</b></td>
                     <td class="part-no">S231W240-234</td>
                     <td class="part-no">32500-234</td>
                     <td class="part-no">32500-734</td>
                 </tr>
                 
-                <tr onclick="showPopup('right-aux')">
+                <tr>
                     <td><b>F/O NAV Switching </b></td>
                     <td class="part-no">S231W240-233</td>
                     <td class="part-no">32500-233</td>
                     <td class="part-no">32500-733</td>
                 </tr>
-                    <tr onclick="showPopup('right-aux')">
+                    <tr>
                     <td><b>F/O DSPL CTRL / AIR DATA ATT</b></td>
                     <td class="part-no">S231W240-234</td>
                     <td class="part-no">32500-234</td>
                     <td class="part-no">32500-734</td>
                 </tr>
-                <tr onclick="showPopup('gnd-prox')">
+                <tr>
                     <td><b>GND PROX - G/S INHBIT</b></td>
                     <td class="part-no">S231W240-225</td>
                     <td class="part-no">32500-225</td>
                     <td class="part-no">32500-725</td>
                 </tr>
-                     <tr onclick="showPopup('gnd-prox')">
+                     <tr>
                     <td><b>GND PROX -FLAP/GEAR/TERR OVRD</b></td>
                     <td class="part-no">S231W240-221</td>
                     <td class="part-no">32500-221</td>
                     <td class="part-no">32500-721</td>
                 </tr>
-                <tr onclick="showPopup('gear-light')">
+                <tr>
                     <td><b>Heading Reference</b></td>
                     <td class="part-no">S231W240-231</td>
                     <td class="part-no">32500-231</td>
                     <td class="part-no">32500-731</td>
                 </tr>
-                <tr onclick="showPopup('pedestal-brt')">
+                <t>
                     <td><b>EICAS Display Control</b></td>
                     <td class="part-no">S231W240-234</td>
                     <td class="part-no">32500-234</td>
