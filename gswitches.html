@@ -196,23 +196,41 @@
                     <td class="part-no">32500-724</td>
                 </tr>
                 <tr onclick="showPopup('left-aux')">
-                    <td><b>Capt NAV Switching / Display Control / Air Data Att</b></td>
+                    <td><b>Capt NAV Switching </b></td>
                     <td class="part-no">S231W240-233</td>
                     <td class="part-no">32500-233</td>
                     <td class="part-no">32500-733</td>
                 </tr>
+                    <tr onclick="showPopup('left-aux')">
+                    <td><b>Capt DSPL CTRL / AIR DATA ATT</b></td>
+                    <td class="part-no">S231W240-234</td>
+                    <td class="part-no">32500-234</td>
+                    <td class="part-no">32500-734</td>
+                </tr>
                 
                 <tr onclick="showPopup('right-aux')">
-                    <td><b>CAPT NAV Switching / Display Control / Air Data Att</b></td>
+                    <td><b>F/O NAV Switching </b></td>
+                    <td class="part-no">S231W240-233</td>
+                    <td class="part-no">32500-233</td>
+                    <td class="part-no">32500-733</td>
+                </tr>
+                    <tr onclick="showPopup('right-aux')">
+                    <td><b>F/O DSPL CTRL / AIR DATA ATT</b></td>
                     <td class="part-no">S231W240-234</td>
                     <td class="part-no">32500-234</td>
                     <td class="part-no">32500-734</td>
                 </tr>
                 <tr onclick="showPopup('gnd-prox')">
-                    <td><b>GND PROX</b></td>
+                    <td><b>GND PROX - G/S INHBIT</b></td>
                     <td class="part-no">S231W240-225</td>
                     <td class="part-no">32500-225</td>
                     <td class="part-no">32500-725</td>
+                </tr>
+                     <tr onclick="showPopup('gnd-prox')">
+                    <td><b>GND PROX -FLAP/GEAR/TERR OVRD</b></td>
+                    <td class="part-no">S231W240-221</td>
+                    <td class="part-no">32500-221</td>
+                    <td class="part-no">32500-721</td>
                 </tr>
                 <tr onclick="showPopup('gear-light')">
                     <td><b>Heading Reference</b></td>
@@ -236,54 +254,41 @@
     <div id="popup-top-left-warn" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
         <h3>Capt Master Warning/Caution</h3>
-        <div class="popup-row"><span class="label">Boeing top level</span><span class="label">contains the capt master warning in red and caution in amber</span></div>
+        <div class="popup-row"><<span class="label">contains the capt master warning in red and caution in amber</span></div>
 
     <div id="popup-top-right-warn" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
         <h3>F/O Master Warning/Caution</h3>
-        <div class="popup-row"><span class="label">Boeing top level</span><span class="value">S231W240-224</span></div>
-        <div class="popup-row"><span class="label">Korry top level</span><span class="value">32500-224</span></div>
-        <div class="popup-row"><span class="label">Cap/Switch module</span><span class="value">32500-724</span></div>
+        <div class="popup-row"><span class="label">contains the first officer master warning in red and caution in amber</span></div>
     </div>
 
     <div id="popup-left-aux" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
         <h3>Capt NAV Switching / Display Control / Air Data Att</h3>
-        <div class="popup-row"><span class="label">Boeing top level</span><span class="value">S231W240-233</span></div>
-        <div class="popup-row"><span class="label">Korry top level</span><span class="value">32500-233</span></div>
-        <div class="popup-row"><span class="label">Cap/Switch module</span><span class="value">32500-733</span></div>
+        <div class="popup-row"><span class="label">contains the capt MIP source select </span></div>
     </div>
-
     <div id="popup-right-aux" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>CAPT NAV Switching / Display Control / Air Data Att</h3>
-        <div class="popup-row"><span class="label">Boeing top level</span><span class="value">S231W240-234</span></div>
-        <div class="popup-row"><span class="label">Korry top level</span><span class="value">32500-234</span></div>
-        <div class="popup-row"><span class="label">Cap/Switch module</span><span class="value">32500-734</span></div>
+        <h3>F/O NAV Switching / Display Control / Air Data Att</h3>
+        <div class="popup-row"><span class="label">contains the First officer MIP source select</span></div>
     </div>
 
     <div id="popup-gnd-prox" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
         <h3>GND PROX</h3>
-        <div class="popup-row"><span class="label">Boeing top level</span><span class="value">S231W240-225</span></div>
-        <div class="popup-row"><span class="label">Korry top level</span><span class="value">32500-225</span></div>
-        <div class="popup-row"><span class="label">Cap/Switch module</span><span class="value">32500-725</span></div>
+        <div class="popup-row"><span class="label">contains the G/S inhbit, flap ovrd, gear ovrd and terr ovrd</span></div>
     </div>
 
     <div id="popup-gear-light" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
         <h3>Heading Reference</h3>
-        <div class="popup-row"><span class="label">Boeing top level</span><span class="value">S231W240-231</span></div>
-        <div class="popup-row"><span class="label">Korry top level</span><span class="value">32500-231</span></div>
-        <div class="popup-row"><span class="label">Cap/Switch module</span><span class="value">32500-731</span></div>
+        <div class="popup-row"><span class="label">contains heading ref mag-true - norm/true</span></div>
     </div>
 
     <div id="popup-pedestal-brt" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
         <h3>EICAS Display Control</h3>
-        <div class="popup-row"><span class="label">Boeing top level</span><span class="value">S231W240-234</span></div>
-        <div class="popup-row"><span class="label">Korry top level</span><span class="value">32500-234</span></div>
-        <div class="popup-row"><span class="label">Cap/Switch module</span><span class="value">32500-734</span></div>
+        <div class="popup-row"><span class="label">contains eicas display control - altn </span></div>
     </div>
 
     <!-- SWITCHES MANUAL BLUEPRINT POPUP -->
