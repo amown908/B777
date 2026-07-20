@@ -43,6 +43,7 @@
             border-radius: 4px;
             cursor: pointer;
             transition: all 0.2s ease;
+            z-index: 10; /* Ensures zones sit on top of the image */
         }
         .switch-zone:hover {
             background: rgba(245, 158, 11, 0.28);
@@ -59,11 +60,38 @@
         #zone-center-gear-light  { top: 21.0%; left: 54.5%; width: 7.2%;  height: 18.0%; }
         #zone-pedestal-brt       { top: 90.0%; left: 43%;   width: 3.5%;  height: 7.0%;  }
 
-        /* Inventory Index Table Layout styling */
-        .table-container {
+        /* Parts Section Header */
+        .parts-section {
             width: 100%;
             max-width: 1200px;
             margin-top: 20px;
+        }
+        .parts-section h2 {
+            color: #ffffff;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+
+        /* Search input box styling */
+        .search-box {
+            width: 100%;
+            padding: 12px 16px;
+            background: #2b1f1c;
+            border: 1px solid #4e342e;
+            border-radius: 6px;
+            color: #ffffff;
+            font-size: 1em;
+            margin-bottom: 15px;
+        }
+        .search-box:focus {
+            outline: none;
+            border-color: #f59e0b;
+            box-shadow: 0 0 8px rgba(245, 158, 11, 0.3);
+        }
+
+        /* Inventory Index Table Layout styling */
+        .table-container {
+            width: 100%;
             background: #2b1f1c;
             border: 1px solid #4e342e;
             border-radius: 8px;
@@ -122,7 +150,6 @@
         .popup-box h3 { margin: 0 0 15px 0; color: #ffffff; font-size: 1.2em; border-bottom: 1px solid #4e342e; padding-bottom: 8px;}
         .popup-row { display: flex; flex-direction: column; gap: 4px; margin-bottom: 12px; font-size: 0.9em; }
         .popup-row .label { color: #bcaaa4; font-weight: 600; text-transform: uppercase; font-size: 0.8em; letter-spacing: 0.05em; }
-        .popup-row .value { font-family: monospace; color: #f59e0b; background: #1a1412; padding: 6px 10px; border-radius: 4px; border: 1px solid #4e342e; }
         
         .close-btn {
             position: absolute; top: 12px; right: 12px;
@@ -161,7 +188,7 @@
     <div class="image-container">
         <img src="main.jpeg" alt="Panel Workspace View">
         
-        <!-- Synchronized hot-zones matching your requested list values -->
+        <!-- Shaded Hot-Zones -->
         <div class="switch-zone" id="zone-top-left-warn" onclick="showPopup('top-left-warn')" title="Capt Master Warning/Caution"></div>
         <div class="switch-zone" id="zone-top-right-warn" onclick="showPopup('top-right-warn')" title="F/O Master Warning/Caution"></div>
         <div class="switch-zone" id="zone-left-aux-switches" onclick="showPopup('left-aux')" title="Capt NAV Switching / Display Control / Air Data Att"></div>
@@ -172,97 +199,94 @@
     </div>
 
     <!-- INDEX INVENTORY TABLE ELEMENT -->
-       <div class="parts-section">
-
-        <h2>Parts Index </h2>
-
-        <input class="search-box" type="text" id="searchSwitches" onkeyup="filterTable('searchSwitches','SwitchesTable')" placeholder="Search by descriptor fields, component parts numbers, or structural wiring lines...">
-
-        <table id="SwitchesTable">
-
-            <thead>
-
-                <tr>
-
-                    <th>Name</th>
-                    <th>Boeing Top Level</th>
-                    <th>Korry Top Level</th>
-                    <th>Cap/Switch Module</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><b>Capt Master Warning/Caution</b></td>
-                    <td class="part-no">S231W240-224</td>
-                    <td class="part-no">32500-224</td>
-                    <td class="part-no">32500-724</td>
-                </tr>
-                <tr>
-                    <td><b>F/O Master Warning/Caution</b></td>
-                    <td class="part-no">S231W240-224</td>
-                    <td class="part-no">32500-224</td>
-                    <td class="part-no">32500-724</td>
-                </tr>
-                <tr>
-                    <td><b>Capt NAV Switching </b></td>
-                    <td class="part-no">S231W240-233</td>
-                    <td class="part-no">32500-233</td>
-                    <td class="part-no">32500-733</td>
-                </tr>
+    <div class="parts-section">
+        <h2>Parts Index</h2>
+        <input class="search-box" type="text" id="searchSwitches" onkeyup="filterTable()" placeholder="Search by descriptor fields, component parts numbers...">
+        
+        <div class="table-container">
+            <table id="SwitchesTable">
+                <thead>
                     <tr>
-                    <td><b>Capt DSPL CTRL / AIR DATA ATT</b></td>
-                    <td class="part-no">S231W240-234</td>
-                    <td class="part-no">32500-234</td>
-                    <td class="part-no">32500-734</td>
-                </tr>
-                
-                <tr>
-                    <td><b>F/O NAV Switching </b></td>
-                    <td class="part-no">S231W240-233</td>
-                    <td class="part-no">32500-233</td>
-                    <td class="part-no">32500-733</td>
-                </tr>
-                    <tr>
-                    <td><b>F/O DSPL CTRL / AIR DATA ATT</b></td>
-                    <td class="part-no">S231W240-234</td>
-                    <td class="part-no">32500-234</td>
-                    <td class="part-no">32500-734</td>
-                </tr>
-                <tr>
-                    <td><b>GND PROX - G/S INHBIT</b></td>
-                    <td class="part-no">S231W240-225</td>
-                    <td class="part-no">32500-225</td>
-                    <td class="part-no">32500-725</td>
-                </tr>
-                     <tr>
-                    <td><b>GND PROX -FLAP/GEAR/TERR OVRD</b></td>
-                    <td class="part-no">S231W240-221</td>
-                    <td class="part-no">32500-221</td>
-                    <td class="part-no">32500-721</td>
-                </tr>
-                <tr>
-                    <td><b>Heading Reference</b></td>
-                    <td class="part-no">S231W240-231</td>
-                    <td class="part-no">32500-231</td>
-                    <td class="part-no">32500-731</td>
-                </tr>
-                <t>
-                    <td><b>EICAS Display Control</b></td>
-                    <td class="part-no">S231W240-234</td>
-                    <td class="part-no">32500-234</td>
-                    <td class="part-no">32500-734</td>
-                </tr>
-            </tbody>
-        </table>
+                        <th>Name</th>
+                        <th>Boeing Top Level</th>
+                        <th>Korry Top Level</th>
+                        <th>Cap/Switch Module</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr onclick="showPopup('top-left-warn')">
+                        <td><b>Capt Master Warning/Caution</b></td>
+                        <td class="part-no">S231W240-224</td>
+                        <td class="part-no">32500-224</td>
+                        <td class="part-no">32500-724</td>
+                    </tr>
+                    <tr onclick="showPopup('top-right-warn')">
+                        <td><b>F/O Master Warning/Caution</b></td>
+                        <td class="part-no">S231W240-224</td>
+                        <td class="part-no">32500-224</td>
+                        <td class="part-no">32500-724</td>
+                    </tr>
+                    <tr onclick="showPopup('left-aux')">
+                        <td><b>Capt NAV Switching</b></td>
+                        <td class="part-no">S231W240-233</td>
+                        <td class="part-no">32500-233</td>
+                        <td class="part-no">32500-733</td>
+                    </tr>
+                    <tr onclick="showPopup('left-aux')">
+                        <td><b>Capt DSPL CTRL / AIR DATA ATT</b></td>
+                        <td class="part-no">S231W240-234</td>
+                        <td class="part-no">32500-234</td>
+                        <td class="part-no">32500-734</td>
+                    </tr>
+                    <tr onclick="showPopup('right-aux')">
+                        <td><b>F/O NAV Switching</b></td>
+                        <td class="part-no">S231W240-233</td>
+                        <td class="part-no">32500-233</td>
+                        <td class="part-no">32500-733</td>
+                    </tr>
+                    <tr onclick="showPopup('right-aux')">
+                        <td><b>F/O DSPL CTRL / AIR DATA ATT</b></td>
+                        <td class="part-no">S231W240-234</td>
+                        <td class="part-no">32500-234</td>
+                        <td class="part-no">32500-734</td>
+                    </tr>
+                    <tr onclick="showPopup('gnd-prox')">
+                        <td><b>GND PROX - G/S INHBIT</b></td>
+                        <td class="part-no">S231W240-225</td>
+                        <td class="part-no">32500-225</td>
+                        <td class="part-no">32500-725</td>
+                    </tr>
+                    <tr onclick="showPopup('gnd-prox')">
+                        <td><b>GND PROX -FLAP/GEAR/TERR OVRD</b></td>
+                        <td class="part-no">S231W240-221</td>
+                        <td class="part-no">32500-221</td>
+                        <td class="part-no">32500-721</td>
+                    </tr>
+                    <tr onclick="showPopup('gear-light')">
+                        <td><b>Heading Reference</b></td>
+                        <td class="part-no">S231W240-231</td>
+                        <td class="part-no">32500-231</td>
+                        <td class="part-no">32500-731</td>
+                    </tr>
+                    <tr onclick="showPopup('pedestal-brt')">
+                        <td><b>EICAS Display Control</b></td>
+                        <td class="part-no">S231W240-234</td>
+                        <td class="part-no">32500-234</td>
+                        <td class="part-no">32500-734</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <div id="dark-screen" class="overlay-screen" onclick="closeAllPopups()"></div>
 
-    <!-- POP-UP DATA WINDOWS FULLY SYNCHRONIZED TO ALL 7 AREAS -->
+    <!-- POP-UP DATA WINDOWS -->
     <div id="popup-top-left-warn" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
         <h3>Capt Master Warning/Caution</h3>
-        <div class="popup-row"><<span class="label">contains the capt master warning in red and caution in amber</span></div>
+        <div class="popup-row"><span class="label">contains the capt master warning in red and caution in amber</span></div>
+    </div>
 
     <div id="popup-top-right-warn" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
@@ -273,8 +297,9 @@
     <div id="popup-left-aux" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
         <h3>Capt NAV Switching / Display Control / Air Data Att</h3>
-        <div class="popup-row"><span class="label">contains the capt MIP source select </span></div>
+        <div class="popup-row"><span class="label">contains the capt MIP source select</span></div>
     </div>
+    
     <div id="popup-right-aux" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
         <h3>F/O NAV Switching / Display Control / Air Data Att</h3>
@@ -296,7 +321,7 @@
     <div id="popup-pedestal-brt" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
         <h3>EICAS Display Control</h3>
-        <div class="popup-row"><span class="label">contains eicas display control - altn </span></div>
+        <div class="popup-row"><span class="label">contains eicas display control - altn</span></div>
     </div>
 
     <!-- SWITCHES MANUAL BLUEPRINT POPUP -->
@@ -313,16 +338,34 @@
             document.getElementById('dark-screen').style.display = 'block';
             document.getElementById('popup-' + id).style.display = 'block';
         }
+        
         function closeAllPopups() {
             document.getElementById('dark-screen').style.display = 'none';
             const boxes = document.querySelectorAll('.popup-box');
             boxes.forEach(box => box.style.display = 'none');
         }
 
-        // Auto-opens the Switches Guide blueprint pop-up cleanly upon load
-        window.addEventListener('DOMContentLoaded', () => {
-            showPopup('switches-guide');
-        });
+        // Table search filtering logic
+        function filterTable() {
+            var input = document.getElementById("searchSwitches");
+            var filter = input.value.toUpperCase();
+            var table = document.getElementById("SwitchesTable");
+            var tr = table.getElementsByTagName("tr");
+
+            for (var i = 1; i < tr.length; i++) {
+                var showRow = false;
+                var tds = tr[i].getElementsByTagName("td");
+                for (var j = 0; j < tds.length; j++) {
+                    if (tds[j]) {
+                        if (tds[j].textContent.toUpperCase().indexOf(filter) > -1) {
+                            showRow = true;
+                            break;
+                        }
+                    }
+                }
+                tr[i].style.display = showRow ? "" : "none";
+            }
+        }
     </script>
 </body>
 </html>
