@@ -21,18 +21,24 @@
         h1 { color: #ffffff; margin-bottom: 5px; text-align: center; }
         .subtitle { color: #bcaaa4; margin-bottom: 30px; text-align: center; }
 
-        /* Main cockpit image box container */
-          .image-container {
+        /* Main cockpit image box container - Scaled down and zoom-friendly */
+        .image-container {
             position: relative;
             display: inline-block;
-            max-width: 60%;
+            width: 100%;
+            max-width: 450px; /* Controls the maximum size on desktop so it's not too big */
             border: 4px solid #3e2723;
             border-radius: 8px;
             box-shadow: 0 10px 30px -5px rgba(0,0,0,0.9);
             overflow: hidden;
             margin-bottom: 35px;
         }
-        img { max-width: 600%; height: auto; display: block; max-height: 95vh; }
+        /* Forces image to perfectly fill the container and scale cleanly with page zoom */
+        .image-container img { 
+            width: 100%; 
+            height: auto; 
+            display: block; 
+        }
 
         /* Square box overlays matching your red circled zones */
         .switch-zone {
@@ -53,7 +59,7 @@
         /* Absolute coordinates mapping out your 7 red circled zones */
         #zone-door   { top: 90%;  left: 9.5%; width: 7%;  height: 6%;  }
         #zone-flaps  { top: 22%;  left: 83.5%; width: 7.5%;  height: 7.5%;  }
-       
+        
 
         /* Parts Section Header */
         .parts-section {
