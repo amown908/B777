@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glareshield Switches Overview</title>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: #11161a; color: #e2e8f0;
+            margin: 0; padding: 20px;
+            display: flex; flex-direction: column; align-items: center;
+        }
+        .back-link {
+            align-self: flex-start; color: #38bdf8;
+            text-decoration: none; font-weight: bold; margin-bottom: 20px;
+        }
+        .back-link:hover { text-decoration: underline; }
+        
+        h1 { color: #ffffff; margin-bottom: 5px; text-align: center; }
+        .subtitle { color: #94a3b8; margin-bottom: 30px; text-align: center; }
+
+        /* Multi-Image Presentation Grid */
+        .gallery-row {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            width: 100%;
+            max-width: 1400px;
+            margin-bottom: 35px;
+            flex-wrap: wrap;
+        }
+        
+        .image-frame {
+            position: relative;
+            background: #1e293b;
+            border: 4px solid #334155;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px -5px rgba(0,0,0,0.8);
+            overflow: hidden;
+            flex: 1;
+            min-width: 340px;
+            max-width: 48%;
+        }
+
+        .image-frame img { 
+            width: 100%; 
+            height: auto; 
+            display: block; 
+            max-height: 60vh;
+            object-fit: contain;
+        }
+
+        /* Highlighted Switch Mapping Regions */
+        .switch-zone {
+            position: absolute;
+            background: rgba(56, 189, 248, 0.15);
+            border: 2px dashed #38bdf8;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .switch-zone:hover {
+            background: rgba(245, 158, 11, 0.3);
+            border-color: #f59e0b;
+            box-shadow: 0 0 10px #f59e0b;
+        }
+
+        /* Mock placements for switch hotspots (Adjust coordinates if needed) */
+        #sw-mcp-disengage { top: 45%; left: 50%; width: 4.5%; height: 9%; }
+        #sw-gear-lever     { top: 35%; left: 59%; width: 3.5%; height: 12%; }
+
+        /* Popup Layer Structures */
+        .overlay-screen {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85);
+            z-index: 99;
+        }
+        
+        .popup-box {
+            display: none;
+            position: fixed;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            background: #1e293b;
+            border: 2px solid #38bdf8;
+            padding: 22px 25px;
+            border-radius: 8px;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.9);
+            z-index: 100;
+            width: 92%; max-width: 600px;
+        }
+        
+        .popup-box h3 { margin: 0 0 12px 0; color: #ffffff; font-size: 1.2em; }
+        .popup-divider { border: none; border-top: 1px solid #334155; margin: 12px 0; }
+        
+        .close-btn {
+            position: absolute; top: 12px; right: 12px;
+            background: #334155; color: white; border: none;
+            padding: 4px 9px; cursor: pointer; border-radius: 4px; font-size: 0.85em;
+        }
+        .close-btn:hover { background: #ef4444; }
+
+        .guide-display-img {
+            width: 100%;
+            height: auto;
+            border-radius: 4px;
+            border: 1px solid #334155;
+            margin-top: 8px;
+        }
+        
+        .btn-trigger {
+            background: #38bdf8; color: #11161a;
+            border: none; padding: 10px 18px;
+            font-weight: bold; border-radius: 6px;
+            cursor: pointer; margin-bottom: 20px;
+            transition: background 0.2s;
+        }
+        .btn-trigger:hover { background: #0ea5e9; }
+    </style>
+</head>
+<body>
+
+    <a href="glareshield.html" class="back-link">← Back to Instruments Configuration</a>
+    
+    <h1>Glareshield & Panels Control Switches</h1>
+    <p class="subtitle">Highlighting physical cockpit switches, relays, and toggle behaviors.</p>
+
+    <!-- Manual Action Trigger Button -->
+    <button class="btn-trigger" onclick="showPopup('switches-guide')">Open Switches Guide Manual</button>
+
+    <!-- Balanced Two-Image View Grid -->
+    <div class="gallery-row">
+        <!-- Frame 1: Main Panel Map Layout -->
+        <div class="image-frame">
+            <img src="main.jpeg" alt="Panel Workspace View">
+            <!-- Example Interactive Switch Hotspots on Image 1 -->
+            <div class="switch-zone" id="sw-mcp-disengage" onclick="alert('MCP Disengage Bar Selected')" title="MCP Disengage Switch"></div>
+            <div class="switch-zone" id="sw-gear-lever" onclick="alert('Landing Gear Toggle Switch Selected')" title="Gear Selector Switch"></div>
+        </div>
+
+        <!-- Frame 2: Push Button Layout View -->
+        <div class="image-frame">
+            <img src="PBGuide.jpg" alt="Push Button Configuration Overview Diagram">
+        </div>
+    </div>
+
+    <!-- Shadows Dark Overlay Layout -->
+    <div id="dark-screen" class="overlay-screen" onclick="closeAllPopups()"></div>
+
+    <!-- AUTOMATIC TRIGGER GUIDE POPUP -->
+    <div id="popup-switches-guide" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>Switches Guide</h3>
+        <div class="popup-divider"></div>
+        <p style="font-size: 0.85em; color: #94a3b8; margin: 0 0 10px 0;">Push Button Configuration Manual Overview:</p>
+        <img src="PBGuide.jpg" alt="PBGuide Reference Resource View" class="guide-display-img">
+    </div>
+
+    <script>
+        function showPopup(id) {
+            closeAllPopups();
+            document.getElementById('dark-screen').style.display = 'block';
+            document.getElementById('popup-' + id).style.display = 'block';
+        }
+        function closeAllPopups() {
+            document.getElementById('dark-screen').style.display = 'none';
+            const boxes = document.querySelectorAll('.popup-box');
+            boxes.forEach(box => box.style.display = 'none');
+        }
+
+        // Window load wrapper that forces the Switches Guide modal to open automatically on entry
+        window.addEventListener('DOMContentLoaded', () => {
+            showPopup('switches-guide');
+        });
+    </script>
+</body>
+</html>
