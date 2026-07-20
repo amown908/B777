@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Glareshield Switches Overview</title>
+    <title>Glareshield & Main Panel Switches</title>
     <style>
         * { box-sizing: border-box; }
         body {
@@ -54,10 +54,47 @@
         #zone-top-left-warn      { top: 4.5%;  left: 12.3%; width: 4.8%;  height: 9.0%;  }
         #zone-top-right-warn     { top: 2.5%;  left: 80.5%; width: 4.8%;  height: 9.0%;  }
         #zone-left-aux-switches  { top: 34.0%; left: 0.3%;  width: 3.5%;  height: 18.0%; }
-        #zone-right-aux-switches { top: 32%; left: 95.4%; width: 4.0%;  height: 20.0%; }
+        #zone-right-aux-switches { top: 32%;    left: 95.4%; width: 4.0%;  height: 20.0%; }
         #zone-capt-gnd-prox      { top: 56.5%; left: 28.5%; width: 5.8%;  height: 10.0%; }
         #zone-center-gear-light  { top: 21.0%; left: 54.5%; width: 7.2%;  height: 18.0%; }
-        #zone-pedestal-brt       { top: 90.0%; left: 43%; width: 3.5%;  height: 7.0%;  }
+        #zone-pedestal-brt       { top: 90.0%; left: 43%;   width: 3.5%;  height: 7.0%;  }
+
+        /* Inventory Index Table Layout styling */
+        .table-container {
+            width: 100%;
+            max-width: 1200px;
+            margin-top: 20px;
+            background: #2b1f1c;
+            border: 1px solid #4e342e;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.9em;
+        }
+        th, td {
+            padding: 12px 16px;
+            border-bottom: 1px solid #4e342e;
+        }
+        th {
+            background: #3e2723;
+            color: #f59e0b;
+            text-transform: uppercase;
+            font-size: 0.8em;
+            letter-spacing: 0.05em;
+        }
+        tr:hover td {
+            background: #352723;
+            cursor: pointer;
+        }
+        td.part-no {
+            font-family: monospace;
+            color: #f59e0b;
+        }
 
         /* Popup Layer Structures */
         .overlay-screen {
@@ -116,15 +153,15 @@
 
     <a href="glareshield.html" class="back-link">← Back to Instruments Configuration</a>
     
-    <h1>Glareshield & Panels Control Switches</h1>
-    <p class="subtitle">Highlighting physical cockpit switches, relays, and toggle behaviors.</p>
+    <h1>Glareshield & Main Panel Switches</h1>
+    <p class="subtitle">Highlighting physical cockpit switches.</p>
 
     <button class="btn-trigger" onclick="showPopup('switches-guide')">Open Switches Guide</button>
 
     <div class="image-container">
         <img src="main.jpeg" alt="Panel Workspace View">
         
-        <!-- The 7 requested interactive highlighted square zones -->
+        <!-- Synchronized hot-zones matching your requested list values -->
         <div class="switch-zone" id="zone-top-left-warn" onclick="showPopup('top-left-warn')" title="Capt Master Warning/Caution"></div>
         <div class="switch-zone" id="zone-top-right-warn" onclick="showPopup('top-right-warn')" title="F/O Master Warning/Caution"></div>
         <div class="switch-zone" id="zone-left-aux-switches" onclick="showPopup('left-aux')" title="Capt NAV Switching / Display Control / Air Data Att"></div>
@@ -134,63 +171,121 @@
         <div class="switch-zone" id="zone-pedestal-brt" onclick="showPopup('pedestal-brt')" title="EICAS Display Control"></div>
     </div>
 
+    <!-- INDEX INVENTORY TABLE ELEMENT -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Boeing Top Level</th>
+                    <th>Korry Top Level</th>
+                    <th>Cap/Switch Module</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr onclick="showPopup('top-left-warn')">
+                    <td><b>Capt Master Warning/Caution</b></td>
+                    <td class="part-no">S231W240-224</td>
+                    <td class="part-no">32500-224</td>
+                    <td class="part-no">32500-724</td>
+                </tr>
+                <tr onclick="showPopup('top-right-warn')">
+                    <td><b>F/O Master Warning/Caution</b></td>
+                    <td class="part-no">S231W240-224</td>
+                    <td class="part-no">32500-224</td>
+                    <td class="part-no">32500-724</td>
+                </tr>
+                <tr onclick="showPopup('left-aux')">
+                    <td><b>Capt NAV Switching / Display Control / Air Data Att</b></td>
+                    <td class="part-no">S231W240-233</td>
+                    <td class="part-no">32500-233</td>
+                    <td class="part-no">32500-733</td>
+                </tr>
+                <tr onclick="showPopup('right-aux')">
+                    <td><b>CAPT NAV Switching / Display Control / Air Data Att</b></td>
+                    <td class="part-no">S231W240-234</td>
+                    <td class="part-no">32500-234</td>
+                    <td class="part-no">32500-734</td>
+                </tr>
+                <tr onclick="showPopup('gnd-prox')">
+                    <td><b>GND PROX</b></td>
+                    <td class="part-no">S231W240-225</td>
+                    <td class="part-no">32500-225</td>
+                    <td class="part-no">32500-725</td>
+                </tr>
+                <tr onclick="showPopup('gear-light')">
+                    <td><b>Heading Reference</b></td>
+                    <td class="part-no">S231W240-231</td>
+                    <td class="part-no">32500-231</td>
+                    <td class="part-no">32500-731</td>
+                </tr>
+                <tr onclick="showPopup('pedestal-brt')">
+                    <td><b>EICAS Display Control</b></td>
+                    <td class="part-no">S231W240-234</td>
+                    <td class="part-no">32500-234</td>
+                    <td class="part-no">32500-734</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
     <div id="dark-screen" class="overlay-screen" onclick="closeAllPopups()"></div>
 
-    <!-- DATA MODALS INCORPORATING YOUR SPECIFIC COLUMN FIELDS -->
+    <!-- POP-UP DATA WINDOWS FULLY SYNCHRONIZED TO ALL 7 AREAS -->
     <div id="popup-top-left-warn" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
         <h3>Capt Master Warning/Caution</h3>
-        <div class="popup-row"><span class="label">Boeing top level</span><span class="value">B777-GLSH-01A</span></div>
-        <div class="popup-row"><span class="label">Korry top level</span><span class="value">KRY-813-2201-01</span></div>
-        <div class="popup-row"><span class="label">Cap/Switch module</span><span class="value">MOD-WNG-CHASSIS-L</span></div>
+        <div class="popup-row"><span class="label">Boeing top level</span><span class="value">S231W240-224</span></div>
+        <div class="popup-row"><span class="label">Korry top level</span><span class="value">32500-224</span></div>
+        <div class="popup-row"><span class="label">Cap/Switch module</span><span class="value">32500-724</span></div>
     </div>
 
     <div id="popup-top-right-warn" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>F/O Master Warning / Caution</h3>
-        <div class="popup-row"><span class="label">Boeing top level</span><span class="value">B777-GLSH-01B</span></div>
-        <div class="popup-row"><span class="label">Korry top level</span><span class="value">KRY-813-2201-02</span></div>
-        <div class="popup-row"><span class="label">Cap/Switch module</span><span class="value">MOD-WNG-CHASSIS-R</span></div>
+        <h3>F/O Master Warning/Caution</h3>
+        <div class="popup-row"><span class="label">Boeing top level</span><span class="value">S231W240-224</span></div>
+        <div class="popup-row"><span class="label">Korry top level</span><span class="value">32500-224</span></div>
+        <div class="popup-row"><span class="label">Cap/Switch module</span><span class="value">32500-724</span></div>
     </div>
 
     <div id="popup-left-aux" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
         <h3>Capt NAV Switching / Display Control / Air Data Att</h3>
-        <div class="popup-row"><span class="label">Boeing top level</span><span class="value">B777-AUX-03L</span></div>
-        <div class="popup-row"><span class="label">Korry top level</span><span class="value">KRY-703-4112-00</span></div>
-        <div class="popup-row"><span class="label">Cap/Switch module</span><span class="value">CAP-TOGGLE-TRIPLE-L</span></div>
+        <div class="popup-row"><span class="label">Boeing top level</span><span class="value">S231W240-233</span></div>
+        <div class="popup-row"><span class="label">Korry top level</span><span class="value">32500-233</span></div>
+        <div class="popup-row"><span class="label">Cap/Switch module</span><span class="value">32500-733</span></div>
     </div>
 
     <div id="popup-right-aux" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>F/O NAV Switching / Display Control / Air Data Att"</h3>
-        <div class="popup-row"><span class="label">Boeing top level</span><span class="value">B777-AUX-03R</span></div>
-        <div class="popup-row"><span class="label">Korry top level</span><span class="value">KRY-703-4112-05</span></div>
-        <div class="popup-row"><span class="label">Cap/Switch module</span><span class="value">CAP-TOGGLE-TRIPLE-R</span></div>
+        <h3>CAPT NAV Switching / Display Control / Air Data Att</h3>
+        <div class="popup-row"><span class="label">Boeing top level</span><span class="value">S231W240-234</span></div>
+        <div class="popup-row"><span class="label">Korry top level</span><span class="value">32500-234</span></div>
+        <div class="popup-row"><span class="label">Cap/Switch module</span><span class="value">32500-734</span></div>
     </div>
 
     <div id="popup-gnd-prox" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
         <h3>GND PROX</h3>
-        <div class="popup-row"><span class="label">Boeing top level</span><span class="value">B777-GPWS-OVRD</span></div>
-        <div class="popup-row"><span class="label">Korry top level</span><span class="value">KRY-925-1104-02</span></div>
-        <div class="popup-row"><span class="label">Cap/Switch module</span><span class="value">CAP-GUARDED-PB-02</span></div>
+        <div class="popup-row"><span class="label">Boeing top level</span><span class="value">S231W240-225</span></div>
+        <div class="popup-row"><span class="label">Korry top level</span><span class="value">32500-225</span></div>
+        <div class="popup-row"><span class="label">Cap/Switch module</span><span class="value">32500-725</span></div>
     </div>
 
     <div id="popup-gear-light" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
         <h3>Heading Reference</h3>
-        <div class="popup-row"><span class="label">Boeing top level</span><span class="value">B777-GEAR-OVRD</span></div>
-        <div class="popup-row"><span class="label">Korry top level</span><span class="value">KRY-911-3061-00</span></div>
-        <div class="popup-row"><span class="label">Cap/Switch module</span><span class="value">CAP-FLIGHT-CTRL-BLOCK</span></div>
+        <div class="popup-row"><span class="label">Boeing top level</span><span class="value">S231W240-231</span></div>
+        <div class="popup-row"><span class="label">Korry top level</span><span class="value">32500-231</span></div>
+        <div class="popup-row"><span class="label">Cap/Switch module</span><span class="value">32500-731</span></div>
     </div>
 
     <div id="popup-pedestal-brt" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
         <h3>EICAS Display Control</h3>
-        <div class="popup-row"><span class="label">Boeing top level</span><span class="value">B777-BRT-PEDESTAL</span></div>
-        <div class="popup-row"><span class="label">Korry top level</span><span class="value">KRY-602-1180-01</span></div>
-        <div class="popup-row"><span class="label">Cap/Switch module</span><span class="value">MOD-POT-DUAL-ROTARY</span></div>
+        <div class="popup-row"><span class="label">Boeing top level</span><span class="value">S231W240-234</span></div>
+        <div class="popup-row"><span class="label">Korry top level</span><span class="value">32500-234</span></div>
+        <div class="popup-row"><span class="label">Cap/Switch module</span><span class="value">32500-734</span></div>
     </div>
 
     <!-- SWITCHES MANUAL BLUEPRINT POPUP -->
