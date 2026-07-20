@@ -8,7 +8,6 @@
         * { box-sizing: border-box; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-           
             background: #1a1412; color: #e2e8f0;
             margin: 0; padding: 20px;
             display: flex; flex-direction: column; align-items: center;
@@ -22,38 +21,45 @@
         h1 { color: #ffffff; margin-bottom: 5px; text-align: center; }
         .subtitle { color: #bcaaa4; margin-bottom: 30px; text-align: center; }
 
+        /* Main cockpit image box container */
         .image-container {
             position: relative;
             display: inline-block;
-            max-width: 50%;
+            max-width: 100%;
+            width: 1200px;
             border: 4px solid #3e2723;
             border-radius: 8px;
             box-shadow: 0 10px 30px -5px rgba(0,0,0,0.9);
             overflow: hidden;
             margin-bottom: 35px;
         }
-        .image-container img { max-width: 100%; height: auto; display: block; max-height: 65vh; }
+        .image-container img { width: 100%; height: auto; display: block; }
 
-        /* Dotted highlight switch overlay ring mapping rules */
+        /* Square box overlays matching your red circled zones */
         .switch-zone {
             position: absolute;
-            background: rgba(141, 110, 99, 0.12);
-            border: 1.5px dashed rgba(215, 204, 200, 0.6);
-            border-radius: 50%;
+            background: rgba(245, 158, 11, 0.08);
+            border: 2px solid rgba(245, 158, 11, 0.5);
+            border-radius: 4px;
             cursor: pointer;
             transition: all 0.2s ease;
         }
         .switch-zone:hover {
-            background: rgba(245, 158, 11, 0.25);
+            background: rgba(245, 158, 11, 0.28);
             border-color: #f59e0b;
-            box-shadow: 0 0 8px #f59e0b;
+            box-shadow: 0 0 12px #f59e0b;
         }
 
-        /* Temporary initial mock placements for switches (Ready for you to change/add more) */
-        #sw-mcp-disengage { top: 45%; left: 50%; width: 4.5%; height: 9%; }
-        #sw-gear-lever     { top: 35%; left: 59%; width: 3.5%; height: 12%; }
+        /* Absolute coordinates mapping out your 7 red circled zones */
+        #zone-top-left-warn      { top: 4.5%;  left: 12.3%; width: 4.8%;  height: 9.0%;  }
+        #zone-top-right-warn     { top: 2.5%;  left: 80.5%; width: 4.8%;  height: 9.0%;  }
+        #zone-left-aux-switches  { top: 34.0%; left: 0.3%;  width: 3.5%;  height: 18.0%; }
+        #zone-right-aux-switches { top: 32.5%; left: 94.4%; width: 4.0%;  height: 20.0%; }
+        #zone-capt-gnd-prox      { top: 56.5%; left: 27.5%; width: 5.8%;  height: 10.0%; }
+        #zone-center-gear-light  { top: 21.0%; left: 54.5%; width: 7.2%;  height: 18.0%; }
+        #zone-pedestal-brt       { top: 89.0%; left: 41.5%; width: 3.5%;  height: 7.0%;  }
 
-        /* Popup Box Layout Overlays */
+        /* Popup Layer Structures */
         .overlay-screen {
             display: none;
             position: fixed;
@@ -73,11 +79,13 @@
             border-radius: 8px;
             box-shadow: 0 25px 50px -12px rgba(0,0,0,0.9);
             z-index: 100;
-            width: 92%; max-width: 600px;
+            width: 92%; max-width: 500px;
         }
         
-        .popup-box h3 { margin: 0 0 12px 0; color: #ffffff; font-size: 1.2em; }
-        .popup-divider { border: none; border-top: 1px solid #4e342e; margin: 12px 0; }
+        .popup-box h3 { margin: 0 0 15px 0; color: #ffffff; font-size: 1.2em; border-bottom: 1px solid #4e342e; padding-bottom: 8px;}
+        .popup-row { display: flex; flex-direction: column; gap: 4px; margin-bottom: 12px; font-size: 0.9em; }
+        .popup-row .label { color: #bcaaa4; font-weight: 600; text-transform: uppercase; font-size: 0.8em; letter-spacing: 0.05em; }
+        .popup-row .value { font-family: monospace; color: #f59e0b; background: #1a1412; padding: 6px 10px; border-radius: 4px; border: 1px solid #4e342e; }
         
         .close-btn {
             position: absolute; top: 12px; right: 12px;
@@ -108,30 +116,88 @@
 
     <a href="glareshield.html" class="back-link">← Back to Instruments Configuration</a>
     
-    <h1>Glareshield & Main Panel Switches</h1>
-    <p class="subtitle">Highlighting physical cockpit switches.</p>
+    <h1>Glareshield & Panels Control Switches</h1>
+    <p class="subtitle">Highlighting physical cockpit switches, relays, and toggle behaviors.</p>
 
-    <!-- The Box Trigger Action Button -->
     <button class="btn-trigger" onclick="showPopup('switches-guide')">Open Switches Guide</button>
 
-    <!-- KEEP ONLY ONE IMAGE VISIBLE ON SCREEN -->
     <div class="image-container">
         <img src="main.jpeg" alt="Panel Workspace View">
         
-        <!-- Interactive target rings overlay markers container -->
-        <div class="switch-zone" id="sw-mcp-disengage" onclick="alert('MCP Disengage Bar Selected')" title="MCP Disengage Switch"></div>
-        <div class="switch-zone" id="sw-gear-lever" onclick="alert('Landing Gear Toggle Switch Selected')" title="Gear Selector Switch"></div>
+        <!-- The 7 requested interactive highlighted square zones -->
+        <div class="switch-zone" id="zone-top-left-warn" onclick="showPopup('top-left-warn')" title="Capt Master Warning/Caution"></div>
+        <div class="switch-zone" id="zone-top-right-warn" onclick="showPopup('top-right-warn')" title="F/O Master Warning/Caution"></div>
+        <div class="switch-zone" id="zone-left-aux-switches" onclick="showPopup('left-aux')" title="Capt NAV Switching / Display Control / Air Data Att"></div>
+        <div class="switch-zone" id="zone-right-aux-switches" onclick="showPopup('right-aux')" title="CAPT NAV Switching / Display Control / Air Data Att"></div>
+        <div class="switch-zone" id="zone-capt-gnd-prox" onclick="showPopup('gnd-prox')" title="GND PROX"></div>
+        <div class="switch-zone" id="zone-center-gear-light" onclick="showPopup('gear-light')" title="Heading Reference"></div>
+        <div class="switch-zone" id="zone-pedestal-brt" onclick="showPopup('pedestal-brt')" title="EICAS Display Control"></div>
     </div>
 
-    <!-- Background Shadows Layout Screen -->
     <div id="dark-screen" class="overlay-screen" onclick="closeAllPopups()"></div>
 
-    <!-- THE DYNAMIC MODAL BOX FOR PBGUIDE.JPG -->
+    <!-- DATA MODALS INCORPORATING YOUR SPECIFIC COLUMN FIELDS -->
+    <div id="popup-top-left-warn" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>Capt Master Warning/Caution</h3>
+        <div class="popup-row"><span class="label">Boeing top level</span><span class="value">B777-GLSH-01A</span></div>
+        <div class="popup-row"><span class="label">Korry top level</span><span class="value">KRY-813-2201-01</span></div>
+        <div class="popup-row"><span class="label">Cap/Switch module</span><span class="value">MOD-WNG-CHASSIS-L</span></div>
+    </div>
+
+    <div id="popup-top-right-warn" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>F/O Master Warning / Caution</h3>
+        <div class="popup-row"><span class="label">Boeing top level</span><span class="value">B777-GLSH-01B</span></div>
+        <div class="popup-row"><span class="label">Korry top level</span><span class="value">KRY-813-2201-02</span></div>
+        <div class="popup-row"><span class="label">Cap/Switch module</span><span class="value">MOD-WNG-CHASSIS-R</span></div>
+    </div>
+
+    <div id="popup-left-aux" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>Capt NAV Switching / Display Control / Air Data Att</h3>
+        <div class="popup-row"><span class="label">Boeing top level</span><span class="value">B777-AUX-03L</span></div>
+        <div class="popup-row"><span class="label">Korry top level</span><span class="value">KRY-703-4112-00</span></div>
+        <div class="popup-row"><span class="label">Cap/Switch module</span><span class="value">CAP-TOGGLE-TRIPLE-L</span></div>
+    </div>
+
+    <div id="popup-right-aux" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>F/O NAV Switching / Display Control / Air Data Att"</h3>
+        <div class="popup-row"><span class="label">Boeing top level</span><span class="value">B777-AUX-03R</span></div>
+        <div class="popup-row"><span class="label">Korry top level</span><span class="value">KRY-703-4112-05</span></div>
+        <div class="popup-row"><span class="label">Cap/Switch module</span><span class="value">CAP-TOGGLE-TRIPLE-R</span></div>
+    </div>
+
+    <div id="popup-gnd-prox" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>GND PROX</h3>
+        <div class="popup-row"><span class="label">Boeing top level</span><span class="value">B777-GPWS-OVRD</span></div>
+        <div class="popup-row"><span class="label">Korry top level</span><span class="value">KRY-925-1104-02</span></div>
+        <div class="popup-row"><span class="label">Cap/Switch module</span><span class="value">CAP-GUARDED-PB-02</span></div>
+    </div>
+
+    <div id="popup-gear-light" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>Heading Reference</h3>
+        <div class="popup-row"><span class="label">Boeing top level</span><span class="value">B777-GEAR-OVRD</span></div>
+        <div class="popup-row"><span class="label">Korry top level</span><span class="value">KRY-911-3061-00</span></div>
+        <div class="popup-row"><span class="label">Cap/Switch module</span><span class="value">CAP-FLIGHT-CTRL-BLOCK</span></div>
+    </div>
+
+    <div id="popup-pedestal-brt" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>EICAS Display Control</h3>
+        <div class="popup-row"><span class="label">Boeing top level</span><span class="value">B777-BRT-PEDESTAL</span></div>
+        <div class="popup-row"><span class="label">Korry top level</span><span class="value">KRY-602-1180-01</span></div>
+        <div class="popup-row"><span class="label">Cap/Switch module</span><span class="value">MOD-POT-DUAL-ROTARY</span></div>
+    </div>
+
+    <!-- SWITCHES MANUAL BLUEPRINT POPUP -->
     <div id="popup-switches-guide" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
         <h3>Switches Guide</h3>
         <div class="popup-divider"></div>
-        <!-- PBGuide picture safely embedded only within this pop-up component -->
         <img src="PBGuide.jpg" alt="Push Button Configuration Overview Diagram" class="guide-image">
     </div>
 
@@ -147,7 +213,7 @@
             boxes.forEach(box => box.style.display = 'none');
         }
 
-        // Auto-opens the Switches Guide modal instantly upon loading the page
+        // Auto-opens the Switches Guide blueprint pop-up cleanly upon load
         window.addEventListener('DOMContentLoaded', () => {
             showPopup('switches-guide');
         });
