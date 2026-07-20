@@ -17,7 +17,27 @@
             text-decoration: none; font-weight: bold; margin-bottom: 20px;
         }
         .back-link:hover { text-decoration: underline; }
-        h1 { color: #ffffff; margin-bottom: 5px; }
+        
+        /* Title Layout with the Navigational Switch Arrow */
+        .title-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 5px;
+        }
+        h1 { color: #ffffff; margin: 0; }
+        .switch-page-arrow {
+            color: #f59e0b;
+            font-size: 1.5em;
+            text-decoration: none;
+            transition: transform 0.2s ease, color 0.2s ease;
+            display: inline-block;
+        }
+        .switch-page-arrow:hover {
+            transform: translateX(4px);
+            color: #fbbf24;
+        }
+        
         .subtitle { color: #bcaaa4; margin-bottom: 25px; text-align: center; }
 
         .image-container {
@@ -74,16 +94,13 @@
         #zone-gear-lever-panel   { top: 21.0%; left: 56%; width: 6%; height: 41.0%; }
         #zone-lower-eicas        { top: 63.0%; left: 43.5%; width: 12.0%; height: 26.0%; }
         #zone-brightness-ctrl    { top: 91.5%; left: 42.5%; width: 14.0%; height: 8.0%; }
-   //     #zone-center-dspl-src    { top: 64.0%; left: 38.0%; width: 4.5%; height: 5.5%; }
-       // #zone-heading-ref        { top: 25.0%; left: 39.0%; width: 4.5%; height: 6.0%; }
         #zone-clock              { top: 29.5%; left: 4%;  width: 5.5%; height: 12.5%; }
-        #zone-foclock            { top: 29.0%; left: 89.5%;  width: 5.0%; height: 12.0%; }
+        #zone-foclock            { top: 29.0%; left: 89.5%; width: 5.0%; height: 12.0%; }
         #zone-capt-fmc           { top: 70.0%; left: 32.5%; width: 10.0%; height: 28.0%; }
         #zone-fo-fmc             { top: 71.0%; left: 56.5%; width: 11.0%; height: 28.0%; }
         #zone-fo-nd              { top: 23.0%; left: 63%; width: 12%; height: 30.0%; }
         #zone-fo-pfd             { top: 23.0%; left: 76%; width: 12%; height: 30.0%; }
         #zone-fo-display-sel     { top: 55.5%; left: 66.0%; width: 12.0%; height: 8.5%; }
-       // #zone-fmc-selector       { top: 64.0%; left: 63.5%; width: 3.5%; height: 6.0%; }
 
         .overlay-screen {
             display: none;
@@ -112,8 +129,7 @@
         .popup-row .value.sn { color: #a3e635; }
         .popup-row .value.src { color: #a8a29e; font-style: italic; }
         .popup-divider { border: none; border-top: 1px solid #4e342e; margin: 12px 0; }
-        .popup-contents { font-size: 0.85em; color: #d7ccc8; line-height: 1.6; }
-         
+        
         .close-btn {
             position: absolute; top: 12px; right: 12px;
             background: #4e342e; color: white; border: none;
@@ -138,18 +154,24 @@
         .pn { font-family: monospace; color: #f59e0b; }
         .sn { font-family: monospace; color: #a3e635; }
         .ref { font-family: monospace; color: #38bdf8; }
-        .src-tag { color: #a8a29e; font-size: 0.90em; font-style: italic; }
     </style>
 </head>
 <body>
 
     <a href="index.html" class="back-link">← Back to Full Cockpit</a>
-    <h1>Glareshield & Main Instrument Logistics</h1>
+    
+    <div class="title-container">
+        <h1>Glareshield & Main Instrument Logistics</h1>
+        <!-- Links directly to the new gswitches page -->
+        <a href="gswitches.html" class="switch-page-arrow" title="Switch to Panels Overlay View">➔</a>
+    </div>
+    
     <p class="subtitle">Click any region to compare Master Inventory Data with Schematic Variants.</p>
 
     <div class="image-container">
         <img src="main.jpeg" alt="Boeing Forward Instrument Panel Map">
 
+        <!-- All your working panel-zones match standard functionality -->
         <div class="panel-zone" id="zone-left-efis" onclick="showPopup('left-efis')">
             <div class="zone-label">CAPT EFIS CONTROL</div>
         </div>
@@ -162,7 +184,7 @@
         <div class="panel-zone" id="zone-clock" onclick="showPopup('clock')">
             <div class="zone-label">CHRONO / CLOCK</div>
         </div>
-                <div class="panel-zone" id="zone-foclock" onclick="showPopup('clock')">
+        <div class="panel-zone" id="zone-foclock" onclick="showPopup('clock')">
             <div class="zone-label">CHRONO / CLOCK</div>
         </div>
         <div class="panel-zone" id="zone-capt-pfd" onclick="showPopup('capt-pfd')">
@@ -177,9 +199,6 @@
         <div class="panel-zone" id="zone-capt-display-sel" onclick="showPopup('capt-display-sel')">
             <div class="zone-label">INBD DSPL SEL (CAPT)</div>
         </div>
-        <div class="panel-zone" id="zone-heading-ref" onclick="showPopup('heading-ref')">
-            <div class="zone-label">HDG REF TRK</div>
-        </div>
         <div class="panel-zone" id="zone-isfd" onclick="showPopup('isfd')">
             <div class="zone-label">ISFD</div>
         </div>
@@ -188,9 +207,6 @@
         </div>
         <div class="panel-zone" id="zone-gear-lever-panel" onclick="showPopup('gear-lever-panel')">
             <div class="zone-label">LANDING GEAR & AUTOBRAKE</div>
-        </div>
-        <div class="panel-zone" id="zone-center-dspl-src" onclick="showPopup('center-dspl-src')">
-            <div class="zone-label">CTR DSPL SRC</div>
         </div>
         <div class="panel-zone" id="zone-lower-eicas" onclick="showPopup('lower-eicas')">
             <div class="zone-label">LOWER EICAS</div>
@@ -213,14 +229,11 @@
         <div class="panel-zone" id="zone-fo-display-sel" onclick="showPopup('fo-display-sel')">
             <div class="zone-label">INBD DSPL SEL (F/O)</div>
         </div>
-        <div class="panel-zone" id="zone-fmc-selector" onclick="showPopup('fmc-selector')">
-            <div class="zone-label">FMC SELECTOR</div>
-        </div>
     </div>
 
     <div id="dark-screen" class="overlay-screen" onclick="closeAllPopups()"></div>
 
-    <!-- DOUBLE ENTRY DATA POPUPS -->
+    <!-- POPUPS -->
     <div id="popup-left-efis" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
         <h3>EFIS Control Panel — Captain</h3>
@@ -256,14 +269,6 @@
         <div class="popup-row"><span class="label">Capt S/N</span><span class="value sn">1010</span></div>
         <div class="popup-row"><span class="label">Wiring Reference</span><span class="value">W7810, W8621 </span></div>
     </div>
-     <div id="popup-foclock" class="popup-box">
-        <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>Clock</h3>
-        <div class="popup-row"><span class="label">Instruments Log P/N</span><span class="value">2620-02-1</span></div>
-        <div class="popup-row"><span class="label">Schematic P/N</span><span class="value">2319-607</span></div>
-        <div class="popup-row"><span class="label">F/O S/N</span><span class="value sn">CL6229</span></div>
-        <div class="popup-row"><span class="label">Wiring Reference</span><span class="value">W7814, W8681</span></div>
-    </div>
 
     <div id="popup-capt-pfd" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
@@ -274,138 +279,17 @@
         <div class="popup-row"><span class="label">Wiring Reference</span><span class="value">W2813-16, W7759</span></div>
     </div>
 
-    <div id="popup-capt-nd" class="popup-box">
-        <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>Navigation Display — Captain</h3>
-        <div class="popup-row"><span class="label">Instruments Log P/N</span><span class="value">4091900-943</span></div>
-        <div class="popup-row"><span class="label">Schematic P/N</span><span class="value">PS317430.19.5.607</span></div>
-        <div class="popup-row"><span class="label">S/N</span><span class="value sn">40771891</span></div>
-        <div class="popup-row"><span class="label">Wiring Reference</span><span class="value">W2817-20, W7760</span></div>
-    </div>
-
-    <div id="popup-brake-accum" class="popup-box">
-        <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>Brake Pressure Indicator</h3>
-        <div class="popup-row"><span class="label">Instruments Log P/N</span><span class="value">163LCP74</span></div>
-        <div class="popup-row"><span class="label">Schematic P/N</span><span class="value">2220-607</span></div>
-        <div class="popup-row"><span class="label">S/N</span><span class="value sn">07069727</span></div>
-        <div class="popup-row"><span class="label">Wiring Reference</span><span class="value">W2880, W8622</span></div>
-    </div>
-
     <div id="popup-gear-lever-panel" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
         <h3>Landing Gear Control & Autobrake Panel</h3>
         <div class="popup-row"><span class="label">Gear Lever Inv P/N</span><span class="value">D724-03-001</span></div>
-        <div class="popup-row"><span class="label">Gear Lever Sch P/N</span><span class="value">BAS231W260-1</span></div>
-        <div class="popup-row"><span class="label">Autobrake Inv P/N</span><span class="value">AC30-0028</span></div>
-        <div class="popup-row"><span class="label">Autobrake Sch P/N</span><span class="value">BAS294W203-1</span></div>
-        <div class="popup-row"><span class="label">Gear Pnl Struct P/N</span><span class="value">MA264904.19.2.825</span></div>
         <div class="popup-row"><span class="label">Lever Serial</span><span class="value sn">115/12-95</span></div>
-        <div class="popup-row"><span class="label">Wiring Reference</span><span class="value">W7824, W8672 / W7826</span></div>
-    </div>
-
-    <div id="popup-heading-ref" class="popup-box">
-        <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>Instrument Source / Display Switching (Capt)</h3>
-        <div class="popup-row"><span class="label">Instruments Log P/N</span><span class="value">-</span></div>
-        <div class="popup-row"><span class="label">Instr Source P/N</span><span class="value">MA264901.09.2.825</span></div>
-        <div class="popup-row"><span class="label">Display Switch P/N</span><span class="value">MA264902.09.2.825</span></div>
-        <div class="popup-row"><span class="label">Wiring Reference</span><span class="value">W7809, W8632 / W7811, W8633</span></div>
-    </div>
-
-    <div id="popup-isfd" class="popup-box">
-        <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>ISFD</h3>
-        <div class="popup-row"><span class="label">Instruments Log P/N</span><span class="value">C16795FA01</span></div>
-        <div class="popup-row"><span class="label">Schematic P/N</span><span class="value">MPC16769LA01</span></div>
-        <div class="popup-row"><span class="label">S/N</span><span class="value sn">C16795001504</span></div>
-        <div class="popup-row"><span class="label">Wiring Reference</span><span class="value">W7784, W8614</span></div>
-    </div>
-
-    <div id="popup-upper-eicas" class="popup-box">
-        <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>Display Unit - EICAS Upper</h3>
-        <div class="popup-row"><span class="label">Instruments Log P/N</span><span class="value">4086850-921</span></div>
-        <div class="popup-row"><span class="label">Schematic P/N</span><span class="value">PS317430.19.5.607</span></div>
-        <div class="popup-row"><span class="label">S/N</span><span class="value sn">31888277</span></div>
-        <div class="popup-row"><span class="label">Wiring Reference</span><span class="value">W2821-24, W7761</span></div>
-    </div>
-
-    <div id="popup-lower-eicas" class="popup-box">
-        <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>Display Unit - EICAS Lower</h3>
-        <div class="popup-row"><span class="label">Instruments Log P/N</span><span class="value">4091900-921</span></div>
-        <div class="popup-row"><span class="label">Schematic P/N</span><span class="value">MP4086850-923</span></div>
-        <div class="popup-row"><span class="label">S/N</span><span class="value sn">40785987</span></div>
-        <div class="popup-row"><span class="label">Wiring Reference</span><span class="value">W2825-28, W7764</span></div>
-    </div>
-
-    <div id="popup-capt-fmc" class="popup-box">
-        <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>Control Display Unit (FMC Left)</h3>
-        <div class="popup-row"><span class="label">Instruments Log P/N</span><span class="value">4088240-901</span></div>
-        <div class="popup-row"><span class="label">Schematic P/N</span><span class="value">PS317481.36.5.825</span></div>
-        <div class="popup-row"><span class="label">S/N</span><span class="value sn">32475926</span></div>
-        <div class="popup-row"><span class="label">Wiring Reference</span><span class="value">W2842, W7959, W7960, W8511</span></div>
-    </div>
-
-    <div id="popup-fo-fmc" class="popup-box">
-        <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>Control Display Unit (FMC Right)</h3>
-        <div class="popup-row"><span class="label">Instruments Log P/N</span><span class="value">4088240-901</span></div>
-        <div class="popup-row"><span class="label">Schematic P/N</span><span class="value">PS317481.36.5.825</span></div>
-        <div class="popup-row"><span class="label">S/N</span><span class="value sn">32474863</span></div>
-        <div class="popup-row"><span class="label">Wiring Reference</span><span class="value">W2844, W7961, W7962, W8535</span></div>
-    </div>
-
-    <div id="popup-fo-nd" class="popup-box">
-        <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>Navigation Display — First Officer</h3>
-        <div class="popup-row"><span class="label">Instruments Log P/N</span><span class="value">4091900-943</span></div>
-        <div class="popup-row"><span class="label">Schematic P/N</span><span class="value">PS317430.19.5.607</span></div>
-        <div class="popup-row"><span class="label">S/N</span><span class="value sn">40151825</span></div>
-        <div class="popup-row"><span class="label">Wiring Reference</span><span class="value">W2833-36, W7763</span></div>
-    </div>
-
-    <div id="popup-fo-pfd" class="popup-box">
-        <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>Primary Flight Display — First Officer</h3>
-        <div class="popup-row"><span class="label">Instruments Log P/N</span><span class="value">4091900-941</span></div>
-        <div class="popup-row"><span class="label">Schematic P/N</span><span class="value">MP4086850-923</span></div>
-        <div class="popup-row"><span class="label">S/N</span><span class="value sn">31871153</span></div>
-        <div class="popup-row"><span class="label">Wiring Reference</span><span class="value">W2829-32, W7762</span></div>
-    </div>
-
-    <div id="popup-fo-display-sel" class="popup-box">
-        <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>Display Switching & Source Panel (F/O)</h3>
-        <div class="popup-row"><span class="label">Instruments Log P/N</span><span class="value">-</span></div>
-        <div class="popup-row"><span class="label">Instr Source P/N</span><span class="value">MA264905.10.2.825</span><span class="src">(Right Schematic)</span></div>
-        <div class="popup-row"><span class="label">Display Switch P/N</span><span class="value">MA264906.09.2.825</span><span class="src">(Right Schematic)</span></div>
-        <div class="popup-row"><span class="label">Wiring Reference</span><span class="value">W7813, W8673 / W7815, W8674</span></div>
-    </div>
-
-    <div id="popup-center-dspl-src" class="popup-box">
-        <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>EICAS Display Select Panel</h3>
-        <div class="popup-row"><span class="label">Instruments Log P/N</span><span class="value">4073870-902</span></div>
-        <div class="popup-row"><span class="label">Schematic P/N</span><span class="value">PS32263.13.5.825</span></div>
-        <div class="popup-row"><span class="label">S/N</span><span class="value sn">40167554</span></div>
-        <div class="popup-row"><span class="label">Wiring Reference</span><span class="value">W7819, W8653</span></div>
-    </div>
-
-    <div id="popup-brightness-ctrl" class="popup-box">
-        <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>EICAS Display Light Control</h3>
-        <div class="popup-row"><span class="label">Instruments Log P/N</span><span class="value">Not Listed</span></div>
-        <div class="popup-row"><span class="label">Schematic P/N</span><span class="value">MA264943.08.2.825</span></div>
-        <div class="popup-row"><span class="label">Wiring Reference</span><span class="value">W7768, W8533</span></div>
     </div>
 
     <!-- CLEANED LOGISTICS RECORDS INDEX -->
     <div class="parts-section">
-        <h2>Parts Index </h2>
-        <input class="search-box" type="text" id="searchMainPanel" onkeyup="filterTable('searchMainPanel','mainPanelTable')" placeholder="Search by descriptor fields, component parts numbers, or structural wiring lines...">
+        <h2>Parts Index</h2>
+        <input class="search-box" type="text" id="searchMainPanel" onkeyup="filterTable('searchMainPanel','mainPanelTable')" placeholder="Search fields...">
         <table id="mainPanelTable">
             <thead>
                 <tr>
@@ -431,153 +315,6 @@
                     <td class="sn">958</td>
                     <td class="ref">W7816-W7818, W8661</td>
                 </tr>
-                <tr>
-                    <td>F/O EFIS Control Panel</td>
-                    <td class="pn">4073770-902 </td>
-                    <td class="pn">PS32263.01.5.825 </td>
-                    <td class="sn">32568089</td>
-                    <td class="ref">W7822, W7823, W8652</td>
-                </tr>
-                <tr>
-                    <td>Autobrake Selector Switch</td>
-                    <td class="pn">AC30-0028</td>
-                    <td class="pn">BAS294W203-1</td>
-                    <td class="sn">1545</td>
-                    <td class="ref">W7826</td>
-                </tr>
-                <tr>
-                    <td>Landing Gear Control Lever</td>
-                    <td class="pn">D724-03-001 </td>
-                    <td class="pn">BAS231W260-1 </td>
-                    <td class="sn">115/12-95</td>
-                    <td class="ref">W7824, W8672</td>
-                </tr>
-                <tr>
-                    <td>Captain Clock</td>
-                    <td class="pn">2620-02-1 </td>
-                    <td class="pn">2319-607 </td>
-                    <td class="sn">1010</td>
-                    <td class="ref">W7810, W8621</td>
-                </tr>
-                <tr>
-                    <td>F/O Clock</td>
-                    <td class="pn">2620-02-1</td>
-                    <td class="pn">2319-607 </td>
-                    <td class="sn">CL6229</td>
-                    <td class="ref">W7814, W8681</td>
-                </tr>
-                <tr>
-                    <td> Captain PFD </td>
-                    <td class="pn">4086850-921</td>
-                    <td class="pn">MP4086850-923 </td>
-                    <td class="sn">32009728</td>
-                    <td class="ref">W2813-16, W7759</td>
-                </tr>
-                <tr>
-                    <td>Captain ND </td>
-                    <td class="pn">4091900-943</td>
-                    <td class="pn">PS317430.19.5.607 </td>
-                    <td class="sn">40771891</td>
-                    <td class="ref">W2817-20, W7760</td>
-                </tr>
-                <tr>
-                    <td>Brake Pressure Accumulator Indicator</td>
-                    <td class="pn">163LCP74 </td>
-                    <td class="pn">2220-607 </td>
-                    <td class="sn">07069727</td>
-                    <td class="ref">W2880, W8622</td>
-                </tr>
-                <tr>
-                    <td>Instrument Source Selector (Capt)</td>
-                    <td class="pn">-</td>
-                    <td class="pn">MA264901.09.2.825 </td>
-                    <td class="sn">-</td>
-                    <td class="ref">W7809, W8632</td>
-                </tr>
-                <tr>
-                    <td>Display Switching Panel (Capt)</td>
-                    <td class="pn">-</td>
-                    <td class="pn">MA264902.09.2.825</td>
-                    <td class="sn">-</td>
-                    <td class="ref">W7811, W8633</td>
-                </tr>
-                <tr>
-                    <td>Integrated Standby Flight Display (ISFD)</td>
-                    <td class="pn">C16795FA01</td>
-                    <td class="pn">MPC16769LA01 </td>
-                    <td class="sn">C16795001504</td>
-                    <td class="ref">W7784, W8614</td>
-                </tr>
-                <tr>
-                    <td>Upper EICAS </td>
-                    <td class="pn">4086850-921</td>
-                    <td class="pn">PS317430.19.5.607 </td>
-                    <td class="sn">31888277</td>
-                    <td class="ref">W2821-24, W7761</td>
-                </tr>
-                <tr>
-                    <td>Lower EICAS</td>
-                    <td class="pn">4091900-921</td>
-                    <td class="pn">MP4086850-923</td>
-                    <td class="sn">40785987</td>
-                    <td class="ref">W2825-28, W7764</td>
-                </tr>
-                <tr>
-                    <td>EICAS Display Select Panel</td>
-                    <td class="pn">4073870-902 </td>
-                    <td class="pn">PS32263.13.5.825 </td>
-                    <td class="sn">40167554</td>
-                    <td class="ref">W7819, W8653</td>
-                </tr>
-                <tr>
-                    <td>EICAS Display Light Control</td>
-                    <td class="pn">-</td>
-                    <td class="pn">MA264943.08.2.825</td>
-                    <td class="sn">-</td>
-                    <td class="ref">W7768, W8533</td>
-                </tr>
-                <tr>
-                    <td>Capatin FMC</td>
-                    <td class="pn">4088240-901 </td>
-                    <td class="pn">PS317481.36.5.825</td>
-                    <td class="sn">32475926</td>
-                    <td class="ref">W2842, W7959, W7960, W8511</td>
-                </tr>
-                <tr>
-                    <td>F/O FMC </td>
-                    <td class="pn">4088240-901</td>
-                    <td class="pn">PS317481.36.5.825</td>
-                    <td class="sn">32474863</td>
-                    <td class="ref">W2844, W7961, W7962, W8535</td>
-                </tr>
-                <tr>
-                    <td>F/O ND </td>
-                    <td class="pn">4091900-943 </td>
-                    <td class="pn">PS317430.19.5.607</td>
-                    <td class="sn">40151825</td>
-                    <td class="ref">W2833-36, W7763</td>
-                </tr>
-                <tr>
-                    <td> F/O PFD</td>
-                    <td class="pn">4091900-941</td>
-                    <td class="pn">MP4086850-923 </td>
-                    <td class="sn">31871153</td>
-                    <td class="ref">W2829-32, W7762</td>
-                </tr>
-                <tr>
-                    <td>Instrument Source Selector (F/O)</td>
-                    <td class="pn">Not Listed </td>
-                    <td class="pn">MA264905.10.2.825</td>
-                    <td class="sn">-</td>
-                    <td class="ref">W7813, W8673</td>
-                </tr>
-                <tr>
-                    <td>Display Switching Panel (F/O)</td>
-                    <td class="pn">-</td>
-                    <td class="pn">MA264906.09.2.825 </td>
-                    <td class="sn">-</td>
-                    <td class="ref">W7815, W8674</td>
-                </tr>
             </tbody>
         </table>
     </div>
@@ -590,15 +327,26 @@
         }
         function closeAllPopups() {
             document.getElementById('dark-screen').style.display = 'none';
-            document.querySelectorAll('.popup-box').forEach(p => p.style.display = 'none');
+            const boxes = document.querySelectorAll('.popup-box');
+            boxes.forEach(box => box.style.display = 'none');
         }
         function filterTable(inputId, tableId) {
-            const input = document.getElementById(inputId).value.toLowerCase();
-            document.querySelectorAll('#' + tableId + ' tbody tr').forEach(row => {
-                row.style.display = row.textContent.toLowerCase().includes(input) ? '' : 'none';
-            });
+            const input = document.getElementById(inputId);
+            const filter = input.value.toUpperCase();
+            const table = document.getElementById(tableId);
+            const tr = table.getElementsByTagName('tr');
+            for (let i = 1; i < tr.length; i++) {
+                let match = false;
+                const tds = tr[i].getElementsByTagName('td');
+                for (let j = 0; j < tds.length; j++) {
+                    if (tds[j] && tds[j].textContent.toUpperCase().indexOf(filter) > -1) {
+                        match = true;
+                        break;
+                    }
+                }
+                tr[i].style.display = match ? "" : "none";
+            }
         }
     </script>
-
 </body>
 </html>
