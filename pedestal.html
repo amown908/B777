@@ -69,10 +69,15 @@
         #zone-speedbrake-lever   { top: 7.0%; left: 21.0%; width: 13%; height: 16.0%; }
         #zone-parking-brake      { top: 24.5%; left: 9.5%; width: 5.5%; height: 11.5%; }
         #zone-stand-structure    { top: 1.0%; left: 36.5%; width: 26.5%; height: 23.0%; }
+        #zone-flaps              { top: 7.0%; left: 65.5%; width: 5%; height: 29.0%; }
+        #zone-alt-flaps          { top: 22.0%; left: 80.5%; width: 9%; height: 12%; }
+
 
         #zone-capt-rtp           { top: 39.5%; left: 9.5%; width: 26.5%; height: 6.5%; }
         #zone-capt-acp           { top: 46.5%; left: 9.5%; width: 26.5%; height: 11.5%; }
         #zone-weather-radar      { top: 58.5%; left: 9.5%; width: 26.5%; height: 7.0%; }
+        #zone-obs-rtp            { top: 65%; left: 9.5%; width: 26.5%; height: 7.0%; }
+        #zone-obs-acp           { top: 72%; left: 9.5%; width: 26.5%; height: 11.5%; }
 
         #zone-engine-fire        { top: 39.5%; left: 36.5%; width: 26.5%; height: 8.5%; }
         #zone-center-cdu         { top: 48.5%; left: 36.5%; width: 26.5%; height: 25.0%; }
@@ -175,18 +180,29 @@
         <div class="panel-zone" id="zone-stand-structure" onclick="showPopup('stand-structure')">
             <div class="zone-label">CONTROL STAND MECHANISM</div>
         </div>
+                <div class="panel-zone" id="zone-flaps" onclick="showPopup('flaps')">
+            <div class="zone-label">FLAPS</div>
+        </div>
+                <div class="panel-zone" id="zone-alt-flaps" onclick="showPopup('alt-flaps')">
+            <div class="zone-label">ALTN FLAPS</div>
+        </div>
 
         <!-- Lower Aisle Stand Left Column -->
         <div class="panel-zone" id="zone-capt-rtp" onclick="showPopup('capt-rtp')">
-            <div class="zone-label">RADIO TUNING (LEFT)</div>
+            <div class="zone-label">CAPT RADIO TUNING</div>
         </div>
         <div class="panel-zone" id="zone-capt-acp" onclick="showPopup('capt-acp')">
-            <div class="zone-label">AUDIO CONTROL (CAPT)</div>
+            <div class="zone-label">CAPT AUDIO CONTROL</div>
         </div>
         <div class="panel-zone" id="zone-weather-radar" onclick="showPopup('weather-radar')">
             <div class="zone-label">WEATHER RADAR</div>
         </div>
-
+        <div class="panel-zone" id="zone-ons-rtp" onclick="showPopup('obs-rtp')">
+            <div class="zone-label">OBS RADIO TUNNING</div>
+        </div>
+        <div class="panel-zone" id="zone-obs-acp" onclick="showPopup('obs-acp')">
+            <div class="zone-label">OBS AUDIO CONTROL</div>
+        </div>
         <!-- Center Column Avionics -->
         <div class="panel-zone" id="zone-engine-fire" onclick="showPopup('engine-fire')">
             <div class="zone-label">ENGINE FIRE HANDLES</div>
@@ -461,7 +477,7 @@
 
     <!-- MAIN PEDESTAL REGISTRY REFRENCING DATA GRID -->
     <div class="parts-section">
-        <h2>Pedestal / Aisle Stand — Component Logistics Registry</h2>
+        <h2>Part Indx</h2>
         <input class="search-box" type="text" id="searchPedestal" onkeyup="filterTable('searchPedestal','pedestalTable')" placeholder="Filter pedestal components by identifiers, serial metrics, or harness loops...">
         <table id="pedestalTable">
             <thead>
