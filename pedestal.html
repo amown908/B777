@@ -489,14 +489,66 @@
             </thead>
             <tbody>
                 <tr><td>Actuator, Auto Speedbrake Assembly</td><td class="pn">924D100-1</td><td class="pn">BA654W0007-535</td><td class="sn">1221</td><td class="wire">W8057</td></tr>
+                <tr><td>Aisle Stand Integrated Backlight Controller</td><td class="pn">Not Installed</td><td class="pn">MA264944.25.2.825</td><td class="sn">N/A</td><td class="wire">W7970, W8515</td></tr>
                 <tr><td>ATC / TCAS Operations Control Panel</td><td class="pn">G7131-02</td><td class="pn">2054-825</td><td class="sn">52116</td><td class="wire">W7918, W7919, W8552</td></tr>
                 <tr><td>Audio Control Panel — Captain</td><td class="pn">5701-1-1</td><td class="pn">2142-825</td><td class="sn">6440</td><td class="wire">W7912, W8512</td></tr>
                 <tr><td>Audio Control Panel — First Officer</td><td class="pn">5701-1-1</td><td class="pn">2142-825</td><td class="sn">2509</td><td class="wire">W7913, W8522</td></tr>
                 <tr><td>Audio Control Panel — Observer Line</td><td class="pn">5701-1-1</td><td class="pn">2142-825</td><td class="sn">2969, Now 2034</td><td class="wire">W7914, W8524</td></tr>
                 <tr><td>Control Display Unit - Aft FMC Station</td><td class="pn">4088240-901</td><td class="pn">PS317481.38.5.825</td><td class="sn">36015423</td><td class="wire">W7963, W7964, W2843, W8544</td></tr>
+                <tr><td>Control Stand Core Housing Structure</td><td class="pn">Not Installed</td><td class="pn">BA654W0007-535</td><td class="sn">N/A</td><td class="wire">W7854-W7861, W7878-W7881</td></tr>
+                <tr><td>Cursor Control Device — Captain</td><td class="pn">4073970-901</td><td class="pn">2000-825</td><td class="sn">32237431</td><td class="wire">W7850, W7861, W8501</td></tr>
+                <tr><td>Cursor Control Device — First Officer</td><td class="pn">4073970-951</td><td class="pn">2001-825</td><td class="sn">96100419</td><td class="wire">W7859, W7860, W8502</td></tr>
+                <tr><td>Emergency Evac Operational Module</td><td class="pn">G6031-05</td><td class="pn">2168-825</td><td class="sn">2263</td><td class="wire">W7928, W8543</td></tr>
+                <tr><td>Engine Fire Control Operational Module</td><td class="pn">D731-04-001 (L) / D731-05-001 (R)</td><td class="pn">MA264941.10.2.825</td><td class="sn">3037 (L) / 2875 (R)</td><td class="wire">W7971, W7972, W7973</td></tr>
+                <tr><td>Flight Deck Interactive Printer Assembly</td><td class="pn">C12349AD03</td><td class="pn">PS317509.21.5.842</td><td class="sn">4094</td><td class="wire">W7969, W8525</td></tr>
+                <tr><td>Parking Brake Lock Interlock Module</td><td class="pn">Not Installed</td><td class="pn">BA654W0007-535</td><td class="sn">N/A</td><td class="wire">W7853</td></tr>
+                <tr><td>Radio Tuning Comm Control Panel (Left)</td><td class="pn">285W0114-5</td><td class="pn">BA285W0114-3</td><td class="sn">D01950</td><td class="wire">W7909, W8514, W8551</td></tr>
+                <tr><td>Radio Tuning Comm Control Panel (Right)</td><td class="pn">285W0114-5</td><td class="pn">BA285W0114-3</td><td class="sn">D02818</td><td class="wire">W7910, W8523, W8562</td></tr>
+                <tr><td>Rudder Trim System Control Panel</td><td class="pn">654W0007-498</td><td class="pn">MA264942.07.2.825</td><td class="sn">0112</td><td class="wire">W7966, W8513</td></tr>
+                <tr><td>Rudder Trim Structural Position Indicator</td><td class="pn">372-078-002</td><td class="pn">PS322658.01.5.607</td><td class="sn">1047</td><td class="wire">W7965, W8573</td></tr>
+                <tr><td>Stabilizer Trim Indicator (Left/Right Tracks)</td><td class="pn">372-079-003</td><td class="pn">MP372-079-003</td><td class="sn">1251 (L) / 388 (R)</td><td class="wire">W7861, W8571, W8572</td></tr>
+                <tr><td>Weather Radar Operation Control Panel</td><td class="pn">Not Installed</td><td class="pn">PS312578.20.5.825</td><td class="sn">N/A</td><td class="wire">W7916, W7917, W8541, W8542</td></tr>
             </tbody>
         </table>
     </div>
+
+    <script>
+        function showPopup(id) {
+            closeAllPopups();
+            document.getElementById('dark-screen').style.display = 'block';
+            var popup = document.getElementById('popup-' + id);
+            if (popup) popup.style.display = 'block';
+        }
+
+        function closeAllPopups() {
+            document.getElementById('dark-screen').style.display = 'none';
+            var popups = document.getElementsByClassName('popup-box');
+            for (var i = 0; i < popups.length; i++) {
+                popups[i].style.display = 'none';
+            }
+        }
+
+        function filterTable(inputId, tableId) {
+            var input = document.getElementById(inputId);
+            var filter = input.value.toUpperCase();
+            var table = document.getElementById(tableId);
+            var tr = table.getElementsByTagName("tr");
+
+            for (var i = 1; i < tr.length; i++) {
+                var show = false;
+                var tds = tr[i].getElementsByTagName("td");
+                for (var j = 0; j < tds.length; j++) {
+                    if (tds[j]) {
+                        if (tds[j].textContent.toUpperCase().indexOf(filter) > -1) {
+                            show = true;
+                            break;
+                        }
+                    }
+                }
+                tr[i].style.display = show ? "" : "none";
+            }
+        }
+    </script>
 
 </body>
 </html>
