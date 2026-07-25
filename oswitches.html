@@ -45,7 +45,7 @@
         }
         .image-container img { width: 100%; height: auto; display: block; }
 
-        /* Square box overlays matching updated overhead zones */
+        /* Square box overlays matching overhead zones */
         .switch-zone {
             position: absolute;
             background: rgba(245, 158, 11, 0.03);
@@ -137,18 +137,9 @@
             font-size: 0.8em;
             letter-spacing: 0.05em;
         }
-        tr:hover td {
-            background: #352723;
-        }
-        td.part-no {
-            font-family: monospace;
-            color: #f59e0b;
-        }
-        td.qty-cell {
-            text-align: center;
-            font-weight: bold;
-            color: #e2e8f0;
-        }
+        tr:hover td { background: #352723; }
+        td.part-no { font-family: monospace; color: #f59e0b; }
+        td.qty-cell { text-align: center; font-weight: bold; color: #e2e8f0; }
         .section-row {
             background: #231816;
             font-weight: bold;
@@ -158,7 +149,7 @@
             letter-spacing: 0.05em;
         }
 
-        /* Popup Layer Structures */
+        /* Overlay Background */
         .overlay-screen {
             display: none;
             position: fixed;
@@ -167,6 +158,7 @@
             z-index: 99;
         }
         
+        /* Data Popup Boxes */
         .popup-box {
             display: none;
             position: fixed;
@@ -180,26 +172,53 @@
             z-index: 100;
             width: 95%; max-width: 680px;
         }
-        
         .popup-box h3 { margin: 0 0 15px 0; color: #ffffff; font-size: 1.3em; border-bottom: 1px solid #4e342e; padding-bottom: 8px;}
+
+        /* Photo Viewer Lightbox for PBGuide.jpg */
+        .photo-viewer-box {
+            display: none;
+            position: fixed;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            background: #1a1412;
+            border: 3px solid #f59e0b;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.95);
+            z-index: 100;
+            max-width: 90vw;
+            max-height: 90vh;
+            text-align: center;
+        }
+        .photo-viewer-box img {
+            max-width: 100%;
+            max-height: 78vh;
+            display: block;
+            margin: 0 auto 15px auto;
+            border-radius: 4px;
+        }
+        .photo-close-btn {
+            background: #f59e0b;
+            color: #1a1412;
+            border: none;
+            padding: 10px 24px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: all 0.2s ease;
+        }
+        .photo-close-btn:hover { background: #d97706; }
         
-        /* Mini data table architecture inside popups */
+        /* Mini Data Tables Inside Popups */
         .popup-table {
             width: 100%;
             border-collapse: collapse;
             font-size: 0.85em;
             margin-top: 10px;
         }
-        .popup-table th {
-            background: #34221f;
-            color: #f59e0b;
-            padding: 8px 10px;
-        }
-        .popup-table td {
-            padding: 8px 10px;
-            border-bottom: 1px solid #3a2824;
-            background: #2b1f1c;
-        }
+        .popup-table th { background: #34221f; color: #f59e0b; padding: 8px 10px; }
+        .popup-table td { padding: 8px 10px; border-bottom: 1px solid #3a2824; background: #2b1f1c; }
         
         .close-btn {
             position: absolute; top: 12px; right: 12px;
@@ -216,12 +235,13 @@
     <h1>Overhead Panel Switches</h1>
     <p class="subtitle">Highlighting physical cockpit switches.</p>
 
-    <button class="btn-trigger" onclick="showPopup('switches-guide')">Open Switches Guide</button>
+    <!-- Button triggers the PBGuide.jpg photo viewer modal -->
+    <button class="btn-trigger" onclick="showPhoto('PBGuide.jpg')">Open Switches Guide</button>
 
     <div class="image-container">
         <img src="overhead.jpeg" alt="Overhead Panel Workspace View">
         
-        <!-- Interactive Hot-Zones Mapped to Layout Columns -->
+        <!-- Interactive Hot-Zones -->
         <div class="switch-zone" id="zone-adiru" onclick="showPopup('adiru')" title="PFC / ADIRU Panel"></div>
         <div class="switch-zone" id="zone-electrical" onclick="showPopup('electrical')" title="Electrical Power Control"></div>
         <div class="switch-zone" id="zone-wipers-lights" onclick="showPopup('wipers-lights')" title="Left Wipers & Lights"></div>
@@ -500,15 +520,13 @@
         </div>
     </div>
 
-    <!-- DYNAMIC POP-UP DATA MODALS -->
-    <div id="popup-switches-guide" class="popup-box">
-        <button class="close-btn" onclick="closeAllPopups()">✕</button>
-        <h3>Switches Guide & Instructions</h3>
-        <p style="font-size:0.9em; color:#e2e8f0; margin-top:10px; line-height: 1.5;">
-            Click on any highlighted interactive hot-zone on the overhead panel graphic to view detailed Korry and Boeing module part specifications.
-        </p>
+    <!-- PHOTO VIEWER MODAL CONTAINER -->
+    <div id="photo-viewer" class="photo-viewer-box">
+        <img id="photo-viewer-img" src="" alt="Switches Guide">
+        <button class="photo-close-btn" onclick="closeAllPopups()">✕ Exit Photo</button>
     </div>
 
+    <!-- HOT-ZONE DATA POPUPS -->
     <div id="popup-adiru" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
         <h3>PFC / ADIRU Module Specifications</h3>
@@ -674,6 +692,17 @@
     <div id="dark-screen" class="overlay-screen" onclick="closeAllPopups()"></div>
 
     <script>
+        function showPhoto(imgSrc) {
+            closeAllPopups();
+            var darkScreen = document.getElementById('dark-screen');
+            var photoBox = document.getElementById('photo-viewer');
+            var photoImg = document.getElementById('photo-viewer-img');
+
+            photoImg.src = imgSrc;
+            if (darkScreen) darkScreen.style.display = 'block';
+            if (photoBox) photoBox.style.display = 'block';
+        }
+
         function showPopup(id) {
             closeAllPopups();
             var darkScreen = document.getElementById('dark-screen');
@@ -687,6 +716,9 @@
             var darkScreen = document.getElementById('dark-screen');
             if (darkScreen) darkScreen.style.display = 'none';
             
+            var photoBox = document.getElementById('photo-viewer');
+            if (photoBox) photoBox.style.display = 'none';
+
             const boxes = document.querySelectorAll('.popup-box');
             boxes.forEach(box => box.style.display = 'none');
         }
