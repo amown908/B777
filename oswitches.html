@@ -19,7 +19,17 @@
         .back-link:hover { text-decoration: underline; }
         
         h1 { color: #ffffff; margin-bottom: 5px; text-align: center; }
-        .subtitle { color: #bcaaa4; margin-bottom: 30px; text-align: center; }
+        .subtitle { color: #bcaaa4; margin-bottom: 20px; text-align: center; }
+
+        .btn-trigger {
+            background: #3e2723; color: #f59e0b;
+            border: 1px solid #f59e0b; padding: 10px 18px;
+            border-radius: 6px; cursor: pointer; font-weight: bold;
+            margin-bottom: 25px; transition: all 0.2s ease;
+        }
+        .btn-trigger:hover {
+            background: #f59e0b; color: #1a1412;
+        }
 
         /* Main cockpit image box container */
         .image-container {
@@ -54,6 +64,7 @@
         /* Column 1 Coordinate Positions */
         #zone-adiru          { top: 59%; left: 4%; width: 22.5%; height: 8.5%; }
         #zone-electrical     { top: 67.5%; left: 4%; width: 22.5%; height: 16.5%; }
+        #zone-wipers-lights  { top: 85%; left: 4%; width: 22.5%; height: 8%; }
 
         /* Column 2 Coordinate Positions */
         #zone-emer-lights    { top: 55.5%; left: 27.5%; width: 20%; height: 12.25%; }
@@ -68,6 +79,7 @@
         /* Column 4 Coordinate Positions */
         #zone-air-cond       { top: 54.5%; left: 72%; width: 22.5%; height: 13%; }
         #zone-bleed-press    { top: 68.5%; left: 71%; width: 22.5%; height: 16%; }
+        #zone-lighting-r     { top: 85%; left: 71%; width: 22.5%; height: 8%; }
 
         /* Parts Section Header */
         .parts-section {
@@ -488,9 +500,15 @@
         </div>
     </div>
 
-    <div id="dark-screen" class="overlay-screen" onclick="closeAllPopups()"></div>
-
     <!-- DYNAMIC POP-UP DATA MODALS -->
+    <div id="popup-switches-guide" class="popup-box">
+        <button class="close-btn" onclick="closeAllPopups()">✕</button>
+        <h3>Switches Guide & Instructions</h3>
+        <p style="font-size:0.9em; color:#e2e8f0; margin-top:10px; line-height: 1.5;">
+            Click on any highlighted interactive hot-zone on the overhead panel graphic to view detailed Korry and Boeing module part specifications.
+        </p>
+    </div>
+
     <div id="popup-adiru" class="popup-box">
         <button class="close-btn" onclick="closeAllPopups()">✕</button>
         <h3>PFC / ADIRU Module Specifications</h3>
@@ -653,41 +671,48 @@
         <p style="font-size:0.85em; color:#bcaaa4; margin:10px 0 0 0;">No direct Korry modular digital switches mapped to this hardware frame quadrant on reference dataset sheet.</p>
     </div>
 
+    <div id="dark-screen" class="overlay-screen" onclick="closeAllPopups()"></div>
+
     <script>
         function showPopup(id) {
             closeAllPopups();
-            document.getElementById('dark-screen').style.display = 'block';
-            document.getElementById('popup-' + id).style.display = 'block';
+            var darkScreen = document.getElementById('dark-screen');
+            var targetPopup = document.getElementById('popup-' + id);
+
+            if (darkScreen) darkScreen.style.display = 'block';
+            if (targetPopup) targetPopup.style.display = 'block';
         }
         
         function closeAllPopups() {
-            document.getElementById('dark-screen').style.display = 'none';
+            var darkScreen = document.getElementById('dark-screen');
+            if (darkScreen) darkScreen.style.display = 'none';
+            
             const boxes = document.querySelectorAll('.popup-box');
             boxes.forEach(box => box.style.display = 'none');
         }
 
-        // Search engine lookup logic
         function filterTable() {
             var input = document.getElementById("searchSwitches");
             var filter = input.value.toUpperCase();
             var table = document.getElementById("SwitchesTable");
             var tr = table.getElementsByTagName("tr");
 
-            for (var i = 1; i < tr.length; i++) {
-                if (tr[i].classList.contains('section-row')) {
-                    continue; 
-                }
-                var showRow = false;
-                var tds = tr[i].getElementsByTagName("td");
-                for (var j = 0; j < tds.length; j++) {
-                    if (tds[j]) {
-                        if (tds[j].textContent.toUpperCase().indexOf(filter) > -1) {
-                            showRow = true;
+            for (var i = 0; i < tr.length; i++) {
+                if (tr[i].classList.contains('section-row')) continue;
+                
+                var tdArr = tr[i].getElementsByTagName("td");
+                var match = false;
+                
+                for (var j = 0; j < tdArr.length; j++) {
+                    if (tdArr[j]) {
+                        var txtValue = tdArr[j].textContent || tdArr[j].innerText;
+                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                            match = true;
                             break;
                         }
                     }
                 }
-                tr[i].style.display = showRow ? "" : "none";
+                tr[i].style.display = match ? "" : "none";
             }
         }
     </script>
