@@ -57,7 +57,7 @@
         }
         .panel-box:hover::after { opacity: 1; }
 
-        /* ── POP-UP MODAL OVERLAY ── */
+        /* POP-UP MODAL OVERLAY */
         .modal-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -127,14 +127,14 @@
 <body>
 
     <h1>Boeing 777 Flight Deck Guide</h1>
-    <p class="subtitle">Hover over a layout section to preview. Click panels to visit pages, or click yokes & seats for details.</p>
+    <p class="subtitle">Hover over a layout section to preview. Click panels to visit pages, or click yokes &amp; seats for details.</p>
 
     <div class="cockpit-container">
         <img src="b777_cockpit.jpeg" alt="Boeing 777 Flight Deck System Breakdown">
 
         <a href="overhead.html"     class="panel-box" id="overhead"      title="Overhead Panel System" data-summary="Manages primary electrical, hydraulic, fuel, and air conditioning aircraft sub-systems."></a>
-        <a href="compass.html"      class="panel-box" id="compass"       title="Standby Compass & Eye Ref" data-summary="Provides mechanical, magnetic direction backup independent of main systems."></a>
-        <a href="glareshield.html"  class="panel-box" id="glareshield"   title="Glareshield & Main Panel" data-summary="Houses Autoflight system control panel (Mode Control Panel), EFIS display settings and Primary Flight Displays and Engine Indication/Crew Alerting System screens."></a>
+        <a href="compass.html"      class="panel-box" id="compass"       title="Standby Compass &amp; Eye Ref" data-summary="Provides mechanical, magnetic direction backup independent of main systems."></a>
+        <a href="glareshield.html"  class="panel-box" id="glareshield"   title="Glareshield &amp; Main Panel" data-summary="Houses Autoflight system control panel (Mode Control Panel), EFIS display settings and Primary Flight Displays and Engine Indication/Crew Alerting System screens."></a>
         <a href="pedestal.html"     class="panel-box" id="pedestal"      title="Pedestal" data-summary="Contains thrust levers, flap selectors, radio panels, and Control Display Units."></a>
         <a href="CaptLateral.html" class="panel-box" id="lateral-capt"  title="Lateral Console — Capt" data-summary="Houses side window controls, oxygen mask stowage, and audio select panels."></a>
         <a href="FOLateral.html"   class="panel-box" id="lateral-fo"    title="Lateral Console - FO" data-summary="First Officer side instrumentation, window operation, and oxygen interface."></a>
@@ -182,15 +182,20 @@
             });
         });
 
-        // Seat interaction setup
+        // Seat interaction setup (METHOD 2: Directly set P/N and S/N based on seat ID)
         seatTriggers.forEach(seat => {
             seat.addEventListener('click', function() {
                 modalTitle.textContent = this.getAttribute('title');
                 modalDescription.textContent = this.getAttribute('data-summary') || "No layout description provided.";
                 
-                // You can customize the empty P/N and S/N strings below or load them dynamically
-                document.getElementById('pnValue').textContent = "ADD_PART_NUMBER_HERE";
-                document.getElementById('snValue').textContent = "ADD_SERIAL_NUMBER_HERE";
+                // Set specific P/N and S/N values depending on which seat was clicked
+                if (this.id === 'seat-capt') {
+                    document.getElementById('pnValue').textContent = "3A258-0041-01-1"; // Replace with your Capt seat P/N
+                    document.getElementById('snValue').textContent = "48512";     // Replace with your Capt seat S/N
+                } else if (this.id === 'seat-fo') {
+                    document.getElementById('pnValue').textContent = "3A258-0042-01-1Z"; // Replace with your FO seat P/N
+                    document.getElementById('snValue').textContent = "46185";       // Replace with your FO seat S/N
+                }
 
                 modalSerialBox.style.display = 'block'; // Make P/N & S/N block visible
                 modal.classList.add('active');
